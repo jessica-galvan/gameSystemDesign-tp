@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    private CharacterBaseStatsSO baseStats;
+    [SerializeField, ReadOnly] private CharacterBaseStatsSO baseStats;
 
     [field: SerializeField, ReadOnly] public int CurrentLife { get; private set; }
     [field: SerializeField, ReadOnly] public int MaxLife { get; private set; }
