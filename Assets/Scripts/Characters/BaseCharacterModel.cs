@@ -30,7 +30,6 @@ public class BaseCharacterModel : MonoBehaviour
 
     public void LookDirection(Vector2 dir)
     {
-        direction = dir;
-        transform.forward = dir;
+        //TODO change sprite direction
     }
 }

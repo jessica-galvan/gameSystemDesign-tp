@@ -39,9 +39,15 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         Input = new GameInputs();
+        Input.Gameplay.Enable();
 
         updateManager = Instantiate(prefabReferences.updateManagerPrefab);
         updateManager.Initialize();
+
+        var player = Instantiate(prefabReferences.playerPrefab);
+        player.Initialize();
+        Player = player.Model;
+        Player.Initialize();
     }
 
     public void SetPause(bool value)

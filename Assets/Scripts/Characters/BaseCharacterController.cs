@@ -13,7 +13,7 @@ public abstract class BaseCharacterController : MonoBehaviour, IUpdate
 
     public virtual bool CanUpdate()
     {
-        return GameManager.Instance.Pause || GameManager.Instance.Won; //!model.Alive
+        return !GameManager.Instance.Pause || !GameManager.Instance.Won; //!model.Alive
     }
 
     public abstract void Refresh();

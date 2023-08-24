@@ -7,6 +7,6 @@ using UnityEngine;
 public class PrefabsReferencesSO : ScriptableObject
 {
     public UpdateManager updateManagerPrefab;
-    public PlayerModel playerModel;
+    public PlayerController playerPrefab;
     //TODO make death prefab and pool 
 }

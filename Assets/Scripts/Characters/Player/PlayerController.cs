@@ -7,13 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : BaseCharacterController
 {
     [SerializeField, ReadOnly] private Vector2 direction;
-    private PlayerModel model;
     private Vector2 prevDir;
     private bool canShoot = false;
+    public PlayerModel Model { get; private set; }
 
     public override void Initialize()
     {
-        GameManager.Instance.updateManager.fixCustomUpdater.Remove(this);
+        base.Initialize();
+        Model = GetComponent<PlayerModel>();
     }
 
     public override void Refresh()
@@ -22,18 +23,18 @@ public class PlayerController : BaseCharacterController
 
         direction = GameManager.Instance.Input.Gameplay.Movement.ReadValue<Vector2>();
 
-        model.Move(direction);
+        Model.Move(direction);
 
         if (prevDir != direction)
         {
             prevDir = direction;
-            model.LookDirection(direction);
+            Model.LookDirection(direction);
         }
     }
 
     public override bool CanUpdate()
     {
-        return base.CanUpdate() || !model.Alive;
+        return base.CanUpdate() || !Model.Alive;
     }
 
     protected override void AddToUpdate()
