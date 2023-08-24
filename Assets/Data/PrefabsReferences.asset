@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17cba1cd5e4026648802aefcc081ded2, type: 3}
   m_Name: PrefabsReferences
   m_EditorClassIdentifier: 
+  eventSystemPrefab: {fileID: 2958176022810612844, guid: 24b0266607133fc4496aaa79c10ee9cf, type: 3}
   updateManagerPrefab: {fileID: 2874862342044180590, guid: bab1137be00052046861f62f11c51ce0, type: 3}
+  hudManagerPrefab: {fileID: 5574007770337794900, guid: a8db92351c4e0d3479afabc0a5fcb8c9, type: 3}
+  pauseMenuPrefab: {fileID: 8244378401399495384, guid: ca69cd4708f4aad4dbf0b8cc5959a94a, type: 3}
   playerPrefab: {fileID: 3814967593655648918, guid: b27db9e9a00ce8a4192f1572dbd1be18, type: 3}

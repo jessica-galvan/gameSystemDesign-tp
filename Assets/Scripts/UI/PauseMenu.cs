@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HUDManager : Panel
+public class PauseMenu : Panel
 {
 
 }

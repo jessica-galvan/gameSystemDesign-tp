@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Info")]
     [ReadOnly] public UpdateManager updateManager;
+    [ReadOnly] public GameplayUIManager gameplayUIManager;
     //TODO EnemyManager with PoolSystem
     //TODO HUDManager
 
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour
 
         Input = new GameInputs();
         Input.Gameplay.Enable();
+        Input.Gameplay.Pause.performed += TogglePause;
+        Input.Menu.Resume.performed += TogglePause;
 
         updateManager = Instantiate(prefabReferences.updateManagerPrefab);
         updateManager.Initialize();
@@ -48,11 +53,37 @@ public class GameManager : MonoBehaviour
         player.Initialize();
         Player = player.Model;
         Player.Initialize();
+
+        gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
+        gameplayUIManager.Initialize();
+    }
+
+    private void OnDestroy()
+    {
+        Input.Gameplay.Pause.performed -= TogglePause;
+        Input.Menu.Resume.performed -= TogglePause;
+    }
+
+    private void TogglePause(InputAction.CallbackContext cxt)
+    {
+        if (Won) return;
+        TogglePause();
     }
 
     public void SetPause(bool value)
     {
         if (Pause == value) return;
+
+        if (value)
+        {
+            Input.Gameplay.Disable();
+            Input.Menu.Enable();
+        }
+        else
+        {
+            Input.Gameplay.Enable();
+            Input.Menu.Disable();
+        }
 
         Pause = value;
         OnPause.Invoke(Pause);
