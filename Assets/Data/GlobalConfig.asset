@@ -12,5 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae62aeebfcf52644aac59f81fbb50c2e, type: 3}
   m_Name: GlobalConfig
   m_EditorClassIdentifier: 
+  gameScene: Gameplay
+  menuScene: MainMenu
   gameplayFPSTarget: 0
   uiFPSTarget: 60
+  pointsFormat: 00000
+  timeFormat: mm':'ss
+  restartPopup:
+    title: Sure you want to restart?
+    description: Restarting the level will loose the current points!
+  mainMenuPopup:
+    title: Sure you want to leave?
+    description: Warning! Going back to the menu will lose all your points and gameplay.
+  exitPopup:
+    title: Sure you want to quit?
+    description: "Warning! The game has no save system, exiting will make you lose\r
+      all your points!"

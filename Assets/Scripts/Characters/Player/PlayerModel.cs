@@ -19,7 +19,7 @@ public class PlayerModel : BaseCharacterModel
     {
         if (!CanShoot)
         {
-            AudioManager.instance.PlaySFXSound(AudioManager.instance.soundReferences.negativeShootSound);
+            GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.negativeShootSound);
             return;
         }
 
@@ -35,7 +35,7 @@ public class PlayerModel : BaseCharacterModel
         CanShoot = false;
         cooldownShootTimer = 0f;
 
-        AudioManager.instance.PlaySFXSound(AudioManager.instance.soundReferences.playerShoot);
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
     }
 
 

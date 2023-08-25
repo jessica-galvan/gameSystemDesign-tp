@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public GlobalConfigSO globalConfig;
     public PrefabsReferencesSO prefabReferences;
+    public SoundReferencesSO soundReferences;
     public Transform playerSpawningPoint;
 
     [Header("Info")]
+    [ReadOnly] public AudioManager audioManager;
     [ReadOnly] public UpdateManager updateManager;
     [ReadOnly] public GameplayUIManager gameplayUIManager;
     //TODO EnemyManager with PoolSystem
@@ -45,6 +47,9 @@ public class GameManager : MonoBehaviour
         Input.Gameplay.Enable();
         Input.Gameplay.Pause.performed += TogglePause;
         Input.Menu.Resume.performed += TogglePause;
+
+        Instantiate(prefabReferences.eventSystemPrefab);
+        audioManager = Instantiate(prefabReferences.audioManagerPrefab);
 
         updateManager = Instantiate(prefabReferences.updateManagerPrefab);
         updateManager.Initialize();

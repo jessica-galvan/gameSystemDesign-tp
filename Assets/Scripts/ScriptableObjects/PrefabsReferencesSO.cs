@@ -9,6 +9,7 @@ public class PrefabsReferencesSO : ScriptableObject
     [Header("Base")]
     public EventSystem eventSystemPrefab;
     public UpdateManager updateManagerPrefab;
+    public AudioManager audioManagerPrefab;
 
     [Header("UI")]
     public HUDManager hudManagerPrefab;

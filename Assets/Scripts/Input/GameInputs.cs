@@ -44,6 +44,15 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0e2e99f-15ef-4676-bc85-ca3093c2a68b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +75,17 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2f83072-fed8-4e78-b383-b44c700f62f4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -265,6 +285,7 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Selection = m_Menu.FindAction("Selection", throwIfNotFound: true);
         m_Menu_Resume = m_Menu.FindAction("Resume", throwIfNotFound: true);
+        m_Menu_GoBack = m_Menu.FindAction("GoBack", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
@@ -332,12 +353,14 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Selection;
     private readonly InputAction m_Menu_Resume;
+    private readonly InputAction m_Menu_GoBack;
     public struct MenuActions
     {
         private @GameInputs m_Wrapper;
         public MenuActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Selection => m_Wrapper.m_Menu_Selection;
         public InputAction @Resume => m_Wrapper.m_Menu_Resume;
+        public InputAction @GoBack => m_Wrapper.m_Menu_GoBack;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -353,6 +376,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @Resume.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnResume;
                 @Resume.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnResume;
                 @Resume.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnResume;
+                @GoBack.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
+                @GoBack.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
+                @GoBack.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -363,6 +389,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @Resume.started += instance.OnResume;
                 @Resume.performed += instance.OnResume;
                 @Resume.canceled += instance.OnResume;
+                @GoBack.started += instance.OnGoBack;
+                @GoBack.performed += instance.OnGoBack;
+                @GoBack.canceled += instance.OnGoBack;
             }
         }
     }
@@ -428,6 +457,7 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     {
         void OnSelection(InputAction.CallbackContext context);
         void OnResume(InputAction.CallbackContext context);
+        void OnGoBack(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {

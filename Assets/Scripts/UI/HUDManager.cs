@@ -22,7 +22,7 @@ public class HUDManager : Panel, IUpdate
     public void UpdateTimer(float timeInSeconds)
     {
         TimeSpan time = TimeSpan.FromSeconds(timeInSeconds);
-        txtTimer.text = time.ToString("mm':'ss");
+        txtTimer.text = time.ToString(GameManager.Instance.globalConfig.timeFormat);
     }
 
 }
