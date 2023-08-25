@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         Won = true;
         Pause = true;
 
-        AudioManager.instance.PlaySFXSound(AudioManager.instance.soundReferences.win);
+        audioManager.PlaySFXSound(soundReferences.win);
         OnWin.Invoke();
     }
 }
