@@ -85,7 +85,10 @@ public class GameManager : MonoBehaviour
             Input.Menu.Disable();
         }
 
+
+
         Pause = value;
+        Time.timeScale = Pause ? 0 : 1;
         OnPause.Invoke(Pause);
     }
 

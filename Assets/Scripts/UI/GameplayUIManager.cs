@@ -11,6 +11,8 @@ public class GameplayUIManager : MonoBehaviour
     public void Initialize()
     {
         hudManager = Instantiate(GameManager.Instance.prefabReferences.hudManagerPrefab);
+        hudManager.Initialize();
+
         //TODO add power up selection menu
         pauseMenu = Instantiate(GameManager.Instance.prefabReferences.pauseMenuPrefab);
 

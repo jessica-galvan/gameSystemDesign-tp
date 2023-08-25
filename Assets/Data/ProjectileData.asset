@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86f988867271e24a8d762344d5d953a, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 5
   cooldown: 1
   baseDamage: 1
   totalTimeAlive: 5

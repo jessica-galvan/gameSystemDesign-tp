@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: PlayerBaseStats
   m_EditorClassIdentifier: 
   maxLife: 100
+  radius: 1
   movementSpeed: 2
-  shootingCooldown: 2
+  turnSpeed: 5
