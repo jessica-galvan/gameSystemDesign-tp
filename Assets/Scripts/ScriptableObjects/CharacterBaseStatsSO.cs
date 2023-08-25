@@ -7,9 +7,9 @@ public class CharacterBaseStatsSO : ScriptableObject
 {
     [Header("Health")]
     public int maxLife = 100;
+    public float radius = 2f;
 
     [Header("Movement")]
     public float movementSpeed = 2f;
-
-    public float shootingCooldown = 2f;
+    public float turnSpeed = 5f;
 }
