@@ -14,14 +14,13 @@ public class SoundReferencesSO : ScriptableObject
     public AudioClip closePopup;
 
     [Header("Level")]
+    public AudioClip spawnSound;
     public AudioClip playerDeath;
     public AudioClip enemyDeath;
-    public AudioClip negativeShootSound;
     public AudioClip playerShoot;
-    public AudioClip enemyShoot;
-    public AudioClip spawnSound;
+    public AudioClip negativeShootSound;
 
     [Header("Extras")]
-    public AudioClip win;
+    public AudioClip GameOver;
     public AudioClip levelMusic;
 }

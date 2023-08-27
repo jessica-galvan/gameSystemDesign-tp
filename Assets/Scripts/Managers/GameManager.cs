@@ -21,15 +21,17 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public AudioManager audioManager;
     [ReadOnly] public UpdateManager updateManager;
     [ReadOnly] public GameplayUIManager gameplayUIManager;
+    [ReadOnly] public EnemyManager enemyManager;
     //TODO EnemyManager with PoolSystem
     //TODO HUDManager
 
     [field: SerializeField, ReadOnly] public PlayerModel Player { get; private set; }
     [field: SerializeField, ReadOnly] public bool Pause { get; private set; }
-    [field: SerializeField, ReadOnly] public bool Won { get;private set; }
-    [field: SerializeField, ReadOnly] public bool CanUpdate => !Won && !Pause;
+    [field: SerializeField, ReadOnly] public bool GameOver { get;private set; }
 
+    public bool CanUpdate => !Pause  || !GameOver;
     public GameInputs Input { get; private set; }
+
 
     public Action<bool> OnPause;
     public Action OnWin;
@@ -61,9 +63,8 @@ public class GameManager : MonoBehaviour
         Player = player.Model;
         Player.Initialize();
 
-        var enemy = Instantiate(prefabReferences.enemyPrefab);
-        enemy.transform.position = playerSpawningPoint.position;
-        enemy.Initialize();
+        enemyManager = GetComponent<EnemyManager>();
+        enemyManager.Initialize();
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void TogglePause(InputAction.CallbackContext cxt)
     {
-        if (Won) return;
+        if (GameOver) return;
         TogglePause();
     }
 
@@ -105,17 +106,17 @@ public class GameManager : MonoBehaviour
 
     private void TogglePause()
     {
-        if (Won) return;
+        if (GameOver) return;
         SetPause(!Pause);
     }
 
-    public void WinGame()
+    public void SetGameOver()
     {
-        if (Won) return;
-        Won = true;
+        if (GameOver) return;
+        GameOver = true;
         Pause = true;
 
-        audioManager.PlaySFXSound(soundReferences.win);
+        audioManager.PlaySFXSound(soundReferences.GameOver);
         OnWin.Invoke();
     }
 }

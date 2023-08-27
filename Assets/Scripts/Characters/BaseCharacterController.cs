@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCharacterController : MonoBehaviour, IUpdate
+public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate where T: BaseCharacterModel
 {
+    public T Model { get; private set; }
 
     //TODO RETHINK WHEN ADDING POOL
     public virtual void Initialize()
     {
-        GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
+        Model = GetComponent<T>();
+        Model.Initialize();
+        AddToUpdate();
     }
 
     public virtual bool CanUpdate()
     {
-        return !GameManager.Instance.Pause || !GameManager.Instance.Won; //!model.Alive
+        return GameManager.Instance.CanUpdate; //&& Model.Alive;
     }
 
     public abstract void Refresh();

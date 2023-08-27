@@ -30,7 +30,7 @@ public class UpdateManager : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.Instance.Pause || !GameManager.Instance.Won)
+        if (!GameManager.Instance.CanUpdate)
             currentTimeGameplay += Time.deltaTime;
 
         fixCustomUpdater.UpdateList();

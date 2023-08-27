@@ -4,19 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerModel))]
-public class PlayerController : BaseCharacterController
+public class PlayerController : BaseCharacterController<PlayerModel>
 {
     private Vector2 direction;
     private Vector2 prevDir;
     private Vector2 mousePos;
     private Camera mainCam;
 
-    public PlayerModel Model { get; private set; }
-
     public override void Initialize()
     {
         base.Initialize();
-        Model = GetComponent<PlayerModel>();
         mainCam = Camera.main;
     }
 
@@ -50,12 +47,17 @@ public class PlayerController : BaseCharacterController
 
     protected override void AddToUpdate()
     {
-        GameManager.Instance.updateManager.fixCustomUpdater.Remove(this);
+        GameManager.Instance.updateManager.fixCustomUpdater.Add(this);
     }
 
     protected override void RemoveFromUpdate()
     {
         if (GameManager.HasInstance)
             GameManager.Instance.updateManager.fixCustomUpdater.Remove(this);
+    }
+
+    private void OnDestroy()
+    {
+        RemoveFromUpdate();
     }
 }

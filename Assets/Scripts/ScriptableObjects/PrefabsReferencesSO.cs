@@ -8,8 +8,12 @@ public class PrefabsReferencesSO : ScriptableObject
 {
     [Header("Base")]
     public EventSystem eventSystemPrefab;
+
+    [Header("Managers")]
     public UpdateManager updateManagerPrefab;
     public AudioManager audioManagerPrefab;
+    public EnemyManager enemyManagerPrefab;
+    //TODO do pool manager
 
     [Header("UI")]
     public HUDManager hudManagerPrefab;
@@ -19,5 +23,5 @@ public class PrefabsReferencesSO : ScriptableObject
     public PlayerController playerPrefab;
     public ProjectileController testingBulletPrefab;
     public EnemyController enemyPrefab;
-    //TODO make death prefab and pool 
+    //TODO make death prefab and particles?
 }

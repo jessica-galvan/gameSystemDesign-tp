@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3100252399873087287}
   - component: {fileID: 739401082032805207}
+  - component: {fileID: 3945118050406822864}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -51,6 +52,22 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   updateManager: {fileID: 0}
   gameplayUIManager: {fileID: 0}
+  enemyManager: {fileID: 0}
   <Player>k__BackingField: {fileID: 0}
   <Pause>k__BackingField: 0
-  <Won>k__BackingField: 0
+  <GameOver>k__BackingField: 0
+--- !u!114 &3945118050406822864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891228874865401596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924e2e14d6e26674390f42def545264d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalKilled: 0
+  totalSpawned: 0
+  currentEnemyQuantitySpawned: 0

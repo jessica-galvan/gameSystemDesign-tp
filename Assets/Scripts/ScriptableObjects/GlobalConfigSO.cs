@@ -10,6 +10,9 @@ public class GlobalConfigSO : ScriptableObject
     public string gameScene = "Gameplay";
     public string menuScene = "MainMenu";
 
+    [Header("Gameplay")]
+    public int maxEnemiesAtAllTimes = 10;
+
     [Header("CustomUpdate Settings")]
     [Tooltip("This FrameRate is for the gameplay things that keep adding and leaving: bullets, enemies, etc.")]
     public int gameplayFPSTarget = 60; //nothign that depends on the input system should be here

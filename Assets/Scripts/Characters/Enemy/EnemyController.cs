@@ -9,19 +9,16 @@ public enum EnemyStates
     Move,
 }
 
-public class EnemyController : BaseCharacterController
+public class EnemyController : BaseCharacterController<EnemyModel>
 {
     [ReadOnly, SerializeField] private EnemyStates currentEnemyState;
 
     private FSM<EnemyStates> fsm;
-    public EnemyModel Model { get; private set; }
-
 
     public override void Initialize()
     {
         base.Initialize();
-        Model = GetComponent<EnemyModel>();
-        Model.Initialize();
+        Model.LifeController.OnDeath += OnDie;
         InitializeFSM();
     }
 
@@ -53,17 +50,25 @@ public class EnemyController : BaseCharacterController
 
     public override void Refresh()
     {
-        if (!GameManager.Instance.CanUpdate) return;
+        if (!CanUpdate()) return;
         fsm.OnUpdate();
     }
 
     protected override void AddToUpdate()
     {
-
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
     }
 
     protected override void RemoveFromUpdate()
     {
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
+    }
 
+    private void OnDie()
+    {
+        GameManager.Instance.enemyManager.EnemyKilled(this);
+        RemoveFromUpdate();
+        Destroy(gameObject);
+        //TODO return to pool!
     }
 }

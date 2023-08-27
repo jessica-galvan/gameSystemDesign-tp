@@ -24,7 +24,6 @@ public class ProjectileController : MonoBehaviour, IUpdate
         
         this.direction = direction;
         transform.eulerAngles = Vector3.forward * rotation;
-        print(transform.eulerAngles);
         timer = 0f;
         SetVisibility(true);
         active = true;
@@ -44,7 +43,7 @@ public class ProjectileController : MonoBehaviour, IUpdate
     public void Refresh()
     {
         if (!active) return;
-        if (GameManager.Instance.Pause || GameManager.Instance.Won) return;
+        if (!GameManager.Instance.CanUpdate) return;
         body.velocity += direction * data.speed * Time.deltaTime;
 
         timer += Time.deltaTime;
