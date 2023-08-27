@@ -35,11 +35,8 @@ public class ProjectileController : MonoBehaviour, IUpdate
     {
         if (!active) return;
 
-        var entity = collision.gameObject.GetComponent<LifeController>();
-        if (entity != null)
-        {
-            entity.TakeDamage(data.baseDamage); //TODO: add multipliers
-        }
+        if (collision.gameObject.TryGetComponent<IDamagable>(out var damagable))
+            damagable.TakeDamage(data.baseDamage, direction); //TODO: add multipliers
 
         Die();
     }
@@ -55,11 +52,12 @@ public class ProjectileController : MonoBehaviour, IUpdate
             Die();
     }
 
-    public void FixedRefresh()
-    {
-       
-
-    }
+    //public void FixedRefresh()
+    //{
+    //    if (!active) return;
+    //    if (GameManager.Instance.Pause || GameManager.Instance.Won) return;
+    //    body.velocity += direction * data.speed * Time.deltaTime;
+    //}
 
     public void ReturnToPool()
     {

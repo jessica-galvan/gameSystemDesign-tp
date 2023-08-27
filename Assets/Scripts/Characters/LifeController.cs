@@ -37,6 +37,7 @@ public class LifeController : MonoBehaviour
 
     public void Heal(int heal)
     {
+        if (CurrentLife == MaxLife) return;
         CurrentLife = Mathf.Clamp(CurrentLife + heal, 0, MaxLife);
         OnLifeUpdate?.Invoke();
     }

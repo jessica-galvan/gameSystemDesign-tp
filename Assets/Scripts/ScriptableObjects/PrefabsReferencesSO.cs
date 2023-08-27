@@ -18,5 +18,6 @@ public class PrefabsReferencesSO : ScriptableObject
     [Header("Characters")]
     public PlayerController playerPrefab;
     public ProjectileController testingBulletPrefab;
+    public EnemyController enemyPrefab;
     //TODO make death prefab and pool 
 }

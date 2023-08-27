@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [field: SerializeField, ReadOnly] public PlayerModel Player { get; private set; }
     [field: SerializeField, ReadOnly] public bool Pause { get; private set; }
     [field: SerializeField, ReadOnly] public bool Won { get;private set; }
+    [field: SerializeField, ReadOnly] public bool CanUpdate => !Won && !Pause;
 
     public GameInputs Input { get; private set; }
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        Time.timeScale = 1;
         Instance = this;
 
         Input = new GameInputs();
@@ -58,6 +60,10 @@ public class GameManager : MonoBehaviour
         player.Initialize();
         Player = player.Model;
         Player.Initialize();
+
+        var enemy = Instantiate(prefabReferences.enemyPrefab);
+        enemy.transform.position = playerSpawningPoint.position;
+        enemy.Initialize();
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
