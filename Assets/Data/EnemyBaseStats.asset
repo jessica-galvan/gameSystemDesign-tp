@@ -16,7 +16,7 @@ MonoBehaviour:
   radius: 2
   damage: 1
   experience: 1
-  movementSpeed: 1
+  movementSpeed: 10
   turnSpeed: 5
   knockbackRecovery: 0
   predictionTime: 1

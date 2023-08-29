@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UpdateManager : MonoBehaviour
 {
-    [ReadOnly] public CustomUpdate fixCustomUpdater;
+    [ReadOnly] public CustomUpdate uncappedCustomUpdate;
     [ReadOnly] public CustomUpdate gameplayCustomUpdate;
     [ReadOnly] public CustomUpdate uiCustomUpdate;
 
@@ -15,11 +15,11 @@ public class UpdateManager : MonoBehaviour
     public void Initialize()
     {
         //there are two gameplayList because the second one can constantly change as the bullets and enemies come and go.
-        //Meanwhile the fixed one are the ones that don't have a set frame, they update all the frames as we want don't want to limit the frame check as they depend on the craprichious input system
+        //Meanwhile the uncappedCustomUpdate one are the ones that don't have a set frame, they update all the frames as we want don't want to limit the frame check as they depend on the craprichious input system
         //InputManager, PlayerController, EnemyManager
 
-        fixCustomUpdater = gameObject.AddComponent<CustomUpdate>();
-        fixCustomUpdater.Initialize(0, "Managers");
+        uncappedCustomUpdate = gameObject.AddComponent<CustomUpdate>();
+        uncappedCustomUpdate.Initialize(0, "Managers");
 
         gameplayCustomUpdate = gameObject.AddComponent<CustomUpdate>();
         gameplayCustomUpdate.Initialize(GameManager.Instance.globalConfig.gameplayFPSTarget, "Gameplay");
@@ -33,7 +33,7 @@ public class UpdateManager : MonoBehaviour
         if (!GameManager.Instance.CanUpdate)
             currentTimeGameplay += Time.deltaTime;
 
-        fixCustomUpdater.UpdateList();
+        uncappedCustomUpdate.UpdateList();
         gameplayCustomUpdate.UpdateList();
         uiCustomUpdate.UpdateList();
     }

@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
     {
         canSpawnEnemies = true;
 
-        GameManager.Instance.updateManager.fixCustomUpdater.Add(this);
+        GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
     }
 
     public void Refresh()
@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         currentEnemyQuantitySpawned++;
         totalSpawned++;
         inLevelEnemies.Add(enemy);
-        currentTime = UnityEngine.Random.Range(2f, 5f);
+        currentTime = UnityEngine.Random.Range(GameManager.Instance.globalConfig.minSpawnTime, GameManager.Instance.globalConfig.maxSpawnTime);
     }
 
     private Vector2 GetSpawnPos()
@@ -68,6 +68,6 @@ public class EnemyManager : MonoBehaviour, IUpdate
     private void OnDestroy()
     {
         if (GameManager.HasInstance)
-            GameManager.Instance.updateManager.fixCustomUpdater.Remove(this);
+            GameManager.Instance.updateManager.uncappedCustomUpdate.Remove(this);
     }
 }

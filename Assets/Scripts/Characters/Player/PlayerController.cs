@@ -47,13 +47,13 @@ public class PlayerController : BaseCharacterController<PlayerModel>
 
     protected override void AddToUpdate()
     {
-        GameManager.Instance.updateManager.fixCustomUpdater.Add(this);
+        GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
     }
 
     protected override void RemoveFromUpdate()
     {
         if (GameManager.HasInstance)
-            GameManager.Instance.updateManager.fixCustomUpdater.Remove(this);
+            GameManager.Instance.updateManager.uncappedCustomUpdate.Remove(this);
     }
 
     private void OnDestroy()

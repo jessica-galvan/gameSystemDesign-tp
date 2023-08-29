@@ -12,6 +12,8 @@ public class GlobalConfigSO : ScriptableObject
 
     [Header("Gameplay")]
     public int maxEnemiesAtAllTimes = 10;
+    public float minSpawnTime = 0;
+    public float maxSpawnTime = 5f;
 
     [Header("CustomUpdate Settings")]
     [Tooltip("This FrameRate is for the gameplay things that keep adding and leaving: bullets, enemies, etc.")]
