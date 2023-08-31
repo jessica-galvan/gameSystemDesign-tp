@@ -33,6 +33,8 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     {
         this.direction = direction;
         rb.velocity = direction * baseStats.movementSpeed;
+        //var pos = (Vector2)transform.position + direction * baseStats.movementSpeed;
+        //rb.MovePosition(pos);
     }
 
     public void LookDirection(Vector2 dir)

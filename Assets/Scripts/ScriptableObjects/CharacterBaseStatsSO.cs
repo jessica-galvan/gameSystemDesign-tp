@@ -13,10 +13,10 @@ public class CharacterBaseStatsSO : ScriptableObject
 
     [Header("Movement")]
     public float movementSpeed = 2f;
-    public float turnSpeed = 5f;
     public float knockbackRecovery = 0f;
 
     [Header("IA Stats")]
-    public float predictionTime = 1f;
+    [Tooltip("Prediction time affects how far away will predict, the lower it is, the lower it will take to turn, the higher it goes, the faster ir turn or completly skip it")]
+    public float predictionTime = 0.0000f;
     public float minDistanceFromPlayer = 0.5f;
 }

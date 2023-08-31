@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScene: Gameplay
   menuScene: MainMenu
-  maxEnemiesAtAllTimes: 10
+  maxEnemiesAtAllTimes: 1
   minSpawnTime: 0
-  maxSpawnTime: 1
+  maxSpawnTime: 0
   gameplayFPSTarget: 0
   uiFPSTarget: 60
   pointsFormat: 00000

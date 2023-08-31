@@ -8,9 +8,9 @@ public class EnemyManager : MonoBehaviour, IUpdate
     [ReadOnly] public int totalKilled = 0;
     [ReadOnly] public int totalSpawned = 0;
     [ReadOnly] public int currentEnemyQuantitySpawned = 0;
+    [ReadOnly, SerializeField] private bool canSpawnEnemies;
 
     public Action<int> OnEnemyKilled = delegate { };
-    private bool canSpawnEnemies;
     private float currentTime;
     private HashSet<EnemyController> inLevelEnemies = new HashSet<EnemyController>();
 
@@ -42,6 +42,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         currentEnemyQuantitySpawned++;
         totalSpawned++;
         inLevelEnemies.Add(enemy);
+        canSpawnEnemies = HasSpaceToSpawnEnemy();
         currentTime = UnityEngine.Random.Range(GameManager.Instance.globalConfig.minSpawnTime, GameManager.Instance.globalConfig.maxSpawnTime);
     }
 
@@ -57,7 +58,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         totalKilled++;
         OnEnemyKilled.Invoke(totalKilled);
         currentEnemyQuantitySpawned--;
-        canSpawnEnemies = HasSpaceToSpawnEnemy(); //is it lazy computation if we only update it when the number changes instead of doing the method on every frame of the DoUpdate?)
+        canSpawnEnemies = HasSpaceToSpawnEnemy();
     }
 
     private bool HasSpaceToSpawnEnemy()
