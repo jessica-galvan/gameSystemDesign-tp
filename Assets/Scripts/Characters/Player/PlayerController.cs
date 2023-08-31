@@ -9,12 +9,10 @@ public class PlayerController : BaseCharacterController<PlayerModel>
     private Vector2 direction;
     private Vector2 prevDir;
     private Vector2 mousePos;
-    private Camera mainCam;
 
     public override void Initialize()
     {
         base.Initialize();
-        mainCam = Camera.main;
     }
 
     public override void Refresh()
@@ -32,10 +30,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
         }
 
         if (GameManager.Instance.Input.Gameplay.Attack.IsPressed())
-        {
-            mousePos = Mouse.current.position.ReadValue();
-            Model.Shoot(mainCam.ScreenToWorldPoint(mousePos));
-        }
+            Model.Shoot(GameManager.Instance.cameraController.MouseWorldPos());
 
         Model.ShootingCooldown();
     }

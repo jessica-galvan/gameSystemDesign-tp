@@ -54,4 +54,10 @@ public class LifeController : MonoBehaviour
         CurrentLife = 0;
         OnDeath?.Invoke();
     }
+
+    public void ResetStats()
+    {
+        Alive = true;
+        CurrentLife = MaxLife;
+    }
 }

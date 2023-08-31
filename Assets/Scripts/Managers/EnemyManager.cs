@@ -17,7 +17,6 @@ public class EnemyManager : MonoBehaviour, IUpdate
     public void Initialize()
     {
         canSpawnEnemies = true;
-
         GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
     }
 
@@ -36,9 +35,8 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private void EnemySpawn()
     {
-        var enemy = Instantiate(GameManager.Instance.prefabReferences.enemyPrefab);
-        enemy.transform.position = GetSpawnPos();
-        enemy.Initialize();
+        var enemy = GameManager.Instance.poolManager.GetEnemy();
+        enemy.Spawn(GetSpawnPos());
         currentEnemyQuantitySpawned++;
         totalSpawned++;
         inLevelEnemies.Add(enemy);
@@ -49,6 +47,11 @@ public class EnemyManager : MonoBehaviour, IUpdate
     private Vector2 GetSpawnPos()
     {
         //TODO get direction player is going!!!
+        //var direction = GameManager.Instance.Player.Direction;
+        //var spawnPoint = GameManager.Instance.cameraController.GetSpawnPoint(direction);
+        //print($"Player direction {direction}, spawnPoint {spawnPoint}");
+        //return spawnPoint;
+
         return GameManager.Instance.playerSpawningPoint.position;
     }
 

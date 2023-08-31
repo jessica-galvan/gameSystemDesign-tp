@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3100252399873087287}
   - component: {fileID: 739401082032805207}
   - component: {fileID: 3945118050406822864}
+  - component: {fileID: 726836408256549944}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,10 +50,12 @@ MonoBehaviour:
   prefabReferences: {fileID: 11400000, guid: fde4a7cd1772b5043bdb2ecf88725e24, type: 2}
   soundReferences: {fileID: 11400000, guid: 0ddac87534e1c6443b146f4e76f7da4f, type: 2}
   playerSpawningPoint: {fileID: 0}
+  cameraController: {fileID: 0}
   audioManager: {fileID: 0}
   updateManager: {fileID: 0}
   gameplayUIManager: {fileID: 0}
   enemyManager: {fileID: 0}
+  poolManager: {fileID: 0}
   <Player>k__BackingField: {fileID: 0}
   <Pause>k__BackingField: 0
   <GameOver>k__BackingField: 0
@@ -71,3 +74,20 @@ MonoBehaviour:
   totalKilled: 0
   totalSpawned: 0
   currentEnemyQuantitySpawned: 0
+  canSpawnEnemies: 0
+--- !u!114 &726836408256549944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891228874865401596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c962b70b1382ea4d85fcfb87c9c61e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBulletPool: {fileID: 0}
+  enemyPool: {fileID: 0}
+  deathParticlePool: {fileID: 0}
+  bulletImpactParticlePool: {fileID: 0}

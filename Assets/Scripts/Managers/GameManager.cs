@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawningPoint;
 
     [Header("Info")]
+    [ReadOnly] public CameraController cameraController;
     [ReadOnly] public AudioManager audioManager;
     [ReadOnly] public UpdateManager updateManager;
     [ReadOnly] public GameplayUIManager gameplayUIManager;
     [ReadOnly] public EnemyManager enemyManager;
+    [ReadOnly] public PoolManager poolManager;
     //TODO EnemyManager with PoolSystem
     //TODO HUDManager
 
@@ -31,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     public bool CanUpdate => !Pause  || !GameOver;
     public GameInputs Input { get; private set; }
-
 
     public Action<bool> OnPause;
     public Action OnWin;
@@ -63,11 +64,25 @@ public class GameManager : MonoBehaviour
         Player = player.Model;
         Player.Initialize();
 
+        cameraController = Instantiate(prefabReferences.camControllerPrefab);
+        cameraController.Initialize();
+
+        poolManager = GetComponent<PoolManager>();
+        poolManager.Initialize();
+
         enemyManager = GetComponent<EnemyManager>();
         enemyManager.Initialize();
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
+    }
+
+    public static T Create<T>(string name, Transform parent) where T:MonoBehaviour
+    {
+        var container = new GameObject(name);
+        container.transform.parent = parent;
+        T newItem = container.AddComponent<T>();
+        return newItem;
     }
 
     private void OnDestroy()

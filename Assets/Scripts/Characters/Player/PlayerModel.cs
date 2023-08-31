@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerModel : BaseCharacterModel
 {
     //Shooting
+    public ProjectileType basicAttack;
+
     protected float cooldownShootTimer = 0f;
     protected float currentStuckCounter = 0f;
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
@@ -26,10 +28,7 @@ public class PlayerModel : BaseCharacterModel
         var direction = mousePos - rb.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        //var bullet = GameManager.Instance.poolManager.GetBullet(entityConfig.bulletType);
-        var bullet = Instantiate(GameManager.Instance.prefabReferences.testingBulletPrefab);
-        bullet.Initialize();
-
+        var bullet = GameManager.Instance.poolManager.GetProjectile(basicAttack);
         var spawnPoint = rb.position + (direction.normalized * baseStats.radius);
         bullet.SetDirection(spawnPoint, direction, angle);
         CanShoot = false;
@@ -46,7 +45,7 @@ public class PlayerModel : BaseCharacterModel
         cooldownShootTimer += Time.deltaTime;
 
         //TODO rethink this for the ability cooldown
-        if (cooldownShootTimer >= GameManager.Instance.prefabReferences.testingBulletPrefab.data.cooldown)
+        if (cooldownShootTimer >= GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown)
             CanShoot = true;
     }
 }

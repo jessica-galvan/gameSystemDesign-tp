@@ -9,7 +9,7 @@ public enum EnemyStates
     Move,
 }
 
-public class EnemyController : BaseCharacterController<EnemyModel>
+public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
 {
     [ReadOnly, SerializeField] private EnemyStates currentEnemyState;
 
@@ -66,9 +66,22 @@ public class EnemyController : BaseCharacterController<EnemyModel>
 
     private void OnDie()
     {
+        GameManager.Instance.poolManager.ReturnEnemy(this);
         GameManager.Instance.enemyManager.EnemyKilled(this);
+    }
+
+    public void ReturnToPool()
+    {
+        gameObject.SetActive(false);
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
         RemoveFromUpdate();
-        Destroy(gameObject);
-        //TODO return to pool!
+    }
+
+    public void Spawn(Vector2 position)
+    {
+        Model.Spawn(position);
+        Model.ResetStats();
+        gameObject.SetActive(true);
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
     }
 }

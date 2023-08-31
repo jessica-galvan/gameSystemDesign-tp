@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ProjectileType
+{
+    Basic
+}
+
 [RequireComponent(typeof(Rigidbody2D))]
-public class ProjectileController : MonoBehaviour, IUpdate
+public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
 {
     public ProjectileDataSO data;
 
@@ -51,15 +56,11 @@ public class ProjectileController : MonoBehaviour, IUpdate
             Die();
     }
 
-    //public void FixedRefresh()
-    //{
-    //    if (!active) return;
-    //    if (GameManager.Instance.Pause || GameManager.Instance.Won) return;
-    //    body.velocity += direction * data.speed * Time.deltaTime;
-    //}
-
     public void ReturnToPool()
     {
+        //var impactVFX = GameManager.Instance.poolManager.GethParticle(ParticleController.ParticleType.BulletImpact);
+        //impactVFX.Spawn(transform);
+
         SetVisibility(false);
         GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
         transform.position = Vector2.zero;
@@ -73,11 +74,6 @@ public class ProjectileController : MonoBehaviour, IUpdate
 
     private void Die()
     {
-        ReturnToPool();
-        Destroy(gameObject);
-
-        //var impactVFX = GameManager.Instance.poolManager.GethParticle(ParticleController.ParticleType.BulletImpact);
-        //impactVFX.Spawn(transform);
-        //GameManager.Instance.poolManager.ReturnBullet(this);
+        GameManager.Instance.poolManager.ReturnBullet(this);
     }
 }

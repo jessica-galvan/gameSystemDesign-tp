@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScene: Gameplay
   menuScene: MainMenu
-  maxEnemiesAtAllTimes: 1
+  maxEnemiesAtAllTimes: 5
   minSpawnTime: 0
   maxSpawnTime: 0
   gameplayFPSTarget: 0
