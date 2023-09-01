@@ -57,6 +57,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     public void EnemyKilled(EnemyController enemyKilled)
     {
+        GameManager.Instance.experienceSystem.AddExperience(10);
         inLevelEnemies.Remove(enemyKilled);
         totalKilled++;
         OnEnemyKilled.Invoke(totalKilled);

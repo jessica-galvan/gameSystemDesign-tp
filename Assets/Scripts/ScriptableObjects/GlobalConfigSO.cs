@@ -11,6 +11,7 @@ public class GlobalConfigSO : ScriptableObject
     public string menuScene = "MainMenu";
 
     [Header("Gameplay")]
+    public int maxLevelCap = 10;
     public int maxEnemiesAtAllTimes = 10;
     public float minSpawnTime = 0;
     public float maxSpawnTime = 5f;

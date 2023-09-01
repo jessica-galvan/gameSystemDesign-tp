@@ -24,8 +24,9 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public GameplayUIManager gameplayUIManager;
     [ReadOnly] public EnemyManager enemyManager;
     [ReadOnly] public PoolManager poolManager;
-    //TODO EnemyManager with PoolSystem
-    //TODO HUDManager
+
+    [Header("Systems")]
+    [ReadOnly] public ExperienceSystem experienceSystem;
 
     [field: SerializeField, ReadOnly] public PlayerModel Player { get; private set; }
     [field: SerializeField, ReadOnly] public bool Pause { get; private set; }
@@ -72,6 +73,9 @@ public class GameManager : MonoBehaviour
 
         enemyManager = GetComponent<EnemyManager>();
         enemyManager.Initialize();
+
+        experienceSystem = gameObject.AddComponent<ExperienceSystem>();
+        experienceSystem.Initialize();
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
