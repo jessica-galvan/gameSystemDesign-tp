@@ -9,6 +9,8 @@ public class HUDManager : Panel, IUpdate
     public TMP_Text txtTimer;
     public SimpleBar experienceBar;
     public string levelString = "Level {0}";
+    public SimpleBar manaBar;
+    public string manaString = "Mana {0}/{1}";
 
     public override void Initialize()
     {
@@ -17,8 +19,12 @@ public class HUDManager : Panel, IUpdate
         GameManager.Instance.experienceSystem.OnUpdateExperience += UpdateExperience;
         GameManager.Instance.experienceSystem.OnUpdateLevel += UpdateLevel;
 
+        GameManager.Instance.manaSystem.OnUpdateMana += UpdateMana;
+
         experienceBar.SetValue(0);
         experienceBar.txtTitle.SetText(levelString, GameManager.Instance.experienceSystem.CurrentLevel);
+
+        UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana);
     }
 
     public void Refresh()
@@ -40,6 +46,12 @@ public class HUDManager : Panel, IUpdate
     private void UpdateLevel(int level)
     {
         experienceBar.txtTitle.SetText(levelString, level);
+    }
+
+    private void UpdateMana(float fillAmount, int currentMana, int maxMana)
+    {
+        manaBar.SetValue(fillAmount);
+        manaBar.txtTitle.SetText(manaString, currentMana, maxMana);
     }
 
 }

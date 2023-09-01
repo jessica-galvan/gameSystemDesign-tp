@@ -48,4 +48,10 @@ public class PlayerModel : BaseCharacterModel
         if (cooldownShootTimer >= GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown)
             CanShoot = true;
     }
+
+    public override void TakeDamage(int damage, Vector2 direction)
+    {
+        if (!GameManager.Instance.playerData.canTakeDamage) return;
+        base.TakeDamage(damage, direction);
+    }
 }

@@ -43,7 +43,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
         //flipX = dir.x > 0.1f;
     }
 
-    public void TakeDamage(int damage, Vector2 direction)
+    public virtual void TakeDamage(int damage, Vector2 direction)
     {
         LifeController.TakeDamage(damage);
         if (Alive)

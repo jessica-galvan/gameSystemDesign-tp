@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GlobalConfigSO globalConfig;
     public PrefabsReferencesSO prefabReferences;
     public SoundReferencesSO soundReferences;
+    public PlayerDataSO playerData;
     public Transform playerSpawningPoint;
 
     [Header("Info")]
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Systems")]
     [ReadOnly] public ExperienceSystem experienceSystem;
+    [ReadOnly] public ManaSystem manaSystem;
 
     [field: SerializeField, ReadOnly] public PlayerModel Player { get; private set; }
     [field: SerializeField, ReadOnly] public bool Pause { get; private set; }
@@ -74,14 +76,17 @@ public class GameManager : MonoBehaviour
         enemyManager = GetComponent<EnemyManager>();
         enemyManager.Initialize();
 
-        experienceSystem = gameObject.AddComponent<ExperienceSystem>();
+        experienceSystem = Create<ExperienceSystem>("PlayerSystems");
         experienceSystem.Initialize();
+
+        manaSystem = experienceSystem.AddComponent<ManaSystem>();
+        manaSystem.Initialize();
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
     }
 
-    public static T Create<T>(string name, Transform parent) where T:MonoBehaviour
+    public static T Create<T>(string name, Transform parent = null) where T:MonoBehaviour
     {
         var container = new GameObject(name);
         container.transform.parent = parent;

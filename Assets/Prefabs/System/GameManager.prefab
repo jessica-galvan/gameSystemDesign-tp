@@ -49,6 +49,7 @@ MonoBehaviour:
   globalConfig: {fileID: 11400000, guid: d6e8c8b374227894ea241ad167c77246, type: 2}
   prefabReferences: {fileID: 11400000, guid: fde4a7cd1772b5043bdb2ecf88725e24, type: 2}
   soundReferences: {fileID: 11400000, guid: 0ddac87534e1c6443b146f4e76f7da4f, type: 2}
+  playerData: {fileID: 11400000, guid: 1c464e04c77bec34791067b1d5aa834c, type: 2}
   playerSpawningPoint: {fileID: 0}
   cameraController: {fileID: 0}
   audioManager: {fileID: 0}
@@ -56,6 +57,8 @@ MonoBehaviour:
   gameplayUIManager: {fileID: 0}
   enemyManager: {fileID: 0}
   poolManager: {fileID: 0}
+  experienceSystem: {fileID: 0}
+  manaSystem: {fileID: 0}
   <Player>k__BackingField: {fileID: 0}
   <Pause>k__BackingField: 0
   <GameOver>k__BackingField: 0
