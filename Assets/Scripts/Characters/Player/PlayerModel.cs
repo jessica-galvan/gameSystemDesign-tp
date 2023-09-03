@@ -56,7 +56,8 @@ public class PlayerModel : BaseCharacterModel
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        //TODO make player take damage when touched by enemies
+        if(collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
+            TakeDamage((int)enemy.Model.BaseStats.damage, enemy.Model.Direction);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

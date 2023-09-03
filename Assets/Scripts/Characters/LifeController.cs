@@ -10,8 +10,10 @@ public class LifeController : MonoBehaviour
     [field: SerializeField, ReadOnly] public int CurrentLife { get; private set; }
     [field: SerializeField, ReadOnly] public int MaxLife { get; private set; }
     [field: SerializeField, ReadOnly] public bool Alive { get; private set; }
-
-    public Action OnLifeUpdate;
+    /// <summary>
+    /// Gives current and max hp
+    /// </summary>
+    public Action<int, int> OnLifeUpdate;
     public Action OnDeath;
 
     public void Initialize(CharacterBaseStatsSO baseStats)
@@ -32,14 +34,14 @@ public class LifeController : MonoBehaviour
         if (CurrentLife <= 0)
             Die();
         else
-            OnLifeUpdate?.Invoke();
+            OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
     }
 
     public void Heal(int heal)
     {
         if (CurrentLife == MaxLife) return;
         CurrentLife = Mathf.Clamp(CurrentLife + heal, 0, MaxLife);
-        OnLifeUpdate?.Invoke();
+        OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
     }
 
     public bool CanHeal()

@@ -11,6 +11,8 @@ public class HUDManager : Panel, IUpdate
     public string levelString = "Level {0}";
     public SimpleBar manaBar;
     public string manaString = "Mana {0}/{1}";
+    public SimpleBar hpBar;
+    public string hpString = "HP {0}/{1}";
 
     public override void Initialize()
     {
@@ -18,8 +20,8 @@ public class HUDManager : Panel, IUpdate
         GameManager.Instance.updateManager.uiCustomUpdate.Add(this);
         GameManager.Instance.experienceSystem.OnUpdateExperience += UpdateExperience;
         GameManager.Instance.experienceSystem.OnUpdateLevel += UpdateLevel;
-
         GameManager.Instance.manaSystem.OnUpdateMana += UpdateMana;
+        GameManager.Instance.Player.LifeController.OnLifeUpdate += UpdatePlayerLife;
 
         experienceBar.SetValue(0);
         experienceBar.txtTitle.SetText(levelString, GameManager.Instance.experienceSystem.CurrentLevel);
@@ -52,6 +54,12 @@ public class HUDManager : Panel, IUpdate
     {
         manaBar.SetValue(fillAmount);
         manaBar.txtTitle.SetText(manaString, currentMana, maxMana);
+    }
+
+    private void UpdatePlayerLife(int currentLife, int maxLife)
+    {
+        hpBar.SetValue(Mathf.InverseLerp(0, maxLife, currentLife));
+        hpBar.txtTitle.SetText(hpString, currentLife, maxLife);
     }
 
 }
