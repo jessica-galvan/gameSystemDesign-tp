@@ -18,14 +18,14 @@ public class ManaSystem : MonoBehaviour
     public void Initialize()
     {
         maxMana = GameManager.Instance.playerData.maxMana;
-        currentMana = maxMana;
+        currentMana = 0;
         RecalculateCurrentT();
     }
 
     public void AddMana(int mana)
     {
         currentMana += mana;
-        currentMana = Mathf.Clamp(mana, 0, maxMana);
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
         RecalculateCurrentT();
     }
 

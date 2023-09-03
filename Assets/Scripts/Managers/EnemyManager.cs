@@ -53,7 +53,10 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     public void EnemyKilled(EnemyController enemyKilled)
     {
+        var mana = Instantiate(GameManager.Instance.prefabReferences.manaDropPrefab);
+        mana.transform.position = enemyKilled.transform.position;
         GameManager.Instance.experienceSystem.AddExperience(10);
+
         inLevelEnemies.Remove(enemyKilled);
         totalKilled++;
         OnEnemyKilled.Invoke(totalKilled);

@@ -73,10 +73,9 @@ public class CameraController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.blue;
         foreach (var point in spawnPoints)
-        {
-            Gizmos.DrawSphere(point.Value.position, 2f);
-        }
+            Gizmos.DrawSphere(point.Value.position, 0.5f);
     }
 
 }

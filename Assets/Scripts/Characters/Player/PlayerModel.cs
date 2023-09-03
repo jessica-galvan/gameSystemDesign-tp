@@ -37,7 +37,6 @@ public class PlayerModel : BaseCharacterModel
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
     }
 
-
     public void ShootingCooldown()
     {
         if (CanShoot) return;
@@ -53,5 +52,16 @@ public class PlayerModel : BaseCharacterModel
     {
         if (!GameManager.Instance.playerData.canTakeDamage) return;
         base.TakeDamage(damage, direction);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //TODO make player take damage when touched by enemies
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<ICollectable>(out var collectable))
+            collectable.PickUp();
     }
 }

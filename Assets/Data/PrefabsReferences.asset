@@ -19,5 +19,6 @@ MonoBehaviour:
   hudManagerPrefab: {fileID: 5574007770337794900, guid: a8db92351c4e0d3479afabc0a5fcb8c9, type: 3}
   pauseMenuPrefab: {fileID: 8244378401399495384, guid: ca69cd4708f4aad4dbf0b8cc5959a94a, type: 3}
   playerPrefab: {fileID: 3814967593655648918, guid: b27db9e9a00ce8a4192f1572dbd1be18, type: 3}
-  playerBasicAttackPrefab: {fileID: 5403911747325128226, guid: 91cdc430197df4d49a8b17cdfe9cedd4, type: 3}
   enemyPrefab: {fileID: 7672375688410834417, guid: 1cee0ad3f6d88ec4992b898fe70f27bd, type: 3}
+  playerBasicAttackPrefab: {fileID: 5403911747325128226, guid: 91cdc430197df4d49a8b17cdfe9cedd4, type: 3}
+  manaDropPrefab: {fileID: 7231867871787431721, guid: 1825d8f6abdcf0742a4f0779117bab12, type: 3}
