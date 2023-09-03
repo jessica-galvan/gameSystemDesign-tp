@@ -46,13 +46,9 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private Vector2 GetSpawnPos()
     {
-        //TODO get direction player is going!!!
-        //var direction = GameManager.Instance.Player.Direction;
-        //var spawnPoint = GameManager.Instance.cameraController.GetSpawnPoint(direction);
-        //print($"Player direction {direction}, spawnPoint {spawnPoint}");
-        //return spawnPoint;
-
-        return GameManager.Instance.playerSpawningPoint.position;
+        var direction = GameManager.Instance.Player.Direction;
+        var spawnPoint = GameManager.Instance.cameraController.GetSpawnPoint(direction);
+        return spawnPoint;
     }
 
     public void EnemyKilled(EnemyController enemyKilled)
