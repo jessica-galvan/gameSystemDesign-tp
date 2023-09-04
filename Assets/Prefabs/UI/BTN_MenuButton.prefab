@@ -461,6 +461,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82304d45d736e3e45a016d20c62819fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 4781961394303686564}
-  txtButton: {fileID: 1695295142469619334}
+  txtTitle: {fileID: 1695295142469619334}
   selectedMarker: {fileID: 3255892724387346959}

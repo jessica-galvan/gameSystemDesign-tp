@@ -50,12 +50,14 @@ public class PlayerModel : BaseCharacterModel
 
     public override void TakeDamage(int damage, Vector2 direction)
     {
+        //TODO rethink it with a cooldown and what happens if they keep in touch the player??
         if (!GameManager.Instance.playerData.canTakeDamage) return;
         base.TakeDamage(damage, direction);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        //TODO rethink this with cooldown and make if you stay in contact?
         if(collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
             TakeDamage((int)enemy.Model.BaseStats.damage, enemy.Model.Direction);
     }

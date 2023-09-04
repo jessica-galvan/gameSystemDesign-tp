@@ -16,7 +16,7 @@ public class Popup : Panel
         btnConfirm.Deselect();
         btnCancel.Deselect();
 
-        btnCancel.button.onClick.AddListener(Close);
+        btnCancel.Button.onClick.AddListener(Close);
     }
 
     public void SetPopupInfo(GlobalConfigSO.PopupInfo popupInfo)
@@ -29,14 +29,14 @@ public class Popup : Panel
     {
         base.Open();
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.openPopup);
-        btnConfirm.button.Select();
+        btnConfirm.Button.Select();
     }
 
     public override void Close()
     {
         base.Close();
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.closePopup);
-        btnConfirm.button.onClick.RemoveAllListeners();
+        btnConfirm.Button.onClick.RemoveAllListeners();
         btnCancel.Deselect();
     }
 }

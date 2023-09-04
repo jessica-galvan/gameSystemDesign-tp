@@ -18,27 +18,26 @@ public class PauseMenu : Panel
 
     private List<MenuButton> buttons = new List<MenuButton>();
     private MenuButton currentButton;
-    private static GameInputs _inputs;
 
     public override void Initialize()
     {
         base.Initialize();
 
         buttons.Add(resumeButton);
-        resumeButton.button.onClick.AddListener(OnClickResumeHandler);
+        resumeButton.Button.onClick.AddListener(OnClickResumeHandler);
 
         buttons.Add(restartButton);
-        restartButton.button.onClick.AddListener(OpenRestartPopup);
+        restartButton.Button.onClick.AddListener(OpenRestartPopup);
 
         buttons.Add(menuButton);
-        menuButton.button.onClick.AddListener(OpenMainMenuPopup);
+        menuButton.Button.onClick.AddListener(OpenMainMenuPopup);
 
         buttons.Add(quitButton);
-        quitButton.button.onClick.AddListener(OpenExitPopup);
+        quitButton.Button.onClick.AddListener(OpenExitPopup);
 
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].button.onClick.AddListener(OnClick);
+            buttons[i].Button.onClick.AddListener(OnClick);
             buttons[i].Deselect();
         }
 
@@ -62,11 +61,9 @@ public class PauseMenu : Panel
 
     public override void Dispose()
     {
-        _inputs.Menu.GoBack.started -= PauseInput;
-
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].button.onClick.RemoveAllListeners();
+            buttons[i].Button.onClick.RemoveAllListeners();
         }
 
         if (warningPopup != null)
@@ -101,13 +98,13 @@ public class PauseMenu : Panel
     private void SetSelectedButton()
     {
         buttonsContainer.SetActive(true);
-        currentButton.button.Select();
+        currentButton.Button.Select();
     }
 
     private void OpenRestartPopup()
     {
         warningPopup.SetPopupInfo(GameManager.Instance.globalConfig.restartPopup);
-        warningPopup.btnConfirm.button.onClick.AddListener(OnClickRestartHandler);
+        warningPopup.btnConfirm.Button.onClick.AddListener(OnClickRestartHandler);
         currentButton = restartButton;
         warningPopup.Open();
         buttonsContainer.SetActive(false);
@@ -116,7 +113,7 @@ public class PauseMenu : Panel
     private void OpenMainMenuPopup()
     {
         warningPopup.SetPopupInfo(GameManager.Instance.globalConfig.mainMenuPopup);
-        warningPopup.btnConfirm.button.onClick.AddListener(OnClickMenuHandler);
+        warningPopup.btnConfirm.Button.onClick.AddListener(OnClickMenuHandler);
         currentButton = menuButton;
         warningPopup.Open();
         buttonsContainer.SetActive(false);
@@ -125,7 +122,7 @@ public class PauseMenu : Panel
     private void OpenExitPopup()
     {
         warningPopup.SetPopupInfo(GameManager.Instance.globalConfig.exitPopup);
-        warningPopup.btnConfirm.button.onClick.AddListener(OnClickQuitHandler);
+        warningPopup.btnConfirm.Button.onClick.AddListener(OnClickQuitHandler);
         currentButton = quitButton;
         warningPopup.Open();
         buttonsContainer.SetActive(false);

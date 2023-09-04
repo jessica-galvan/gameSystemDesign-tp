@@ -7,4 +7,6 @@ public class PlayerDataSO : ScriptableObject
 {
     public bool canTakeDamage = true;
     public int maxMana = 50;
+    public int maxPowerUpSelection = 3;
+
 }

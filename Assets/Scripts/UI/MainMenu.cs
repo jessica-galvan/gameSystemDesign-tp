@@ -40,14 +40,14 @@ public class MainMenu : MonoBehaviour
 
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].button.onClick.AddListener(SelectButtonSound);
+            buttons[i].Button.onClick.AddListener(SelectButtonSound);
             buttons[i].Deselect();
         }
 
-        playButton.button.onClick.AddListener(OnClickPlayHandler);
-        creditsButton.button.onClick.AddListener(OnClickCreditsHandler);
-        quitButton.button.onClick.AddListener(OnClickQuitHandler);
-        goBackButton.button.onClick.AddListener(OnClickGoBackHandler);
+        playButton.Button.onClick.AddListener(OnClickPlayHandler);
+        creditsButton.Button.onClick.AddListener(OnClickCreditsHandler);
+        quitButton.Button.onClick.AddListener(OnClickQuitHandler);
+        goBackButton.Button.onClick.AddListener(OnClickGoBackHandler);
 
         _inputs = new GameInputs();
         _inputs.Enable();
@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
     {
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].button.onClick.RemoveAllListeners();
+            buttons[i].Button.onClick.RemoveAllListeners();
         }
 
         _inputs.Menu.GoBack.performed -= GoBack;
@@ -109,7 +109,7 @@ public class MainMenu : MonoBehaviour
 
     private void SelectButton(MenuButton button)
     {
-        button.button.Select();
+        button.Button.Select();
     }
 
     private void OnClickGoBackHandler()

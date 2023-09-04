@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         TogglePause();
     }
 
-    public void SetPause(bool value)
+    public void SetPause(bool value, bool pauseMenu = true)
     {
         if (Pause == value) return;
 
@@ -125,7 +125,9 @@ public class GameManager : MonoBehaviour
 
         Pause = value;
         Time.timeScale = Pause ? 0 : 1;
-        OnPause.Invoke(Pause);
+
+        if(pauseMenu)
+            OnPause.Invoke(Pause);
     }
 
     private void TogglePause()

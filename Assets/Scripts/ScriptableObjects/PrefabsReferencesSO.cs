@@ -17,6 +17,7 @@ public class PrefabsReferencesSO : ScriptableObject
     [Header("UI")]
     public HUDManager hudManagerPrefab;
     public PauseMenu pauseMenuPrefab;
+    public LevelUpPanel levelUpPanelPrefab;
 
     [Header("Characters")]
     public PlayerController playerPrefab;
