@@ -5,23 +5,34 @@ using UnityEngine;
 
 public class EnemyMovingState<T> : EnemyBaseState<T>
 {
-    public EnemyMovingState(T transitionInput, Action onEndActivityCallback) : base(transitionInput, onEndActivityCallback)
+    public EnemyMovingState(T transitionInput) : base(transitionInput)
     {
 
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+        controller.Model.OnBeingKocked += ChangeToIdle;
     }
 
     public override void Execute()
     {
         base.Execute();
 
-        if (model.CanMove(GameManager.Instance.Player.transform.position))
-            model.Move(model.pursuit.GetDir(model));
+        if (controller.Model.CanMove(GameManager.Instance.Player.transform.position))
+            controller.Model.Move(controller.Model.pursuit.GetDir(controller.Model));
         else
-            Exit();
+            ChangeToIdle();
     }
 
-    private void Exit()
+    private void ChangeToIdle()
     {
-        onEndActivityCallback();
+        controller.SetState(EnemyStates.Idle);
+    }
+
+    public override void Sleep()
+    {
+        controller.Model.OnBeingKocked -= ChangeToIdle;
     }
 }

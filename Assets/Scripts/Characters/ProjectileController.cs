@@ -11,6 +11,7 @@ public enum ProjectileType
 public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
 {
     public ProjectileDataSO data;
+    public AttackDataSO attackData;
 
     private Rigidbody2D body;
     private Vector2 direction;
@@ -40,7 +41,7 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
         if (!active) return;
 
         if (collision.gameObject.TryGetComponent<IDamagable>(out var damagable))
-            damagable.TakeDamage(data.baseDamage, direction); //TODO: add multipliers
+            damagable.TakeDamage(attackData.damage, direction.normalized, attackData.force, attackData.forceMode); //TODO: add multipliers
 
         Die();
     }

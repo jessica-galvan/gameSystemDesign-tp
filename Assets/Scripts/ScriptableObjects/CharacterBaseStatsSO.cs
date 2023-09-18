@@ -8,10 +8,11 @@ public class CharacterBaseStatsSO : ScriptableObject
     [Header("Health")]
     public int maxLife = 100;
     public float radius = 2f;
-    public float damage = 1f;
+    public int damage = 1;
     public float experience = 1f;
 
     [Header("Movement")]
+    public bool canBeKockedBack = true;
     public float movementSpeed = 2f;
     public float knockbackRecovery = 0f;
 

@@ -6,10 +6,7 @@ using UnityEngine;
 
 public class EnemyIdleState<T> : EnemyBaseState<T>
 {
-    private float currentTime;
-    private Vector2 playerPos;
-
-    public EnemyIdleState(T transitionInput, Action onEndActivityCallback) : base(transitionInput, onEndActivityCallback)
+    public EnemyIdleState(T transitionInput) : base(transitionInput)
     {
 
     }
@@ -17,17 +14,25 @@ public class EnemyIdleState<T> : EnemyBaseState<T>
     public override void Awake()
     {
         base.Awake();
-        model.Idle();
+        controller.Model.Idle();
+
+        if (controller.Model.wasKnocked)
+            controller.Model.currentKnockbackTimer = controller.Model.BaseStats.knockbackRecovery;
     }
 
     public override void Execute()
     {
-        if (model.CanMove(GameManager.Instance.Player.transform.position))
-            Exit();
-    }
+        if (controller.Model.wasKnocked)
+        {
+            controller.Model.UpdateKnockbackTimer();
+            return;
+        }
 
-    private void Exit()
+        if (controller.Model.CanMove(GameManager.Instance.Player.transform.position))
+            controller.SetState(EnemyStates.Move);
+    }
+    public override void Sleep()
     {
-        onEndActivityCallback();
+        controller.Model.wasKnocked = false;
     }
 }

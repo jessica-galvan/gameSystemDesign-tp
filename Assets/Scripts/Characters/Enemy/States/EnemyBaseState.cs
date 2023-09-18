@@ -5,20 +5,18 @@ using UnityEngine;
 
 public class EnemyBaseState<T> : State<T>
 {
-    protected EnemyModel model;
+    protected EnemyController controller;
     protected FSM<T> fsm;
     protected T transitionInput;
-    protected Action onEndActivityCallback;
 
-    public EnemyBaseState(T transitionInput, Action onEndActivityCallback)
+    public EnemyBaseState(T transitionInput)
     {
         this.transitionInput = transitionInput;
-        this.onEndActivityCallback = onEndActivityCallback;
     }
 
-    public void InitializeState(EnemyModel model, FSM<T> stateFSM)
+    public void InitializeState(EnemyController controller, FSM<T> stateFSM)
     {
-        this.model = model;
+        this.controller = controller;
         fsm = stateFSM;
     }
 }

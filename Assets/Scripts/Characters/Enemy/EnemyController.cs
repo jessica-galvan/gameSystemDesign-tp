@@ -26,11 +26,11 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
     {
         fsm = new FSM<EnemyStates>();
 
-        var idle = new EnemyIdleState<EnemyStates>(EnemyStates.Move, () => SetState(EnemyStates.Move));
-        var move = new EnemyMovingState<EnemyStates>(EnemyStates.Idle, () => SetState(EnemyStates.Idle));
+        var idle = new EnemyIdleState<EnemyStates>(EnemyStates.Move);
+        var move = new EnemyMovingState<EnemyStates>(EnemyStates.Idle);
 
-        idle.InitializeState(Model, fsm);
-        move.InitializeState(Model, fsm);
+        idle.InitializeState(this, fsm);
+        move.InitializeState(this, fsm);
 
         idle.AddTransition(EnemyStates.Move, move);
         move.AddTransition(EnemyStates.Idle, idle);

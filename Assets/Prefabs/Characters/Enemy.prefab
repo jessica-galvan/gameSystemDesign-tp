@@ -181,3 +181,4 @@ MonoBehaviour:
   rb: {fileID: 0}
   direction: {x: 0, y: 0}
   flipX: 0
+  attackStats: {fileID: 11400000, guid: e6bdd6a9d68286e4e98bbab78b9a8bf1, type: 2}

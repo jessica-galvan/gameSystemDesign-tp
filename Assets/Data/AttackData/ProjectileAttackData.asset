@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
-  m_Name: EnemyBaseStats
+  m_Script: {fileID: 11500000, guid: 3cffe56f5bcf1a94fa99bce8fef676db, type: 3}
+  m_Name: ProjectileAttackData
   m_EditorClassIdentifier: 
-  maxLife: 100
-  radius: 2
   damage: 1
-  experience: 50
-  movementSpeed: 5
-  knockbackRecovery: 0
-  predictionTime: 0.00001
-  minDistanceFromPlayer: 1
+  force: 10000
+  forceMode: 1

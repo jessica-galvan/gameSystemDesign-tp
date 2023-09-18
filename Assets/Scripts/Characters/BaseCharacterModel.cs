@@ -11,11 +11,15 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     [ReadOnly, SerializeField] protected Vector2 direction;
     [ReadOnly, SerializeField] private bool flipX = false;
 
+    public bool wasKnocked = false;
+
     public LifeController LifeController { get; private set; }
     public bool Alive => LifeController.Alive;
     public Vector2 Direction => direction;
     public bool FlipX => flipX;
     public CharacterBaseStatsSO BaseStats => baseStats;
+
+    public Action OnBeingKocked;
 
     public virtual void Initialize()
     {
@@ -43,12 +47,18 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
         //flipX = dir.x > 0.1f;
     }
 
-    public virtual void TakeDamage(int damage, Vector2 direction)
+    public virtual void TakeDamage(int damage, Vector2 direction, float force, ForceMode2D forceMode)
     {
         LifeController.TakeDamage(damage);
-        if (Alive)
-        {
-            //TODO add knockback system?
-        }
+
+        if (Alive && baseStats.canBeKockedBack)
+            KnockedBack(direction, force, forceMode);
+    }
+
+    public void KnockedBack(Vector2 direction, float force, ForceMode2D forceMode)
+    {
+        wasKnocked = true;
+        rb.AddForce(direction * force, forceMode);
+        OnBeingKocked?.Invoke();
     }
 }

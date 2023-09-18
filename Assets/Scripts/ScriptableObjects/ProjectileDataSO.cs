@@ -8,6 +8,5 @@ public class ProjectileDataSO : ScriptableObject
     public ProjectileType type;
     public float speed = 5f;
     public float cooldown = 2f;
-    public int baseDamage = 1;
     public float totalTimeAlive = 5f;
 }
