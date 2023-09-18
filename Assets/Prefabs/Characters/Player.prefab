@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3814967593655648923}
   - component: {fileID: 3814967593655648922}
-  - component: {fileID: 3814967593655648921}
   - component: {fileID: 5935307631404088059}
   - component: {fileID: 3814967593655648920}
-  - component: {fileID: 3814967593655648919}
   - component: {fileID: 3814967593655648918}
+  - component: {fileID: 3814967593655648919}
+  - component: {fileID: 3814967593655648921}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -89,22 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3814967593655648921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3814967593655648917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398f363215d48dc429207ac4496febd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseStats: {fileID: 0}
-  <CurrentLife>k__BackingField: 0
-  <MaxLife>k__BackingField: 0
-  <Alive>k__BackingField: 0
 --- !u!61 &5935307631404088059
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,6 +136,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3814967593655648918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814967593655648917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5273751c62dd8e4290997c54b01736e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3814967593655648919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,8 +164,10 @@ MonoBehaviour:
   rb: {fileID: 3814967593655648920}
   direction: {x: 0, y: 0}
   flipX: 0
+  wasKnocked: 0
+  basicAttack: 0
   <CanShoot>k__BackingField: 0
---- !u!114 &3814967593655648918
+--- !u!114 &3814967593655648921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,6 +176,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3814967593655648917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5273751c62dd8e4290997c54b01736e, type: 3}
+  m_Script: {fileID: 11500000, guid: 398f363215d48dc429207ac4496febd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 0}
+  <CurrentLife>k__BackingField: 0
+  <MaxLife>k__BackingField: 0
+  <Alive>k__BackingField: 0
