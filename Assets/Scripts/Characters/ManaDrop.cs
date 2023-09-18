@@ -12,4 +12,5 @@ public class ManaDrop : MonoBehaviour, ICollectable
         //TODO ADD TO POOL!!!!
         Destroy(gameObject);
     }
+    //TODO ADD LIFE TIMER
 }

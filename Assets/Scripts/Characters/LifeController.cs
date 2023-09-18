@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    [SerializeField, ReadOnly] private CharacterBaseStatsSO baseStats;
-
+    [field: SerializeField] public bool Invincible { get; private set; }
     [field: SerializeField, ReadOnly] public int CurrentLife { get; private set; }
     [field: SerializeField, ReadOnly] public int MaxLife { get; private set; }
     [field: SerializeField, ReadOnly] public bool Alive { get; private set; }
@@ -18,8 +17,6 @@ public class LifeController : MonoBehaviour
 
     public void Initialize(CharacterBaseStatsSO baseStats)
     {
-        this.baseStats = baseStats;
-
         Alive = true;
         MaxLife = baseStats.maxLife;
         CurrentLife = MaxLife;
@@ -27,7 +24,7 @@ public class LifeController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!Alive) return;
+        if (!Alive || Invincible) return;
 
         CurrentLife -= damage;
 
@@ -51,7 +48,7 @@ public class LifeController : MonoBehaviour
 
     public void Die()
     {
-        if(!Alive) return;
+        if(!Alive || Invincible) return;
         Alive = false;
         CurrentLife = 0;
         OnDeath?.Invoke();

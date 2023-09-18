@@ -7,9 +7,7 @@ public class FSM<T>
     private IState<T> current;
     private bool hasState;
 
-    public FSM()
-    {
-    }
+    public FSM() { }
 
     public FSM(IState<T> initialState)
     {
@@ -25,10 +23,14 @@ public class FSM<T>
 
     public void OnUpdate()
     {
-        if (hasState)
-        {
-            current.Execute();
-        }
+        if (!hasState) return;
+        current.Execute();
+    }
+
+    public void OnFixedUpdate()
+    {
+        if (!hasState) return;
+        current.FixedExecute();
     }
 
     public void Transition(T input)

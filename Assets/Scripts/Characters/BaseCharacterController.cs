@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate where T: BaseCharacterModel
+public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate, IFixedUpdate where T: BaseCharacterModel
 {
     public T Model { get; private set; }
 
@@ -11,7 +11,6 @@ public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate where 
     {
         Model = GetComponent<T>();
         Model.Initialize();
-        AddToUpdate();
     }
 
     public virtual bool CanUpdate()
@@ -20,6 +19,7 @@ public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate where 
     }
 
     public abstract void Refresh();
+    public abstract void FixedRefresh();
     protected abstract void AddToUpdate();
     protected abstract void RemoveFromUpdate();
 }

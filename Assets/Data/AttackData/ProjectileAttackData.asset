@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ProjectileAttackData
   m_EditorClassIdentifier: 
   damage: 1
-  force: 10000
-  forceMode: 1
+  applyKnockback: 1
+  force: 30

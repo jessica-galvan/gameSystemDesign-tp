@@ -8,18 +8,14 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
     [SerializeField] protected CharacterBaseStatsSO baseStats;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
-    [ReadOnly, SerializeField] protected Vector2 direction;
+    [ReadOnly, SerializeField] protected Vector2 currentDirection;
     [ReadOnly, SerializeField] private bool flipX = false;
-
-    public bool wasKnocked = false;
 
     public LifeController LifeController { get; private set; }
     public bool Alive => LifeController.Alive;
-    public Vector2 Direction => direction;
+    public Vector2 Direction => currentDirection;
     public bool FlipX => flipX;
     public CharacterBaseStatsSO BaseStats => baseStats;
-
-    public Action OnBeingKocked;
 
     public virtual void Initialize()
     {
@@ -30,15 +26,15 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public void Idle()
     {
-        rb.velocity = Vector2.zero;
+        //TODO change animation to idle
     }
 
-    public void Move(Vector2 direction)
+    public virtual void Move(Vector2 direction)
     {
-        this.direction = direction;
-        rb.velocity = direction * baseStats.movementSpeed;
-        //var pos = (Vector2)transform.position + direction * baseStats.movementSpeed;
-        //rb.MovePosition(pos);
+        currentDirection = direction;
+        rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+        //rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+        //rb.velocity = direction * baseStats.movementSpeed;
     }
 
     public void LookDirection(Vector2 dir)
@@ -47,18 +43,23 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
         //flipX = dir.x > 0.1f;
     }
 
-    public virtual void TakeDamage(int damage, Vector2 direction, float force, ForceMode2D forceMode)
+    public virtual void TakeDamage(int damage)
     {
+        if (LifeController.Invincible) return;
         LifeController.TakeDamage(damage);
-
-        if (Alive && baseStats.canBeKockedBack)
-            KnockedBack(direction, force, forceMode);
     }
 
-    public void KnockedBack(Vector2 direction, float force, ForceMode2D forceMode)
+    public virtual void TakeDamage(int damage, Vector2 direction)
     {
-        wasKnocked = true;
-        rb.AddForce(direction * force, forceMode);
-        OnBeingKocked?.Invoke();
+        if (LifeController.Invincible) return;
+        TakeDamage(damage);
+
+        if (Alive && baseStats.canBeKockedBack)
+            KnockedBack(direction);
+    }
+
+    public void KnockedBack(Vector2 direction)
+    {
+        rb.AddForce(direction, ForceMode2D.Impulse);
     }
 }

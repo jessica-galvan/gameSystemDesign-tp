@@ -17,7 +17,6 @@ MonoBehaviour:
   damage: 1
   experience: 50
   canBeKockedBack: 1
-  movementSpeed: 5
-  knockbackRecovery: 1
-  predictionTime: 0.00001
+  movementSpeed: 1
+  predictionTime: 0.000001
   minDistanceFromPlayer: 1

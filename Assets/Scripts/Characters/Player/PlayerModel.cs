@@ -37,6 +37,13 @@ public class PlayerModel : BaseCharacterModel
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
     }
 
+    public override void Move(Vector2 direction)
+    {
+        currentDirection = direction;
+        rb.velocity = currentDirection * baseStats.movementSpeed * Time.deltaTime;
+        //rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+    }
+
     public void ShootingCooldown()
     {
         if (CanShoot) return;
@@ -48,18 +55,13 @@ public class PlayerModel : BaseCharacterModel
             CanShoot = true;
     }
 
-    public override void TakeDamage(int damage, Vector2 direction, float force, ForceMode2D forceMode)
-    {
-        //TODO rethink it with a cooldown and what happens if they keep in touch the player??
-        if (!GameManager.Instance.playerData.canTakeDamage) return;
-        base.TakeDamage(damage, direction, force, forceMode);
-    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //TODO rethink this with cooldown and make if you stay in contact?
         if(collision.gameObject.TryGetComponent<EnemyModel>(out var enemy))
-            TakeDamage((int)enemy.attackStats.damage, enemy.Direction, enemy.attackStats.force, enemy.attackStats.forceMode);
+            TakeDamage((int)enemy.attackStats.damage);
+            //TakeDamage((int)enemy.attackStats.damage, enemy.Direction * enemy.attackStats.force);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

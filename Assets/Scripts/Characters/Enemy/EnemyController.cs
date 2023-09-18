@@ -54,14 +54,22 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
         fsm.OnUpdate();
     }
 
+    public override void FixedRefresh()
+    {
+        if (!CanUpdate()) return;
+        fsm.OnFixedUpdate();
+    }
+
     protected override void AddToUpdate()
     {
         GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
+        GameManager.Instance.updateManager.AddFixedUpdate(this);
     }
 
     protected override void RemoveFromUpdate()
     {
         GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
+        GameManager.Instance.updateManager.RemoveFixedUpdate(this);
     }
 
     private void OnDie()
@@ -73,7 +81,6 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
     public void ReturnToPool()
     {
         gameObject.SetActive(false);
-        GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
         RemoveFromUpdate();
     }
 
@@ -82,6 +89,6 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
         Model.Spawn(position);
         Model.ResetStats();
         gameObject.SetActive(true);
-        GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
+        AddToUpdate();
     }
 }

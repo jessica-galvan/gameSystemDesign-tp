@@ -15,7 +15,7 @@ MonoBehaviour:
   gameScene: Gameplay
   menuScene: MainMenu
   maxLevelCap: 10
-  maxEnemiesAtAllTimes: 2
+  maxEnemiesAtAllTimes: 1
   minSpawnTime: 0
   maxSpawnTime: 0
   initialPool: 10

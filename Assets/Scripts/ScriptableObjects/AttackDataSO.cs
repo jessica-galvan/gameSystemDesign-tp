@@ -6,6 +6,6 @@ using UnityEngine;
 public class AttackDataSO : ScriptableObject
 {
     public int damage = 0;
+    public bool applyKnockback = true;
     public float force = 0f;
-    public ForceMode2D forceMode;
 }

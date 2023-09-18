@@ -12,5 +12,7 @@ public interface IState<T>
 
     void Execute();
 
+    void FixedExecute();
+
     void Sleep();
 }

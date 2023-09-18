@@ -4,6 +4,10 @@ using UnityEngine;
 
 public interface IUpdate 
 {
-    public GameObject gameObject { get; }
     void Refresh();
+}
+
+public interface IFixedUpdate
+{
+    void FixedRefresh();
 }

@@ -9,6 +9,7 @@ public class UpdateManager : MonoBehaviour
     [ReadOnly] public CustomUpdate gameplayCustomUpdate;
     [ReadOnly] public CustomUpdate uiCustomUpdate;
 
+    private List<IFixedUpdate> fixedUpdateList;
     private float currentTimeGameplay; //we have the timer here as it should not be affected by the max fps on gameplay or UI
     public float CurrentTimeGameplay => currentTimeGameplay;
 
@@ -26,9 +27,11 @@ public class UpdateManager : MonoBehaviour
 
         uiCustomUpdate = gameObject.AddComponent<CustomUpdate>();
         uiCustomUpdate.Initialize(GameManager.Instance.globalConfig.uiFPSTarget, "UI");
+
+        fixedUpdateList = new List<IFixedUpdate>();
     }
 
-    void Update()
+    private void Update()
     {
         if (!GameManager.Instance.CanUpdate)
             currentTimeGameplay += Time.deltaTime;
@@ -36,5 +39,25 @@ public class UpdateManager : MonoBehaviour
         uncappedCustomUpdate.UpdateList();
         gameplayCustomUpdate.UpdateList();
         uiCustomUpdate.UpdateList();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!GameManager.Instance.CanUpdate) return;
+
+        for (int i = fixedUpdateList.Count - 1; i >= 0; i--)
+            fixedUpdateList[i].FixedRefresh();
+    }
+
+    public void AddFixedUpdate(IFixedUpdate item)
+    {
+        if (!fixedUpdateList.Contains(item))
+            fixedUpdateList.Add(item);
+    }
+
+    public void RemoveFixedUpdate(IFixedUpdate item)
+    {
+        if (fixedUpdateList.Contains(item))
+            fixedUpdateList.Remove(item);
     }
 }

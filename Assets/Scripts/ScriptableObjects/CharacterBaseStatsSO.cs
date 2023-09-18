@@ -14,7 +14,6 @@ public class CharacterBaseStatsSO : ScriptableObject
     [Header("Movement")]
     public bool canBeKockedBack = true;
     public float movementSpeed = 2f;
-    public float knockbackRecovery = 0f;
 
     [Header("IA Stats")]
     [Tooltip("Prediction time affects how far away will predict, the lower it is, the lower it will take to turn, the higher it goes, the faster ir turn or completly skip it")]

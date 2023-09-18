@@ -41,7 +41,16 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
         if (!active) return;
 
         if (collision.gameObject.TryGetComponent<IDamagable>(out var damagable))
-            damagable.TakeDamage(attackData.damage, direction.normalized, attackData.force, attackData.forceMode); //TODO: add multipliers
+        {
+            if(attackData.force > 0)
+            {
+                var knockback = direction.normalized * attackData.force;
+                damagable.TakeDamage(attackData.damage, knockback); //TODO: add multipliers
+            }
+            else
+                damagable.TakeDamage(attackData.damage); //TODO: add multipliers
+
+        }
 
         Die();
     }

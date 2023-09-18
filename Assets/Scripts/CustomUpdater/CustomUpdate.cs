@@ -16,10 +16,7 @@ public class CustomUpdate : MonoBehaviour
 
         limitTargetFrame = targetFrame > 0;
         if (limitTargetFrame)
-        {
-            //calculamos el tiempo de cada framerate
-            targetTime = 1f / targetFrame; //PRECOMPUTATION
-        }
+            targetTime = 1f / targetFrame; //calculamos el tiempo de cada framerate
     }
 
     public void UpdateList()
@@ -28,9 +25,7 @@ public class CustomUpdate : MonoBehaviour
         if (limitTargetFrame && !CanUpdate()) return;
 
         for (int i = 0; i < updatingList.Count; i++)
-        {
             updatingList[i].Refresh();
-        }
     }
 
     private bool CanUpdate()
@@ -47,16 +42,12 @@ public class CustomUpdate : MonoBehaviour
     public void Add(IUpdate item)
     {
         if (!updatingList.Contains(item))
-        {
             updatingList.Add(item);
-        }
     }
 
     public void Remove(IUpdate item)
     {
         if (updatingList.Contains(item))
-        {
             updatingList.Remove(item);
-        }
     }
 }

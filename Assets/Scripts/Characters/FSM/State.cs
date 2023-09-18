@@ -12,26 +12,18 @@ public class State<T> : IState<T> //T es un parámetro genérico
     public IState<T> GetTransition(T input)
     {
         if (transitions.ContainsKey(input))
-        {
             return transitions[input];
-        }
+
         return null;
     }
 
-    public virtual void Awake() //el virtual es para poder modificarlo después.
-    {
+    public virtual void Awake() { } //el virtual es para poder modificarlo después.
 
-    }
+    public virtual void Execute() { }
 
-    public virtual void Execute()
-    {
+    public virtual void FixedExecute() { }
 
-    }
-
-    public virtual void Sleep()
-    {
-
-    }
+    public virtual void Sleep() { }
 
     public void AddTransition(T input, IState<T> state)
     {
@@ -41,9 +33,7 @@ public class State<T> : IState<T> //T es un parámetro genérico
     public void RemoveTransition(T input)
     {
         if (transitions.ContainsKey(input))
-        {
             transitions.Remove(input);
-        }
     }
 
     public void RemoveTransition(IState<T> state)
