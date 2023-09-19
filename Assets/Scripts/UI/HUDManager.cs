@@ -6,13 +6,18 @@ using UnityEngine;
 
 public class HUDManager : Panel, IUpdate
 {
+    [Header("Top")]
     public TMP_Text txtTimer;
     public SimpleBar experienceBar;
     public string levelString = "Level {0}";
-    public SimpleBar manaBar;
-    public string manaString = "Mana {0}/{1}";
     public SimpleBar hpBar;
     public string hpString = "HP {0}/{1}";
+
+    [Header("Bottom")]
+    public SimpleBar manaBar;
+    public string manaString = "Mana {0}/{1}";
+    public AbilityUI abilityPrototype;
+    public List<AbilityUI> abilityUIList = new List<AbilityUI>();
 
     public override void Initialize()
     {
@@ -25,6 +30,16 @@ public class HUDManager : Panel, IUpdate
 
         experienceBar.SetValue(0);
         experienceBar.txtTitle.SetText(levelString, GameManager.Instance.experienceSystem.CurrentLevel);
+
+        for (int i = 0; i < GameManager.Instance.playerData.maxAbilities; i++)
+        {
+            var ability = Instantiate(abilityPrototype, abilityPrototype.transform.parent);
+            ability.gameObject.name = $"CNT_Ability_{i}";
+            ability.Initialize();
+            abilityUIList.Add(ability);
+        }
+
+        abilityPrototype.gameObject.SetActive(false);
 
         UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana);
     }
@@ -62,4 +77,24 @@ public class HUDManager : Panel, IUpdate
         hpBar.txtTitle.SetText(hpString, currentLife, maxLife);
     }
 
+    private void UnlockAbility(AbilityDataSO abilityData)
+    {
+        AbilityUI ability = null;
+        int currentIndex = 0;
+        for (int i = 0; i < abilityUIList.Count; i++)
+        {
+            if (abilityUIList[i].IsUnlocked) continue;
+            ability = abilityUIList[i];
+            currentIndex = i;
+            break;
+        }
+
+        if (ability == null)
+        {
+            Debug.LogError("Trying to assing an ability when not slots available");
+            return;
+        }
+
+        ability.SetAbility(abilityData, currentIndex + 1);
+    }
 }

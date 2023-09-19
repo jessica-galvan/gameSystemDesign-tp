@@ -33,7 +33,6 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     {
         currentDirection = direction;
         rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
-        //rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
         //rb.velocity = direction * baseStats.movementSpeed;
     }
 

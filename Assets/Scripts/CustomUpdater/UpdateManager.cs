@@ -33,7 +33,7 @@ public class UpdateManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.CanUpdate)
+        if (GameManager.Instance.CanUpdate)
             currentTimeGameplay += Time.deltaTime;
 
         uncappedCustomUpdate.UpdateList();
