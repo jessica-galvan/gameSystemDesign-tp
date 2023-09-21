@@ -27,7 +27,14 @@ public class LevelUpPanel : Panel
 
     private void OnPowerButtonSelected(PowerUpButton button)
     {
-        Debug.Log($"Selected {button.txtTitle.text}");
+        Debug.Log($"Selected {button.CurrentOption.Title}");
+
+        if (button.CurrentOption is AbilityDataSO)
+        {
+            print("Ability was unlocked");
+            GameManager.Instance.Player.UnlockAbility(button.CurrentOption as AbilityDataSO);
+        }
+
         Close();
     }
 
@@ -36,6 +43,7 @@ public class LevelUpPanel : Panel
         base.Open();
 
         GameManager.Instance.SetPause(true, pauseMenu: false);
+        SetOptions();
         buttons[0].Button.Select();
     }
 
@@ -43,6 +51,21 @@ public class LevelUpPanel : Panel
     {
         base.Close();
         GameManager.Instance.SetPause(false, pauseMenu: false);
+    }
+
+    public void SetOptions()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            var selection = GetRandomSelection(i);
+            buttons[i].SetSelectableOption(selection);
+        }
+    }
+
+    public ISelectableOption GetRandomSelection(int i)
+    {
+        //TODO implent a system with random weight for this shit
+        return GameManager.Instance.playerData.allUnlockableAbilities[i];
     }
 
 }

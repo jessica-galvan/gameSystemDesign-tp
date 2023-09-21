@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public PrefabsReferencesSO prefabReferences;
     public SoundReferencesSO soundReferences;
     public PlayerDataSO playerData;
-    public Transform playerSpawningPoint;
 
     [Header("Info")]
     [ReadOnly] public CameraController cameraController;

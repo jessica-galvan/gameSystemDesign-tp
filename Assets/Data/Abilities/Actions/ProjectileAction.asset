@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
-  m_Name: EnemyBaseStats
+  m_Script: {fileID: 11500000, guid: 1321ed06a2ce1f14c8897e011fc4c344, type: 3}
+  m_Name: ProjectileAction
   m_EditorClassIdentifier: 
-  maxLife: 1
-  radius: 2
-  damage: 1
-  experience: 100
-  canBeKockedBack: 1
-  movementSpeed: 500
-  predictionTime: 0.000001
-  minDistanceFromPlayer: 1
+  projectilePrefab: {fileID: 0}
+  baseAmount: 0
+  radiousFromPlayer: 0
+  directions: []

@@ -8,12 +8,13 @@ public class PlayerModel : BaseCharacterModel
     public ProjectileType basicAttack;
 
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
+    private int currentUnlockedAbilities = 0;
 
-    private int unlockedAbilitiesCounter;
     private float cooldownShootTimer = 0f;
 
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
+    public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
     public Action<AbilityDataSO> OnUnlockedAbilityEvent;
 
     public override void Initialize()
@@ -21,6 +22,7 @@ public class PlayerModel : BaseCharacterModel
         base.Initialize();
 
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
+
         CanShoot = true;
     }
 
@@ -64,9 +66,15 @@ public class PlayerModel : BaseCharacterModel
 
     public void UnlockAbility(AbilityDataSO abilityData)
     {
-        Debug.Assert(unlockedAbilitiesCounter < GameManager.Instance.playerData.maxAbilities, "Trying to unlock more abilities than needed");
-        unlockedAbilities[unlockedAbilitiesCounter] = abilityData;
-        unlockedAbilitiesCounter++;
+        if(currentUnlockedAbilities >= GameManager.Instance.playerData.maxAbilities)
+        {
+            Debug.LogError("Trying to unlock more abilities than needed");
+            return;
+        }
+
+        unlockedAbilities[currentUnlockedAbilities] = abilityData;
+        currentUnlockedAbilities++;
+
         OnUnlockedAbilityEvent?.Invoke(abilityData);
     }
 

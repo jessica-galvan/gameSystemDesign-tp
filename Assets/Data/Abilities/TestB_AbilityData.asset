@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
-  m_Name: EnemyBaseStats
+  m_Script: {fileID: 11500000, guid: e56a977097a84dc41b4f949cea6e43cf, type: 3}
+  m_Name: TestB_AbilityData
   m_EditorClassIdentifier: 
-  maxLife: 1
-  radius: 2
-  damage: 1
-  experience: 100
-  canBeKockedBack: 1
-  movementSpeed: 500
-  predictionTime: 0.000001
-  minDistanceFromPlayer: 1
+  title: Title B
+  icon: {fileID: 0}
+  description: Add a description here
+  cooldown: 0.5
+  manaCost: 5
+  actions:
+  - {fileID: 11400000, guid: 4d788ea92a9c48e4588277f69a0143d9, type: 2}
