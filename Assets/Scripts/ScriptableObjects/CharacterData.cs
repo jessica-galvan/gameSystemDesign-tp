@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BaseStatsSo", menuName = "TP/CharacterBaseStats", order = 2)]
-public class CharacterBaseStatsSO : ScriptableObject
+[CreateAssetMenu(fileName = "CharacterData", menuName = "TP/CharacterData", order = 4)]
+public class CharacterDataSO : ScriptableObject
 {
     [Header("Health")]
     public int maxLife = 100;

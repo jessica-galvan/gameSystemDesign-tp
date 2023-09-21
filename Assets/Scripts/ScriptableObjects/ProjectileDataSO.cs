@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileData", menuName = "TP/ProjectileData", order = 2)]
+[CreateAssetMenu(fileName = "ProjectileData", menuName = "TP/Damage/ProjectileData", order = 2)]
 public class ProjectileDataSO : ScriptableObject
 {
     public ProjectileType type;

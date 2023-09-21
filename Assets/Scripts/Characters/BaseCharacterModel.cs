@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(LifeController), typeof(Rigidbody2D))]
 public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
-    [SerializeField] protected CharacterBaseStatsSO baseStats;
+    [SerializeField] protected CharacterDataSO baseStats;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
     [ReadOnly, SerializeField] protected Vector2 currentDirection;
     [ReadOnly, SerializeField] private bool flipX = false;
@@ -15,7 +15,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public bool Alive => LifeController.Alive;
     public Vector2 Direction => currentDirection;
     public bool FlipX => flipX;
-    public CharacterBaseStatsSO BaseStats => baseStats;
+    public CharacterDataSO BaseStats => baseStats;
 
     public virtual void Initialize()
     {

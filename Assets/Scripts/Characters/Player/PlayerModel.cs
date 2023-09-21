@@ -1,19 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerModel : BaseCharacterModel
 {
-    //Shooting
     public ProjectileType basicAttack;
 
-    protected float cooldownShootTimer = 0f;
-    protected float currentStuckCounter = 0f;
+    [SerializeField] private AbilityDataSO[] unlockedAbilities;
+
+    private int unlockedAbilitiesCounter;
+    private float cooldownShootTimer = 0f;
+
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
+
+    public Action<AbilityDataSO> OnUnlockedAbilityEvent;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
         CanShoot = true;
     }
 
@@ -53,6 +60,14 @@ public class PlayerModel : BaseCharacterModel
         //TODO rethink this for the ability cooldown
         if (cooldownShootTimer >= GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown)
             CanShoot = true;
+    }
+
+    public void UnlockAbility(AbilityDataSO abilityData)
+    {
+        Debug.Assert(unlockedAbilitiesCounter < GameManager.Instance.playerData.maxAbilities, "Trying to unlock more abilities than needed");
+        unlockedAbilities[unlockedAbilitiesCounter] = abilityData;
+        unlockedAbilitiesCounter++;
+        OnUnlockedAbilityEvent?.Invoke(abilityData);
     }
 
 

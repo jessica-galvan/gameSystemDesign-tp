@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SoundReferences", menuName = "TP/SoundReferences", order = 5)]
+[CreateAssetMenu(fileName = "SoundReferences", menuName = "TP/General/SoundReferences", order = 5)]
 public class SoundReferencesSO : ScriptableObject
 {
     [Header("UI")]

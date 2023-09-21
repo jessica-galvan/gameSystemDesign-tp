@@ -15,7 +15,7 @@ public class LifeController : MonoBehaviour
     public Action<int, int> OnLifeUpdate;
     public Action OnDeath;
 
-    public void Initialize(CharacterBaseStatsSO baseStats)
+    public void Initialize(CharacterDataSO baseStats)
     {
         Alive = true;
         MaxLife = baseStats.maxLife;

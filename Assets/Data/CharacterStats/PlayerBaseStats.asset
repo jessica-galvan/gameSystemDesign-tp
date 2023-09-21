@@ -17,6 +17,6 @@ MonoBehaviour:
   damage: 0
   experience: 0
   canBeKockedBack: 0
-  movementSpeed: 5
+  movementSpeed: 500
   predictionTime: 100
   minDistanceFromPlayer: 0.5

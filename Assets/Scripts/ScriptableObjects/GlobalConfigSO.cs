@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GlobalConfig", menuName = "TP/GlobalConfig", order = 1)]
+[CreateAssetMenu(fileName = "GlobalConfig", menuName = "TP/General/GlobalConfig", order = 1)]
 public class GlobalConfigSO : ScriptableObject
 {
     [Header("Scenes")]

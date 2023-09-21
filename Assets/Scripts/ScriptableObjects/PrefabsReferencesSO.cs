@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[CreateAssetMenu(fileName = "PrefabsReferences", menuName = "TP/PrefabsReferences", order = 4)]
+[CreateAssetMenu(fileName = "PrefabsReferences", menuName = "TP/General/PrefabsReferences", order = 4)]
 public class PrefabsReferencesSO : ScriptableObject
 {
     [Header("Base")]

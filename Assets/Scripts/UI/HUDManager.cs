@@ -27,6 +27,7 @@ public class HUDManager : Panel, IUpdate
         GameManager.Instance.experienceSystem.OnUpdateLevel += UpdateLevel;
         GameManager.Instance.manaSystem.OnUpdateMana += UpdateMana;
         GameManager.Instance.Player.LifeController.OnLifeUpdate += UpdatePlayerLife;
+        GameManager.Instance.Player.OnUnlockedAbilityEvent += UnlockAbility;
 
         experienceBar.SetValue(0);
         experienceBar.txtTitle.SetText(levelString, GameManager.Instance.experienceSystem.CurrentLevel);
