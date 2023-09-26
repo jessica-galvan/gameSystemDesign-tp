@@ -6,5 +6,5 @@ using UnityEngine;
 public abstract class BaseAbilityAction : ScriptableObject
 {
     public abstract void Initialize();
-    public abstract void Execute(BaseCharacterModel characterModel);
+    public abstract void Execute(PlayerModel playerModel);
 }

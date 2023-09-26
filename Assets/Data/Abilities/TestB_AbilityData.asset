@@ -18,4 +18,4 @@ MonoBehaviour:
   cooldown: 0.5
   manaCost: 5
   actions:
-  - {fileID: 11400000, guid: 4d788ea92a9c48e4588277f69a0143d9, type: 2}
+  - {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}

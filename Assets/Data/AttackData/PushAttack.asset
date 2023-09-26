@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1321ed06a2ce1f14c8897e011fc4c344, type: 3}
-  m_Name: ProjectileAction
+  m_Script: {fileID: 11500000, guid: 3cffe56f5bcf1a94fa99bce8fef676db, type: 3}
+  m_Name: PushAttack
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
-  baseAmount: 0
-  radiousFromPlayer: 0
-  directions: []
+  damage: 1
+  applyKnockback: 1
+  force: 15

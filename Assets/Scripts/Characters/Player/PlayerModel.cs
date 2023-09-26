@@ -26,7 +26,7 @@ public class PlayerModel : BaseCharacterModel
         CanShoot = true;
     }
 
-    public void Shoot(Vector2 mousePos)
+    public void Shoot(Vector2 mousePos, ProjectileDataSO projectileOverride = null)
     {
         if (!CanShoot)
         {
@@ -37,7 +37,14 @@ public class PlayerModel : BaseCharacterModel
         var direction = mousePos - rb.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        var bullet = GameManager.Instance.poolManager.GetProjectile(basicAttack);
+
+        ProjectileController bullet = null;
+
+        if (projectileOverride != null)
+            bullet = GameManager.Instance.poolManager.GetProjectile(projectileOverride.type);
+        else
+            bullet = GameManager.Instance.poolManager.GetProjectile(basicAttack);
+
         var spawnPoint = rb.position + (direction.normalized * baseStats.radius);
         bullet.SetDirection(spawnPoint, direction, angle);
         CanShoot = false;
@@ -75,9 +82,24 @@ public class PlayerModel : BaseCharacterModel
         unlockedAbilities[currentUnlockedAbilities] = abilityData;
         currentUnlockedAbilities++;
 
+        abilityData.Initialize();
+
         OnUnlockedAbilityEvent?.Invoke(abilityData);
     }
 
+
+    public bool CanUseAbility(int index)
+    {
+        if (currentUnlockedAbilities < index) return false;
+
+        return unlockedAbilities[index].CanBeUsed(GameManager.Instance.manaSystem.currentMana);
+    }
+
+    public void UseAbility(int index)
+    {
+        GameManager.Instance.manaSystem.RemoveMana(unlockedAbilities[index].ManaCost);
+        unlockedAbilities[index].Execute(this);
+    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {

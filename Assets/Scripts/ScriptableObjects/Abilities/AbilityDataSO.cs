@@ -24,6 +24,9 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
     public string Description => description;
     public Sprite Icon => icon;
 
+    [field: ReadOnly, NonSerialized] private float currentTime = 0;   
+    [field: ReadOnly, NonSerialized] private bool isInCooldown = false;
+
     [field: ReadOnly, NonSerialized] public int ManaCost { get; set; }
     [field: ReadOnly, NonSerialized] public float Cooldown { get; set; }
 
@@ -32,13 +35,37 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
         ManaCost = manaCost;
         Cooldown = cooldown;
 
+        currentTime = 0;
+
         foreach (var action in actions)
             action.Initialize();
     }
 
-    public void Execute(BaseCharacterModel characterModel)
+    public void Execute(PlayerModel playerModel)
     {
+        SetCooldown();
+
         foreach (var action in actions)
-            action.Execute(characterModel);
+            action.Execute(playerModel);
+    }
+
+    private void SetCooldown()
+    {
+        isInCooldown = true;
+        currentTime = Cooldown;
+    }
+
+    public void Refresh()
+    {
+        if (!isInCooldown) return;
+
+        currentTime -= Time.deltaTime;
+        if (currentTime <= 0)
+            isInCooldown = false;
+    }
+
+    public bool CanBeUsed(int currentMana)
+    {
+        return !isInCooldown && currentMana >= ManaCost;
     }
 }

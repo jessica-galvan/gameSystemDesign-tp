@@ -19,4 +19,4 @@ MonoBehaviour:
   manaCost: 5
   actions:
   - {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
-  - {fileID: 11400000, guid: 31f983fd91182c94fb7eee58b7bb12ea, type: 2}
+  - {fileID: 11400000, guid: b88197c8972b5d942a15a92a1dfcfe1c, type: 2}

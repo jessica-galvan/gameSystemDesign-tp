@@ -27,6 +27,15 @@ public class PlayerController : BaseCharacterController<PlayerModel>
             Model.LookDirection(prevDir);
         }
 
+        if (GameManager.Instance.Input.Gameplay.AbilityOne.WasPressedThisFrame() && Model.CanUseAbility(0))
+            Model.UseAbility(0);
+
+        if (GameManager.Instance.Input.Gameplay.AbilityTwo.WasPressedThisFrame() && Model.CanUseAbility(1))
+            Model.UseAbility(1);
+
+        if (GameManager.Instance.Input.Gameplay.AbilityThree.WasPressedThisFrame() && Model.CanUseAbility(2))
+            Model.UseAbility(2);
+
         if (GameManager.Instance.Input.Gameplay.Attack.IsPressed())
             Model.Shoot(GameManager.Instance.cameraController.MouseWorldPos());
 

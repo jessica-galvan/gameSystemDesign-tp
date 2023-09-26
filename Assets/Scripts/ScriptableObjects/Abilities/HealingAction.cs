@@ -8,15 +8,17 @@ public class HealingAction : BaseAbilityAction
 {
     public int baseHealthingAmount = 0;
 
-    [field: ReadOnly, NonSerialized] public float HealingAmount { get; set; }
+    [field: ReadOnly, NonSerialized] public int HealingAmount { get; set; }
 
     public override void Initialize()
     {
         HealingAmount = baseHealthingAmount;
     }
 
-    public override void Execute(BaseCharacterModel characterModel)
+    public override void Execute(PlayerModel playerModel)
     {
+        playerModel.LifeController.Heal(HealingAmount);
+
         Debug.Log($"Ability {name} was executed");
     }
 }

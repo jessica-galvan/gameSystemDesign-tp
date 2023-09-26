@@ -26,6 +26,8 @@ public class PoolManager : MonoBehaviour
         return newPool;
     }
 
+
+    //TODO rethink this to work with an ID???
     public ProjectileController GetProjectile(ProjectileType type)
     {
         IPoolable bullet = null;
