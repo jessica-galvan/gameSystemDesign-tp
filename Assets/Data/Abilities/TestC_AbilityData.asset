@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestC_AbilityData
   m_EditorClassIdentifier: 
   title: Title C
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3af6f3ed61fa5d146b84dae34015c9af, type: 3}
   description: Add a description here
   cooldown: 3
   manaCost: 5

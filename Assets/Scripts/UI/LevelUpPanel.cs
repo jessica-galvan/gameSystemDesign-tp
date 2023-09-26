@@ -41,7 +41,6 @@ public class LevelUpPanel : Panel
     public override void Open()
     {
         base.Open();
-
         GameManager.Instance.SetPause(true, pauseMenu: false);
         SetOptions();
         buttons[0].Button.Select();
@@ -65,6 +64,7 @@ public class LevelUpPanel : Panel
     public ISelectableOption GetRandomSelection(int i)
     {
         //TODO implent a system with random weight for this shit
+        //and make sure it only shows abilities that haven't been unlocked
         return GameManager.Instance.playerData.allUnlockableAbilities[i];
     }
 

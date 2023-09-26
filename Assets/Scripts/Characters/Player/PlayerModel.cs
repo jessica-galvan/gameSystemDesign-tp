@@ -79,7 +79,7 @@ public class PlayerModel : BaseCharacterModel
 
     public void UnlockAbility(AbilityDataSO abilityData)
     {
-        if(currentUnlockedAbilities >= GameManager.Instance.playerData.maxAbilities)
+        if(!CanUnlockAbility())
         {
             Debug.LogError("Trying to unlock more abilities than needed");
             return;
@@ -91,6 +91,11 @@ public class PlayerModel : BaseCharacterModel
         abilityData.Initialize();
 
         OnUnlockedAbilityEvent?.Invoke(abilityData);
+    }
+
+    public bool CanUnlockAbility()
+    {
+        return currentUnlockedAbilities < GameManager.Instance.playerData.maxAbilities;
     }
 
 
