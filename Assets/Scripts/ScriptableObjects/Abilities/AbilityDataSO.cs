@@ -29,6 +29,8 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
 
     [field: ReadOnly, NonSerialized] public int ManaCost { get; set; }
     [field: ReadOnly, NonSerialized] public float Cooldown { get; set; }
+    public float CurrentTimeLeft => currentTime;
+    public bool IsInCooldown => isInCooldown;
 
     public void Initialize()
     {
@@ -66,6 +68,11 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
 
     public bool CanBeUsed(int currentMana)
     {
-        return !isInCooldown && currentMana >= ManaCost;
+        return !isInCooldown && HasMana(currentMana);
+    }
+
+    public bool HasMana(int currentMana)
+    {
+        return currentMana >= ManaCost;
     }
 }

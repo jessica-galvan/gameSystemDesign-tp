@@ -9,7 +9,7 @@ public class InstantiateAction : BaseAbilityAction
     public GameObject objectToInstantiate;
 
     public bool isProjectile = false;
-    public bool useMouseDirection = false; //ONLY IF IS PROJECTILE
+    public bool useMouseDirection = false; //USE ONLY IF IS PROJECTILE
     public int baseAmount = 0;
     public float minDistanteFromPlayer = 0f;
     public float maxDistanteFromPlayer = 5f;

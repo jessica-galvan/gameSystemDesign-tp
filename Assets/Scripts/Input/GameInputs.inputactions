@@ -315,6 +315,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cheats",
+            "id": "c3c355be-48c4-4f18-a517-e133da66ff88",
+            "actions": [
+                {
+                    "name": "AddMana",
+                    "type": "Button",
+                    "id": "daf223ef-509a-4893-8ecd-92573ddb27d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fc74acc7-5c1f-4ff7-abe9-3e97c1e160ee",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddMana",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

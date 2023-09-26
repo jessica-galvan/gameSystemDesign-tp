@@ -71,6 +71,12 @@ public class PlayerModel : BaseCharacterModel
             CanShoot = true;
     }
 
+    public void RefreshAbilities()
+    {
+        for (int i = 0; i < currentUnlockedAbilities; i++)
+            unlockedAbilities[i].Refresh();
+    }
+
     public void UnlockAbility(AbilityDataSO abilityData)
     {
         if(currentUnlockedAbilities >= GameManager.Instance.playerData.maxAbilities)

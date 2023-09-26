@@ -48,12 +48,18 @@ public class HUDManager : Panel, IUpdate
     public void Refresh()
     {
         UpdateTimer(GameManager.Instance.updateManager.CurrentTimeGameplay);
+        UpdateAbilities();
+    }
+
+    private void UpdateAbilities()
+    {
+        for (int i = 0; i < abilityUIList.Count; i++)
+            abilityUIList[i].Refresh();
     }
 
     public void UpdateTimer(float timeInSeconds)
     {
-        TimeSpan time = TimeSpan.FromSeconds(timeInSeconds);
-        txtTimer.text = time.ToString(GameManager.Instance.globalConfig.timeFormat);
+        txtTimer.SetText(TimeSpan.FromSeconds(timeInSeconds).ToString(GameManager.Instance.globalConfig.timeFormat));
     }
 
     private void UpdateExperience(float amount)

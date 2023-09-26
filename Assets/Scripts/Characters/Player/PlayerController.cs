@@ -39,6 +39,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
         if (GameManager.Instance.Input.Gameplay.Attack.IsPressed())
             Model.Shoot(GameManager.Instance.cameraController.MouseWorldPos());
 
+        Model.RefreshAbilities();
         Model.ShootingCooldown();
     }
 

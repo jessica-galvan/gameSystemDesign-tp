@@ -337,6 +337,34 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cheats"",
+            ""id"": ""c3c355be-48c4-4f18-a517-e133da66ff88"",
+            ""actions"": [
+                {
+                    ""name"": ""AddMana"",
+                    ""type"": ""Button"",
+                    ""id"": ""daf223ef-509a-4893-8ecd-92573ddb27d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fc74acc7-5c1f-4ff7-abe9-3e97c1e160ee"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddMana"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -355,6 +383,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         m_Gameplay_AbilityOne = m_Gameplay.FindAction("AbilityOne", throwIfNotFound: true);
         m_Gameplay_AbilityTwo = m_Gameplay.FindAction("AbilityTwo", throwIfNotFound: true);
         m_Gameplay_AbilityThree = m_Gameplay.FindAction("AbilityThree", throwIfNotFound: true);
+        // Cheats
+        m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
+        m_Cheats_AddMana = m_Cheats.FindAction("AddMana", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -540,6 +571,39 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Cheats
+    private readonly InputActionMap m_Cheats;
+    private ICheatsActions m_CheatsActionsCallbackInterface;
+    private readonly InputAction m_Cheats_AddMana;
+    public struct CheatsActions
+    {
+        private @GameInputs m_Wrapper;
+        public CheatsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AddMana => m_Wrapper.m_Cheats_AddMana;
+        public InputActionMap Get() { return m_Wrapper.m_Cheats; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheatsActions set) { return set.Get(); }
+        public void SetCallbacks(ICheatsActions instance)
+        {
+            if (m_Wrapper.m_CheatsActionsCallbackInterface != null)
+            {
+                @AddMana.started -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
+                @AddMana.performed -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
+                @AddMana.canceled -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
+            }
+            m_Wrapper.m_CheatsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AddMana.started += instance.OnAddMana;
+                @AddMana.performed += instance.OnAddMana;
+                @AddMana.canceled += instance.OnAddMana;
+            }
+        }
+    }
+    public CheatsActions @Cheats => new CheatsActions(this);
     public interface IMenuActions
     {
         void OnSelection(InputAction.CallbackContext context);
@@ -555,5 +619,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         void OnAbilityOne(InputAction.CallbackContext context);
         void OnAbilityTwo(InputAction.CallbackContext context);
         void OnAbilityThree(InputAction.CallbackContext context);
+    }
+    public interface ICheatsActions
+    {
+        void OnAddMana(InputAction.CallbackContext context);
     }
 }

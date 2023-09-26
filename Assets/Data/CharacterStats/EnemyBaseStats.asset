@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
   m_Name: EnemyBaseStats
   m_EditorClassIdentifier: 
-  maxLife: 1
+  maxLife: 5
   radius: 2
   damage: 1
   experience: 100

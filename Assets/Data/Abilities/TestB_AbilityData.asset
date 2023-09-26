@@ -15,7 +15,7 @@ MonoBehaviour:
   title: Title B
   icon: {fileID: 0}
   description: Add a description here
-  cooldown: 0.5
+  cooldown: 4
   manaCost: 5
   actions:
   - {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
