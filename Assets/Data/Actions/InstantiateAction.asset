@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9c314b8427ff643b0d33038019b710, type: 3}
   m_Name: InstantiateAction
   m_EditorClassIdentifier: 
-  objectToInstantiate: {fileID: 5403911747325128225, guid: 91cdc430197df4d49a8b17cdfe9cedd4, type: 3}
-  isProjectile: 1
-  useMouseDirection: 1
+  objectToInstantiate: {fileID: 4021260704073861571, guid: 043e57c67dc5440479c531e291800e3b, type: 3}
+  isProjectile: 0
+  useMouseDirection: 0
   baseAmount: 1
   minDistanteFromPlayer: 0
   maxDistanteFromPlayer: 5
