@@ -214,6 +214,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 561707449979279754, guid: 2b2e9784eba99164a86ddec2083e1182, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6913166663229910639, guid: 2b2e9784eba99164a86ddec2083e1182, type: 3}
       propertyPath: m_Name
       value: CNV_MainMenu

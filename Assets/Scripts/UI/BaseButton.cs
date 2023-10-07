@@ -19,7 +19,7 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public virtual void Select()
     {
-        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.hoverButton);
+        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.hoverButton);
 
         if (selectedMarker != null)
             selectedMarker.SetActive(true);

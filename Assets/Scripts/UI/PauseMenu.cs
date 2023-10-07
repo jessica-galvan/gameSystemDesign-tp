@@ -31,6 +31,7 @@ public class PauseMenu : Panel
 
         buttons.Add(menuButton);
         menuButton.Button.onClick.AddListener(OpenMainMenuPopup);
+        menuButton.enabled = false;
 
         buttons.Add(quitButton);
         quitButton.Button.onClick.AddListener(OpenExitPopup);
@@ -56,7 +57,7 @@ public class PauseMenu : Panel
 
     private void OnClick()
     {
-        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.selectButton);
+        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.selectButton);
     }
 
     public override void Dispose()

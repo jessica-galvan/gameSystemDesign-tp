@@ -28,14 +28,14 @@ public class Popup : Panel
     public override void Open()
     {
         base.Open();
-        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.openPopup);
+        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.openPopup);
         btnConfirm.Button.Select();
     }
 
     public override void Close()
     {
         base.Close();
-        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.closePopup);
+        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.closePopup);
         btnConfirm.Button.onClick.RemoveAllListeners();
         btnCancel.Deselect();
     }

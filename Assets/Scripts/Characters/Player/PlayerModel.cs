@@ -30,7 +30,7 @@ public class PlayerModel : BaseCharacterModel
     {
         if (!CanShoot)
         {
-            GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.negativeShootSound);
+            //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.negativeShootSound);
             return;
         }
 
@@ -50,7 +50,7 @@ public class PlayerModel : BaseCharacterModel
         CanShoot = false;
         cooldownShootTimer = 0f;
 
-        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
+        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
     }
 
     public override void Move(Vector2 direction)
