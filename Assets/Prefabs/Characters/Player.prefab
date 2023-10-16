@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3814967593655648922}
   - component: {fileID: 5935307631404088059}
   - component: {fileID: 3814967593655648920}
+  - component: {fileID: 1624736620705932992}
   - component: {fileID: 3814967593655648918}
   - component: {fileID: 3814967593655648919}
   - component: {fileID: 3814967593655648921}
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.23745102, g: 0.71638846, b: 0.8207547, a: 1}
+  m_Sprite: {fileID: -1604527920, guid: e256c825447a2044abd8c673f49f1812, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,18 +103,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: -0.072434336, y: 0.05870393}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6378285, y: 0.6378285}
   m_EdgeRadius: 0
 --- !u!50 &3814967593655648920
 Rigidbody2D:
@@ -136,6 +137,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1624736620705932992
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814967593655648917}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4be72feff98d4044ea15c2e5cb2e17bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &3814967593655648918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,10 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: 67f14b9b3f9c5cb41b4db03a9ca9e04b, type: 2}
   rb: {fileID: 3814967593655648920}
-  direction: {x: 0, y: 0}
+  currentDirection: {x: 0, y: 0}
   flipX: 0
-  wasKnocked: 0
   basicAttack: 0
+  unlockedAbilities: []
   <CanShoot>k__BackingField: 0
 --- !u!114 &3814967593655648921
 MonoBehaviour:
@@ -179,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398f363215d48dc429207ac4496febd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 0}
+  <Invincible>k__BackingField: 0
   <CurrentLife>k__BackingField: 0
   <MaxLife>k__BackingField: 0
   <Alive>k__BackingField: 0

@@ -57,6 +57,9 @@ public class PlayerModel : BaseCharacterModel
     {
         currentDirection = direction;
         rb.velocity = currentDirection * baseStats.movementSpeed * Time.deltaTime;
+
+        Flip(currentDirection);
+
         //rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
     }
 

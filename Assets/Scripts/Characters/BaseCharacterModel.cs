@@ -8,6 +8,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
     [SerializeField] protected CharacterDataSO baseStats;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
+    [ReadOnly, SerializeField] private Animator animator;
     [ReadOnly, SerializeField] protected Vector2 currentDirection;
     [ReadOnly, SerializeField] private bool flipX = false;
 
@@ -16,11 +17,13 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public Vector2 Direction => currentDirection;
     public bool FlipX => flipX;
     public CharacterDataSO BaseStats => baseStats;
+    public Animator Animator => animator;
 
     public virtual void Initialize()
     {
         LifeController = GetComponent<LifeController>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         LifeController.Initialize(baseStats);
     }
 
@@ -33,6 +36,9 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     {
         currentDirection = direction;
         rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+
+        Flip(currentDirection);
+
         //rb.velocity = direction * baseStats.movementSpeed;
     }
 
@@ -60,5 +66,15 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public void KnockedBack(Vector2 direction)
     {
         rb.AddForce(direction, ForceMode2D.Impulse);
+    }
+
+    public void Flip(Vector2 direction)
+    {
+        var flipped = direction.x < 0;
+
+        if (flipX == flipped) return;
+        flipX = flipped;
+
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipX ? 180f : 0f, 0f));
     }
 }
