@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         Player = player.Model;
         Player.Initialize();
 
-        cameraController = Instantiate(prefabReferences.camControllerPrefab, player.transform);
+        cameraController = Instantiate(prefabReferences.camControllerPrefab);
         cameraController.Initialize();
 
         poolManager = GetComponent<PoolManager>();

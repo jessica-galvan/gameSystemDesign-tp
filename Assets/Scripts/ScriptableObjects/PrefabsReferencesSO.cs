@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PrefabsReferencesSO : ScriptableObject
     [Header("Base")]
     public EventSystem eventSystemPrefab;
     public CameraController camControllerPrefab;
+    public CinemachineVirtualCamera virtualCamera;
 
     [Header("Managers")]
     public UpdateManager updateManagerPrefab;

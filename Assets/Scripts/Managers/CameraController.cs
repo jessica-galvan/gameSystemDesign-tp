@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public Camera main;
+    [ReadOnly] public Cinemachine.CinemachineVirtualCamera virtualCamera;
 
     [Header("Directions")]
     public Transform topSpawnPoint;
@@ -23,7 +24,9 @@ public class CameraController : MonoBehaviour
 
     public void Initialize()
     {
-        main = GetComponent<Camera>();
+        virtualCamera = Instantiate(GameManager.Instance.prefabReferences.virtualCamera);
+
+        virtualCamera.Follow = GameManager.Instance.Player.transform;
 
         spawnPoints.Clear();
         spawnPoints[Vector2Int.up] = topSpawnPoint; //up

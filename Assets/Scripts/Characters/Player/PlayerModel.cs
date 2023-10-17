@@ -6,12 +6,12 @@ using UnityEngine;
 public class PlayerModel : BaseCharacterModel
 {
     public ProjectileType basicAttack;
-
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
     private int currentUnlockedAbilities = 0;
 
     private float cooldownShootTimer = 0f;
 
+    [SerializeField, ReadOnly] private bool isMoving;
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
     public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
@@ -55,12 +55,20 @@ public class PlayerModel : BaseCharacterModel
 
     public override void Move(Vector2 direction)
     {
-        currentDirection = direction;
+        currentDirection = direction.normalized;
         rb.velocity = currentDirection * baseStats.movementSpeed * Time.deltaTime;
 
+        UpdateMovementAnimation();
         Flip(currentDirection);
+    }
 
-        //rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+    public void UpdateMovementAnimation()
+    {
+        var moving = Mathf.Abs(rb.velocity.x) > float.Epsilon || Mathf.Abs(rb.velocity.y) > float.Epsilon;
+        if (isMoving == moving) return;
+        isMoving = moving;
+
+        animator.SetBool("isMoving", isMoving);
     }
 
     public void ShootingCooldown()

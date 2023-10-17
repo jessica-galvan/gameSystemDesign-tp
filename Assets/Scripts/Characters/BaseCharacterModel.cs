@@ -8,7 +8,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
     [SerializeField] protected CharacterDataSO baseStats;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
-    [ReadOnly, SerializeField] private Animator animator;
+    [ReadOnly, SerializeField] protected Animator animator;
     [ReadOnly, SerializeField] protected Vector2 currentDirection;
     [ReadOnly, SerializeField] private bool flipX = false;
 
@@ -70,6 +70,8 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public void Flip(Vector2 direction)
     {
+        if (direction.x == 0) return;
+
         var flipped = direction.x < 0;
 
         if (flipX == flipped) return;
