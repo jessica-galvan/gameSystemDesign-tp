@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1754,7 +1754,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       IconsTiles&More_16x16_7: -355110718
-      IconsTiles&More_16x16_40: -860206329
+      IconsTiles&More_16x16_73: -652758481
       IconsTiles&More_16x16_23: -409381135
       IconsTiles&More_16x16_50: -2133966802
       IconsTiles&More_16x16_16: 165037031
@@ -1789,9 +1789,9 @@ TextureImporter:
       IconsTiles&More_16x16_9: -1028352475
       IconsTiles&More_16x16_2: 2068735776
       IconsTiles&More_16x16_72: -1414580196
-      IconsTiles&More_16x16_6: 14973940
-      IconsTiles&More_16x16_57: -657020121
       IconsTiles&More_16x16_39: -1703805871
+      IconsTiles&More_16x16_57: -657020121
+      IconsTiles&More_16x16_6: 14973940
       IconsTiles&More_16x16_37: 2008440012
       IconsTiles&More_16x16_77: -2077982856
       IconsTiles&More_16x16_56: 2074673278
@@ -1829,7 +1829,7 @@ TextureImporter:
       IconsTiles&More_16x16_58: 1083631154
       IconsTiles&More_16x16_63: -31430615
       IconsTiles&More_16x16_11: 1158322645
-      IconsTiles&More_16x16_73: -652758481
+      IconsTiles&More_16x16_40: -860206329
       IconsTiles&More_16x16_41: 1532038216
   spritePackingTag: 
   pSDRemoveMatte: 0

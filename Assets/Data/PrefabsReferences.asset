@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystemPrefab: {fileID: 2958176022810612844, guid: 24b0266607133fc4496aaa79c10ee9cf, type: 3}
   camControllerPrefab: {fileID: 393189115799179857, guid: 7721a9ff0ce77f34ebbde1827f9c3a1d, type: 3}
+  virtualCamera: {fileID: 4512905674594646801, guid: b8fe10c5d76e463478eacf29528b11b0, type: 3}
   updateManagerPrefab: {fileID: 2874862342044180590, guid: bab1137be00052046861f62f11c51ce0, type: 3}
   audioManagerPrefab: {fileID: 4471230464244330269, guid: 98cdb62d06feeda4da31e920d09c75d0, type: 3}
   hudManagerPrefab: {fileID: 5574007770337794900, guid: a8db92351c4e0d3479afabc0a5fcb8c9, type: 3}
