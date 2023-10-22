@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public Camera main;
+    [ReadOnly] public Camera uiCamera;
     [ReadOnly] public Cinemachine.CinemachineVirtualCamera virtualCamera;
 
     [Header("Directions")]
@@ -25,6 +26,7 @@ public class CameraController : MonoBehaviour
     public void Initialize()
     {
         virtualCamera = Instantiate(GameManager.Instance.prefabReferences.virtualCamera);
+        uiCamera = Instantiate(GameManager.Instance.prefabReferences.uiCamera);
 
         virtualCamera.Follow = GameManager.Instance.Player.transform;
 

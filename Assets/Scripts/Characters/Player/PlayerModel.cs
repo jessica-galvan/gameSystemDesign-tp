@@ -92,7 +92,7 @@ public class PlayerModel : BaseCharacterModel
     {
         if(!CanUnlockAbility())
         {
-            Debug.LogError("Trying to unlock more abilities than needed");
+            Debug.LogError($"Trying to unlock more abilities than needed. CurrentAbilities {currentUnlockedAbilities}");
             return;
         }
 

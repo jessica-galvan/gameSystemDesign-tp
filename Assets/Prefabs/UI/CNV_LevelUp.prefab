@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6676631856921726648}
   - component: {fileID: 9168889725232967596}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CNT_Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 7185355693406914769}
   - component: {fileID: 7185355693406914768}
   - component: {fileID: 7185355693406914775}
+  - component: {fileID: 4567161070408595718}
   - component: {fileID: 7185355693406914774}
   m_Layer: 5
   m_Name: CNV_LevelUp
@@ -698,6 +699,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &4567161070408595718
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185355693406914773}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &7185355693406914774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +725,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 7185355693406914769}
   isOpen: 0
+  canvasGroup: {fileID: 4567161070408595718}
   powerButtonPrefab: {fileID: 3487996460521551134}
+  waitTime: 0.8
+  fadeDuration: 0.5
 --- !u!1 &7984154312695224330
 GameObject:
   m_ObjectHideFlags: 0

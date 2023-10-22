@@ -11,6 +11,7 @@ public class PrefabsReferencesSO : ScriptableObject
     public EventSystem eventSystemPrefab;
     public CameraController camControllerPrefab;
     public CinemachineVirtualCamera virtualCamera;
+    public Camera uiCamera;
 
     [Header("Managers")]
     public UpdateManager updateManagerPrefab;
@@ -20,6 +21,7 @@ public class PrefabsReferencesSO : ScriptableObject
     public HUDManager hudManagerPrefab;
     public PauseMenu pauseMenuPrefab;
     public LevelUpPanel levelUpPanelPrefab;
+    public UIEffects uiEffectsPrefab;
 
     [Header("Characters")]
     public PlayerController playerPrefab;

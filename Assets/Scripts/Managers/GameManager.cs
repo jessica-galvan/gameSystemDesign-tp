@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public GameplayUIManager gameplayUIManager;
     [ReadOnly] public EnemyManager enemyManager;
     [ReadOnly] public PoolManager poolManager;
+    [ReadOnly] public UIEffects uiEffects;
 
     [Header("Systems")]
     [ReadOnly] public ExperienceSystem experienceSystem;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanUpdate => !Pause  || !GameOver;
     public GameInputs Input { get; private set; }
+    public UIEffects UIEffects => uiEffects;
 
     public Action<bool> OnPause;
     public Action OnWin;
@@ -68,6 +70,9 @@ public class GameManager : MonoBehaviour
 
         cameraController = Instantiate(prefabReferences.camControllerPrefab);
         cameraController.Initialize();
+
+        uiEffects = GameManager.Instantiate(GameManager.Instance.prefabReferences.uiEffectsPrefab);
+        uiEffects.Initialize();
 
         poolManager = GetComponent<PoolManager>();
         poolManager.Initialize();

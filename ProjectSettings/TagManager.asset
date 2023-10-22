@@ -44,6 +44,9 @@ TagManager:
   - name: BG
     uniqueID: 3063411441
     locked: 0
+  - name: UIEffects
+    uniqueID: 253105801
+    locked: 0
   - name: Characters
     uniqueID: 869877711
     locked: 0

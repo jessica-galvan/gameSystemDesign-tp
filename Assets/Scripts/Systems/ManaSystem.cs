@@ -38,7 +38,7 @@ public class ManaSystem : MonoBehaviour
     {
         Debug.Assert(currentMana >= mana, "Trying to remove more mana than what player has");
         currentMana -= mana;
-        currentMana = Mathf.Clamp(mana, 0, maxMana);
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
         RecalculateCurrentT();
     }
 

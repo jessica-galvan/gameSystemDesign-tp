@@ -15,11 +15,13 @@ MonoBehaviour:
   eventSystemPrefab: {fileID: 2958176022810612844, guid: 24b0266607133fc4496aaa79c10ee9cf, type: 3}
   camControllerPrefab: {fileID: 393189115799179857, guid: 7721a9ff0ce77f34ebbde1827f9c3a1d, type: 3}
   virtualCamera: {fileID: 4512905674594646801, guid: b8fe10c5d76e463478eacf29528b11b0, type: 3}
+  uiCamera: {fileID: 1185484801018269553, guid: 6fdce98069f4b7c48956dd33822390c2, type: 3}
   updateManagerPrefab: {fileID: 2874862342044180590, guid: bab1137be00052046861f62f11c51ce0, type: 3}
   audioManagerPrefab: {fileID: 4471230464244330269, guid: 98cdb62d06feeda4da31e920d09c75d0, type: 3}
   hudManagerPrefab: {fileID: 5574007770337794900, guid: a8db92351c4e0d3479afabc0a5fcb8c9, type: 3}
   pauseMenuPrefab: {fileID: 8244378401399495384, guid: ca69cd4708f4aad4dbf0b8cc5959a94a, type: 3}
   levelUpPanelPrefab: {fileID: 7185355693406914774, guid: b217190e33cdd684a8d1a3d8019f6c36, type: 3}
+  uiEffectsPrefab: {fileID: 8301818073497795008, guid: a12c014cca97a0d44922265d2cb1b7fa, type: 3}
   playerPrefab: {fileID: 3814967593655648918, guid: b27db9e9a00ce8a4192f1572dbd1be18, type: 3}
   enemyPrefab: {fileID: 7672375688410834417, guid: 1cee0ad3f6d88ec4992b898fe70f27bd, type: 3}
   playerBasicAttackPrefab: {fileID: 5403911747325128226, guid: 91cdc430197df4d49a8b17cdfe9cedd4, type: 3}

@@ -44,16 +44,16 @@ public class AbilityUI : MonoBehaviour
             UpdateTimer(abilityData.CurrentTimeLeft);
     }
 
-    private void CheckStatus()
+    private void CheckStatus(bool force = false)
     {
         var hasMana = abilityData.HasMana(GameManager.Instance.manaSystem.currentMana);
-        if (this.hasMana != hasMana)
+        if (this.hasMana != hasMana || force)
         {
             this.hasMana = hasMana;
             hasNoManaContainer.gameObject.SetActive(!hasMana);
         }
 
-        if(isInCooldown != abilityData.IsInCooldown)
+        if(isInCooldown != abilityData.IsInCooldown || force)
         {
             isInCooldown = abilityData.IsInCooldown;
             imgTimer.enabled = isInCooldown;
@@ -81,6 +81,8 @@ public class AbilityUI : MonoBehaviour
         txtManaCost.SetText(abilityData.manaCost.ToString());
         imgKey.sprite = GameManager.Instance.globalConfig.keyAbilitiesSprite[index];
         imgIcon.sprite = abilityData.icon;
+
+        CheckStatus(force: true);
     }
 
     private void UpdateTimer(float currentTime)
