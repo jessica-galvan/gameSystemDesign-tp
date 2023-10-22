@@ -15,7 +15,7 @@ TagManager:
   - PlayerAttack
   - Damagable
   - Collectable
-  - 
+  - Collision
   - 
   - 
   - 
