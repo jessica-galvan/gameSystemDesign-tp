@@ -102,6 +102,6 @@ public class HUDManager : Panel, IUpdate
             return;
         }
 
-        ability.SetAbility(abilityData, currentIndex + 1);
+        ability.SetAbility(abilityData, currentIndex);
     }
 }

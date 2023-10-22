@@ -8,10 +8,11 @@ using UnityEngine.UI;
 public class AbilityUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text txtManaCost;
-    [SerializeField] private TMP_Text txtKeyboard;
     [SerializeField] private TMP_Text txtCooldown;
+    [SerializeField] private GameObject manaContainer;
     [SerializeField] private GameObject lockedStatusContainer;
     [SerializeField] private GameObject hasNoManaContainer;
+    [SerializeField] private Image imgKey;
     [SerializeField] private Image imgIcon;
     [SerializeField] private Image imgTimer;
 
@@ -65,8 +66,9 @@ public class AbilityUI : MonoBehaviour
         IsUnlocked = enabled;
 
         lockedStatusContainer.SetActive(!enabled);
+        manaContainer.SetActive(enabled);
         txtManaCost.enabled = enabled;
-        txtKeyboard.enabled = enabled;
+        imgKey.enabled = enabled;
         imgIcon.enabled = enabled;
     }
 
@@ -77,8 +79,7 @@ public class AbilityUI : MonoBehaviour
         SetAbilityAsEnable(true);
 
         txtManaCost.SetText(abilityData.manaCost.ToString());
-        txtKeyboard.SetText(index.ToString());
-
+        imgKey.sprite = GameManager.Instance.globalConfig.keyAbilitiesSprite[index];
         imgIcon.sprite = abilityData.icon;
     }
 

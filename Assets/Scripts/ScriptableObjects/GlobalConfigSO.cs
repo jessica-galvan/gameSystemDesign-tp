@@ -27,6 +27,7 @@ public class GlobalConfigSO : ScriptableObject
     [Header("HUD")]
     public string pointsFormat = "00000";
     public string timeFormat = "mm':'ss";
+    public Sprite[] keyAbilitiesSprite;
 
     [Serializable]
     public class PopupInfo

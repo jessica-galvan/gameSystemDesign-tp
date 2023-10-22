@@ -23,6 +23,10 @@ MonoBehaviour:
   uiFPSTarget: 60
   pointsFormat: 00000
   timeFormat: mm':'ss
+  keyAbilitiesSprite:
+  - {fileID: 21300000, guid: afeaf44658fba744da505b8a183cfc26, type: 3}
+  - {fileID: 21300000, guid: 1de995dc71a94cb40a8295e047e1adbb, type: 3}
+  - {fileID: 21300000, guid: 3dc1d2ea94ecd1548bb0b0ceca1ae07b, type: 3}
   restartPopup:
     title: Sure you want to restart?
     description: Restarting the level will loose the current points!
