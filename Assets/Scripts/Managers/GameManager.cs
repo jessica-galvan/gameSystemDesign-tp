@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     private void TogglePause()
     {
-        if (GameOver) return;
+        if (GameOver || gameplayUIManager.levelUpPanel.IsOpen) return;
         SetPause(!Pause);
     }
 

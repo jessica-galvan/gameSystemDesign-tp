@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e56a977097a84dc41b4f949cea6e43cf, type: 3}
-  m_Name: TestB_AbilityData
+  m_Name: SacredArea
   m_EditorClassIdentifier: 
-  title: Title B
-  icon: {fileID: 21300000, guid: ab5519034819e3748acf2d6e4c9f4fa5, type: 3}
-  description: Add a description here
-  cooldown: 4
+  title: Sacred Area
+  icon: {fileID: 165037031, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
+  description: Creates a area that damages all evil when they enter. Will dissapear
+    after some time
+  cooldown: 3
   manaCost: 5
   actions:
-  - {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
+  - {fileID: 11400000, guid: 31f983fd91182c94fb7eee58b7bb12ea, type: 2}

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e56a977097a84dc41b4f949cea6e43cf, type: 3}
-  m_Name: TestC_AbilityData
+  m_Name: WindPush
   m_EditorClassIdentifier: 
-  title: Title C
-  icon: {fileID: 21300000, guid: 3af6f3ed61fa5d146b84dae34015c9af, type: 3}
-  description: Add a description here
-  cooldown: 3
+  title: Wind Push
+  icon: {fileID: 1932835989, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
+  description: All enemies are push back, giving you a small breather
+  cooldown: 2
   manaCost: 5
   actions:
-  - {fileID: 11400000, guid: 31f983fd91182c94fb7eee58b7bb12ea, type: 2}
+  - {fileID: 11400000, guid: 42364a05e11c275408e41208e5d7af32, type: 2}
