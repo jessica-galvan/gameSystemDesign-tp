@@ -8,6 +8,7 @@ public class PoolManager : MonoBehaviour
     [ReadOnly] public Pool playerBulletPool;
     [ReadOnly] public Pool enemyPool;
     [ReadOnly] public Pool deathParticlePool;
+    [ReadOnly] public Pool manaDestructionPool;
     [ReadOnly] public Pool manaDropPool;
 
     //[ReadOnly] public Pool bulletImpactParticlePool;
@@ -18,6 +19,7 @@ public class PoolManager : MonoBehaviour
         playerBulletPool = CreateNewPool("PlayerBasicProjectilePool", GameManager.Instance.prefabReferences.playerBasicAttackPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
         manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
         deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathVFX.gameObject, GameManager.Instance.globalConfig.initialPool);
+        manaDestructionPool = CreateNewPool("ManaParticlePool", GameManager.Instance.prefabReferences.manaDestructionVFX.gameObject, GameManager.Instance.globalConfig.initialPool);
 
         //bulletImpactParticlePool = CreateNewPool("BulletImpactParticlePool", GameManager.Instance.prefabReferences.bulletImpactParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
     }
@@ -86,15 +88,20 @@ public class PoolManager : MonoBehaviour
     public ParticleEffect GetParticle(ParticleEffect.ParticleType Type)
     {
         ParticleEffect particle = null;
+
         switch (Type)
         {
             case ParticleEffect.ParticleType.OnHit:
                 //particle = (ParticleEffect)bulletImpactParticlePool.Spawn();
                 break;
             case ParticleEffect.ParticleType.Death:
-                particle = (ParticleEffect)deathParticlePool.Spawn();
+                particle = (ParticleEffect) deathParticlePool.Spawn();
+                break;
+            case ParticleEffect.ParticleType.ManaDestruction:
+                particle = (ParticleEffect) manaDestructionPool.Spawn();
                 break;
         }
+
         return particle;
     }
 
@@ -107,6 +114,9 @@ public class PoolManager : MonoBehaviour
                 break;
             case ParticleEffect.ParticleType.Death:
                 deathParticlePool.BackToPool(particle);
+                break;
+            case ParticleEffect.ParticleType.ManaDestruction:
+                manaDestructionPool.BackToPool(particle);
                 break;
         }
     }

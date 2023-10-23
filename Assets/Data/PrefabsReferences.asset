@@ -25,5 +25,6 @@ MonoBehaviour:
   playerPrefab: {fileID: 3814967593655648918, guid: b27db9e9a00ce8a4192f1572dbd1be18, type: 3}
   enemyPrefab: {fileID: 7672375688410834417, guid: 1cee0ad3f6d88ec4992b898fe70f27bd, type: 3}
   deathVFX: {fileID: 8011709555246739231, guid: 7e9b514aa38d80745af465d0540155e2, type: 3}
+  manaDestructionVFX: {fileID: 8011709555246739231, guid: 1e26d53312ddfd642b7f0fb199d24573, type: 3}
   playerBasicAttackPrefab: {fileID: 5403911747325128226, guid: 91cdc430197df4d49a8b17cdfe9cedd4, type: 3}
   manaDropPrefab: {fileID: 7231867871787431721, guid: 1825d8f6abdcf0742a4f0779117bab12, type: 3}

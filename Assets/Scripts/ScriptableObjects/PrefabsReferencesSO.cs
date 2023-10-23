@@ -29,6 +29,7 @@ public class PrefabsReferencesSO : ScriptableObject
 
     [Header("VFX")]
     public ParticleEffect deathVFX;
+    public ParticleEffect manaDestructionVFX;
 
     [Header("Objects")]
     public ProjectileController playerBasicAttackPrefab;

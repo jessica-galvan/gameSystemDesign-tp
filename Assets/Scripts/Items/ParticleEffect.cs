@@ -7,6 +7,7 @@ public class ParticleEffect : MonoBehaviour, IPoolable, IUpdate
     public enum ParticleType
     {
         Death,
+        ManaDestruction,
         OnHit
     }
 

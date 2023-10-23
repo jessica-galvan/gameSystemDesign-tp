@@ -30,11 +30,17 @@ public class ManaDrop : MonoBehaviour, ICollectable, IUpdate, IPoolable
         currentTimer -= Time.deltaTime;
 
         if (currentTimer <= 0)
-            Die();
+            Die(destroyed: true);
     }
 
-    private void Die()
+    private void Die(bool destroyed = false)
     {
+        if (destroyed)
+        {
+            var vfx = GameManager.Instance.poolManager.GetParticle(ParticleEffect.ParticleType.ManaDestruction);
+            vfx.Set(transform);
+        }
+
         GameManager.Instance.poolManager.ReturnManaDrop(this);
     }
 
