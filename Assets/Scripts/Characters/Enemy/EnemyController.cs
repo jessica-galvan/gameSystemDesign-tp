@@ -74,6 +74,9 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
 
     private void OnDie()
     {
+        var deathVFX = GameManager.Instance.poolManager.GetParticle(ParticleEffect.ParticleType.Death);
+        deathVFX.Set(Model.transform);
+
         GameManager.Instance.poolManager.ReturnEnemy(this);
         GameManager.Instance.enemyManager.EnemyKilled(this);
     }

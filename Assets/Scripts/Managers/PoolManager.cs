@@ -8,13 +8,17 @@ public class PoolManager : MonoBehaviour
     [ReadOnly] public Pool playerBulletPool;
     [ReadOnly] public Pool enemyPool;
     [ReadOnly] public Pool deathParticlePool;
-    [ReadOnly] public Pool bulletImpactParticlePool;
+    [ReadOnly] public Pool manaDropPool;
+
+    //[ReadOnly] public Pool bulletImpactParticlePool;
 
     public void Initialize()
     {
         enemyPool = CreateNewPool("EnemyPool", GameManager.Instance.prefabReferences.enemyPrefab.gameObject, GameManager.Instance.globalConfig.maxEnemiesAtAllTimes);
         playerBulletPool = CreateNewPool("PlayerBasicProjectilePool", GameManager.Instance.prefabReferences.playerBasicAttackPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
-        //deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
+        manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
+        deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathVFX.gameObject, GameManager.Instance.globalConfig.initialPool);
+
         //bulletImpactParticlePool = CreateNewPool("BulletImpactParticlePool", GameManager.Instance.prefabReferences.bulletImpactParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
     }
 
@@ -68,31 +72,42 @@ public class PoolManager : MonoBehaviour
         enemyPool.BackToPool(enemy);
     }
 
-    //public ParticleController GethParticle(ParticleController.ParticleType type)
-    //{
-    //    ParticleController particle = null;
-    //    switch (type)
-    //    {
-    //        case ParticleController.ParticleType.BulletImpact:
-    //            particle = (ParticleController)bulletImpactParticlePool.Spawn();
-    //            break;
-    //        case ParticleController.ParticleType.Death:
-    //            particle = (ParticleController)deathParticlePool.Spawn();
-    //            break;
-    //    }
-    //    return particle;
-    //}
 
-    //public void ReturnParticle(ParticleController particle)
-    //{
-    //    switch (particle.type)
-    //    {
-    //        case ParticleController.ParticleType.BulletImpact:
-    //            bulletImpactParticlePool.BackToPool(particle);
-    //            break;
-    //        case ParticleController.ParticleType.Death:
-    //            deathParticlePool.BackToPool(particle);
-    //            break;
-    //    }
-    //}
+    public ManaDrop GetManaDrop()
+    {
+        return (ManaDrop)manaDropPool.Spawn();
+    }
+
+    public void ReturnManaDrop(ManaDrop drop)
+    {
+        manaDropPool.BackToPool(drop);
+    }
+
+    public ParticleEffect GetParticle(ParticleEffect.ParticleType Type)
+    {
+        ParticleEffect particle = null;
+        switch (Type)
+        {
+            case ParticleEffect.ParticleType.OnHit:
+                //particle = (ParticleEffect)bulletImpactParticlePool.Spawn();
+                break;
+            case ParticleEffect.ParticleType.Death:
+                particle = (ParticleEffect)deathParticlePool.Spawn();
+                break;
+        }
+        return particle;
+    }
+
+    public void ReturnParticle(ParticleEffect particle)
+    {
+        switch (particle.Type)
+        {
+            case ParticleEffect.ParticleType.OnHit:
+                //bulletImpactParticlePool.BackToPool(particle);
+                break;
+            case ParticleEffect.ParticleType.Death:
+                deathParticlePool.BackToPool(particle);
+                break;
+        }
+    }
 }
