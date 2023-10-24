@@ -33,7 +33,7 @@ public class GameplayUIManager : MonoBehaviour
         GameManager.Instance.experienceSystem.OnUpdateLevel -= LevelUp;
     }
 
-    private void OnPause(bool isPaused)
+    public void OnPause(bool isPaused)
     {
         if (isPaused)
         {

@@ -46,7 +46,9 @@ public class ExperienceSystem : MonoBehaviour
         currentXP = requiredXP - currentXP;
         //TODO requiredXP if has a curve, should be recalculate here;
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
-        OnUpdateLevel?.Invoke(currentLevel);
+
+        GameManager.Instance.gameplayUIManager.levelUpPanel.Open();
+        //OnUpdateLevel?.Invoke(currentLevel);
     }
 
     private void RecalculateCurrentT()

@@ -19,6 +19,9 @@ public class HUDManager : Panel, IUpdate
     public AbilityUI abilityPrototype;
     public List<AbilityUI> abilityUIList = new List<AbilityUI>();
 
+    [Header("Extra")]
+    [SerializeField] public Panel gameOverPanel;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -41,6 +44,9 @@ public class HUDManager : Panel, IUpdate
         }
 
         abilityPrototype.gameObject.SetActive(false);
+
+        gameOverPanel.Initialize();
+        gameOverPanel.Close();
 
         UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana);
     }

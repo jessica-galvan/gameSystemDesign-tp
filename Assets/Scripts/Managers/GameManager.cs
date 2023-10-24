@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         var player = Instantiate(prefabReferences.playerPrefab);
         player.Initialize();
         Player = player.Model;
-        Player.Initialize();
+        Player.LifeController.OnDeath += SetGameOver;
 
         cameraController = Instantiate(prefabReferences.camControllerPrefab);
         cameraController.Initialize();
@@ -125,13 +125,14 @@ public class GameManager : MonoBehaviour
             Input.Menu.Disable();
         }
 
-
-
         Pause = value;
         Time.timeScale = Pause ? 0 : 1;
 
-        if(pauseMenu)
-            OnPause.Invoke(Pause);
+        if (pauseMenu)
+        {
+            gameplayUIManager.OnPause(Pause);
+            //OnPause.Invoke(Pause);
+        }
     }
 
     private void TogglePause()
@@ -146,7 +147,9 @@ public class GameManager : MonoBehaviour
         GameOver = true;
         Pause = true;
 
+        gameplayUIManager.hudManager.gameOverPanel.Open();
+
         //audioManager.PlaySFXSound(soundReferences.GameOver);
-        OnWin.Invoke();
+        //OnWin.Invoke();
     }
 }
