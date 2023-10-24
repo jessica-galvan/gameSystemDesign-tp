@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScene: Gameplay
   menuScene: MainMenu
-  maxLevelCap: 10
-  maxEnemiesAtAllTimes: 5
+  maxLevelCap: 500
+  maxEnemiesAtAllTimes: 500
   minSpawnTime: 0
-  maxSpawnTime: 5
+  maxSpawnTime: 0
   initialPool: 10
   gameplayFPSTarget: 0
   uiFPSTarget: 60

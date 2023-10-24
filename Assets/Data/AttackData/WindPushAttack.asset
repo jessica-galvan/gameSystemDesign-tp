@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cffe56f5bcf1a94fa99bce8fef676db, type: 3}
   m_Name: WindPushAttack
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 100
   applyKnockback: 1
   force: 15
