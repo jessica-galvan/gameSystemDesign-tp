@@ -11,10 +11,14 @@ public class LevelUpPanel : Panel
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float fadeDuration = 2f;
 
-    private bool optionSelected = false;
+    private bool optionSelected = false, isPowerUpSelection = false;
 
     private List<PowerUpButton> buttons = new List<PowerUpButton>();
     private HashSet<AbilityDataSO> currentAbilities = new HashSet<AbilityDataSO>();
+    private HashSet<BasePowerUpSO> currentPowerUps = new HashSet<BasePowerUpSO>();
+
+    private HashSet<AbilityDataSO> unlockedAbilities = new HashSet<AbilityDataSO>();
+    private HashSet<BasePowerUpSO> unlockedPowerUps = new HashSet<BasePowerUpSO>();
 
     public override void Initialize()
     {
@@ -56,6 +60,7 @@ public class LevelUpPanel : Panel
         base.Open();
 
         currentAbilities.Clear();
+        currentPowerUps.Clear();
         GameManager.Instance.SetPause(true, pauseMenu: false);
         GameManager.Instance.UIEffects.SetLevelUpEffects(true);
         SetOptions();
@@ -93,7 +98,12 @@ public class LevelUpPanel : Panel
     {
         for (int i = 0; i < buttons.Count; i++)
         {
-            var selection = GetAbilityRandomSelection();
+            ISelectableOption selection = null;
+            if(isPowerUpSelection)
+                selection = GetPowerUpRandomSelection();
+            else
+                selection = GetAbilityRandomSelection();
+
             buttons[i].SetSelectableOption(selection);
         }
     }
@@ -114,5 +124,23 @@ public class LevelUpPanel : Panel
             return GetAbilityRandomSelection();
 
         return ability;
+    }
+
+    public ISelectableOption GetPowerUpRandomSelection()
+    {
+        var powerup = RandomWeight<BasePowerUpSO>.Run(GameManager.Instance.playerData.AllPowerUps, out var index);
+
+        if (!currentPowerUps.Contains(powerup))
+            currentPowerUps.Add(powerup);
+        else
+            return GetPowerUpRandomSelection();
+
+        return powerup;
+    }
+
+    public void CalculateSelectionType()
+    {
+        isPowerUpSelection = false;
+        //TODO logic here
     }
 }

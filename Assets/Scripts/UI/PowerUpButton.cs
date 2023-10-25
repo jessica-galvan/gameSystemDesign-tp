@@ -28,7 +28,7 @@ public class PowerUpButton : BaseButton
         CurrentOption = option;
 
         txtTitle.SetText(CurrentOption.Title);
-        txtDescription.SetText(CurrentOption.Description);
+        txtDescription.SetText(CurrentOption.GetDescription());
 
         if(imgIcon != null)
             imgIcon.sprite = CurrentOption.Icon;

@@ -64,4 +64,10 @@ public class LifeController : MonoBehaviour
     {
         Invincible = isInivisible;
     }
+
+    public void SetNewMaxLife(int newMaxLife)
+    {
+        MaxLife = newMaxLife;
+        CurrentLife = Mathf.Clamp(CurrentLife, 0, MaxLife);
+    }
 }

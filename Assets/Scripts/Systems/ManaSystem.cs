@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ManaSystem : MonoBehaviour
@@ -21,6 +22,7 @@ public class ManaSystem : MonoBehaviour
         currentMana = 0;
         RecalculateCurrentT();
     }
+
 
     public void AddMana(int mana)
     {
@@ -45,6 +47,7 @@ public class ManaSystem : MonoBehaviour
     public void SetMaxMana(int newMaxMana)
     {
         maxMana = newMaxMana;
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
         RecalculateCurrentT();
     }
 

@@ -77,4 +77,9 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     {
         return currentMana >= ManaCost;
     }
+
+    public string GetDescription()
+    {
+        return description;
+    }
 }
