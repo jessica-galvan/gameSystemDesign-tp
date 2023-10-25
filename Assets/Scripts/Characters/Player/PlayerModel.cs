@@ -112,6 +112,7 @@ public class PlayerModel : BaseCharacterModel
 
     public bool CanUseAbility(int index)
     {
+        if (unlockedAbilities.Length >= index) return false;
         if (unlockedAbilities[index] == null) return false;
 
         return unlockedAbilities[index].CanBeUsed(GameManager.Instance.manaSystem.currentMana);

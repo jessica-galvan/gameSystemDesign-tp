@@ -350,6 +350,15 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerInvinsible"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fb8a721-1c14-4fad-bb63-449610c61c98"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -361,6 +370,17 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AddMana"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1464242-91c8-474c-9a71-0f68b1e874e3"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerInvinsible"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -386,6 +406,7 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         // Cheats
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_AddMana = m_Cheats.FindAction("AddMana", throwIfNotFound: true);
+        m_Cheats_PlayerInvinsible = m_Cheats.FindAction("PlayerInvinsible", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -576,11 +597,13 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Cheats;
     private ICheatsActions m_CheatsActionsCallbackInterface;
     private readonly InputAction m_Cheats_AddMana;
+    private readonly InputAction m_Cheats_PlayerInvinsible;
     public struct CheatsActions
     {
         private @GameInputs m_Wrapper;
         public CheatsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @AddMana => m_Wrapper.m_Cheats_AddMana;
+        public InputAction @PlayerInvinsible => m_Wrapper.m_Cheats_PlayerInvinsible;
         public InputActionMap Get() { return m_Wrapper.m_Cheats; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -593,6 +616,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @AddMana.started -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
                 @AddMana.performed -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
                 @AddMana.canceled -= m_Wrapper.m_CheatsActionsCallbackInterface.OnAddMana;
+                @PlayerInvinsible.started -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
+                @PlayerInvinsible.performed -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
+                @PlayerInvinsible.canceled -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
             }
             m_Wrapper.m_CheatsActionsCallbackInterface = instance;
             if (instance != null)
@@ -600,6 +626,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @AddMana.started += instance.OnAddMana;
                 @AddMana.performed += instance.OnAddMana;
                 @AddMana.canceled += instance.OnAddMana;
+                @PlayerInvinsible.started += instance.OnPlayerInvinsible;
+                @PlayerInvinsible.performed += instance.OnPlayerInvinsible;
+                @PlayerInvinsible.canceled += instance.OnPlayerInvinsible;
             }
         }
     }
@@ -623,5 +652,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     public interface ICheatsActions
     {
         void OnAddMana(InputAction.CallbackContext context);
+        void OnPlayerInvinsible(InputAction.CallbackContext context);
     }
 }

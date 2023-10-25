@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AbilityData", menuName = "TP/AbilityData/AbilityData", order = 3)]
-public class AbilityDataSO : ScriptableObject, ISelectableOption
+public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
 {
     [Header("Basic info")]
     public string title = "TITLE";
@@ -12,6 +12,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
     [TextArea] public string description = "Add a description here";
     public float cooldown = 0.5f;
     public int manaCost = 5;
+    public int weight = 10;
 
     public BaseAbilityAction[] actions;
 
@@ -31,6 +32,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption
     [field: ReadOnly, NonSerialized] public float Cooldown { get; set; }
     public float CurrentTimeLeft => currentTime;
     public bool IsInCooldown => isInCooldown;
+    public int Weight => weight;
 
     public void Initialize()
     {

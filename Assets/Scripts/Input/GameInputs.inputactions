@@ -328,6 +328,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerInvinsible",
+                    "type": "Button",
+                    "id": "3fb8a721-1c14-4fad-bb63-449610c61c98",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -339,6 +348,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AddMana",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1464242-91c8-474c-9a71-0f68b1e874e3",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerInvinsible",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

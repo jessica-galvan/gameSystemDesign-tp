@@ -47,7 +47,7 @@ public class GameplayUIManager : MonoBehaviour
         }
     }
 
-    private void LevelUp(int currentLevel)
+    public void LevelUp(int currentLevel)
     {
         if (!GameManager.Instance.Player.CanUnlockAbility()) return;
 

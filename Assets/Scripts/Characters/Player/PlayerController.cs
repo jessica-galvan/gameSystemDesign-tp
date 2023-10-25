@@ -41,6 +41,19 @@ public class PlayerController : BaseCharacterController<PlayerModel>
 
         Model.RefreshAbilities();
         Model.ShootingCooldown();
+
+        HandelCheatsInput();
+    }
+
+    private void HandelCheatsInput()
+    {
+        if (!GameManager.Instance.playerData.canCheat || !Model.LifeController.Alive) return;
+
+        if (GameManager.Instance.Input.Cheats.AddMana.WasPerformedThisFrame())
+            GameManager.Instance.manaSystem.AddMana(GameManager.Instance.manaSystem.maxMana);
+
+        if (GameManager.Instance.Input.Cheats.PlayerInvinsible.WasPerformedThisFrame())
+            Model.LifeController.SetInivincibility(!Model.LifeController.Invincible);
     }
 
     public override void FixedRefresh()

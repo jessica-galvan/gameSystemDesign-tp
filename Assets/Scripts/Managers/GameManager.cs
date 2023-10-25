@@ -54,8 +54,12 @@ public class GameManager : MonoBehaviour
 
         Input = new GameInputs();
         Input.Gameplay.Enable();
+        Input.Cheats.Enable();
+
         Input.Gameplay.Pause.performed += TogglePause;
         Input.Menu.Resume.performed += TogglePause;
+
+        playerData.Initialize();
 
         Instantiate(prefabReferences.eventSystemPrefab);
         audioManager = Instantiate(prefabReferences.audioManagerPrefab);
@@ -117,11 +121,13 @@ public class GameManager : MonoBehaviour
         if (value)
         {
             Input.Gameplay.Disable();
+            Input.Cheats.Disable();
             Input.Menu.Enable();
         }
         else
         {
             Input.Gameplay.Enable();
+            Input.Cheats.Enable();
             Input.Menu.Disable();
         }
 

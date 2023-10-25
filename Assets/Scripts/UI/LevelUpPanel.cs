@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class LevelUpPanel : Panel
     private bool optionSelected = false;
 
     private List<PowerUpButton> buttons = new List<PowerUpButton>();
+    private HashSet<AbilityDataSO> currentAbilities = new HashSet<AbilityDataSO>();
 
     public override void Initialize()
     {
@@ -40,7 +42,9 @@ public class LevelUpPanel : Panel
         if (button.CurrentOption is AbilityDataSO)
         {
             print("Ability was unlocked");
-            GameManager.Instance.Player.UnlockAbility(button.CurrentOption as AbilityDataSO);
+            var ability = button.CurrentOption as AbilityDataSO;
+            GameManager.Instance.Player.UnlockAbility(ability);
+            GameManager.Instance.playerData.AllUnlockableAbilities.Remove(ability);
         }
 
         Close();
@@ -51,6 +55,7 @@ public class LevelUpPanel : Panel
         canvasGroup.alpha = 0;
         base.Open();
 
+        currentAbilities.Clear();
         GameManager.Instance.SetPause(true, pauseMenu: false);
         GameManager.Instance.UIEffects.SetLevelUpEffects(true);
         SetOptions();
@@ -88,7 +93,7 @@ public class LevelUpPanel : Panel
     {
         for (int i = 0; i < buttons.Count; i++)
         {
-            var selection = GetRandomSelection(i);
+            var selection = GetAbilityRandomSelection();
             buttons[i].SetSelectableOption(selection);
         }
     }
@@ -99,11 +104,15 @@ public class LevelUpPanel : Panel
             buttons[i].Button.enabled = isEnabled;
     }
 
-    public ISelectableOption GetRandomSelection(int i)
+    public ISelectableOption GetAbilityRandomSelection()
     {
-        //TODO implent a system with random weight for this shit
-        //and make sure it only shows abilities that haven't been unlocked
-        return GameManager.Instance.playerData.allUnlockableAbilities[i];
-    }
+        var ability = RandomWeight<AbilityDataSO>.Run(GameManager.Instance.playerData.AllUnlockableAbilities, out var index);
 
+        if (!currentAbilities.Contains(ability))
+            currentAbilities.Add(ability);
+        else
+            return GetAbilityRandomSelection();
+
+        return ability;
+    }
 }

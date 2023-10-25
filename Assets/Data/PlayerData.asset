@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2235973972d60444aa7704202f5dcf85, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxAbilities: 3
+  maxAbilities: 2
   maxMana: 50
-  maxPowerUpSelection: 3
+  maxPowerUpSelection: 2
+  canCheat: 1
   allUnlockableAbilities:
   - {fileID: 11400000, guid: 30aa20423bd0547478ad8823b11f4901, type: 2}
   - {fileID: 11400000, guid: 8b666a5a826b16a499922fd8ee61d654, type: 2}

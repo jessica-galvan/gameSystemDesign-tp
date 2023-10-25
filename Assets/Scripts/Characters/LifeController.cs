@@ -59,4 +59,9 @@ public class LifeController : MonoBehaviour
         Alive = true;
         CurrentLife = MaxLife;
     }
+
+    public void SetInivincibility(bool isInivisible)
+    {
+        Invincible = isInivisible;
+    }
 }
