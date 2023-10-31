@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class LevelUpPanel : Panel
@@ -48,7 +49,7 @@ public class LevelUpPanel : Panel
             print("Ability was unlocked");
             var ability = button.CurrentOption as AbilityDataSO;
             GameManager.Instance.Player.UnlockAbility(ability);
-            GameManager.Instance.playerData.AllUnlockableAbilities.Remove(ability);
+            ScriptableObjectManager.Instance.RemoveUnlockedAbility(ability);
         }
 
         Close();
@@ -116,7 +117,7 @@ public class LevelUpPanel : Panel
 
     public ISelectableOption GetAbilityRandomSelection()
     {
-        var ability = RandomWeight<AbilityDataSO>.Run(GameManager.Instance.playerData.AllUnlockableAbilities, out var index);
+        var ability = RandomWeight<AbilityDataSO>.Run(ScriptableObjectManager.Instance.AllUnlockableAbilities, out var index);
 
         if (!currentAbilities.Contains(ability))
             currentAbilities.Add(ability);
@@ -128,7 +129,7 @@ public class LevelUpPanel : Panel
 
     public ISelectableOption GetPowerUpRandomSelection()
     {
-        var powerup = RandomWeight<BasePowerUpSO>.Run(GameManager.Instance.playerData.AllPowerUps, out var index);
+        var powerup = RandomWeight<BasePowerUpSO>.Run(ScriptableObjectManager.Instance.AllPowerUps, out var index);
 
         if (!currentPowerUps.Contains(powerup))
             currentPowerUps.Add(powerup);

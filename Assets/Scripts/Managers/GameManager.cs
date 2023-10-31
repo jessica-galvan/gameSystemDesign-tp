@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        Time.timeScale = 1;
         Instance = this;
+
+        Time.timeScale = 1;
 
         Input = new GameInputs();
         Input.Gameplay.Enable();
@@ -58,8 +59,6 @@ public class GameManager : MonoBehaviour
 
         Input.Gameplay.Pause.performed += TogglePause;
         Input.Menu.Resume.performed += TogglePause;
-
-        playerData.Initialize();
 
         Instantiate(prefabReferences.eventSystemPrefab);
         audioManager = Instantiate(prefabReferences.audioManagerPrefab);
