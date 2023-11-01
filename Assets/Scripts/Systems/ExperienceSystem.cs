@@ -8,7 +8,9 @@ public class ExperienceSystem : MonoBehaviour
     [ReadOnly] private float currentXP;
     [ReadOnly] private float requiredXP;
     [ReadOnly] private int currentLevel = 0;
+    [ReadOnly] private float experienceMultiplier = 1;
 
+    public float ExperienceMultiplier => experienceMultiplier;
     public float CurrentT { get; private set; }
     public float CurrentLevel => currentLevel;
 
@@ -48,7 +50,6 @@ public class ExperienceSystem : MonoBehaviour
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
 
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);
-        //OnUpdateLevel?.Invoke(currentLevel);
     }
 
     private void RecalculateCurrentT()
@@ -57,4 +58,15 @@ public class ExperienceSystem : MonoBehaviour
         OnUpdateExperience?.Invoke(CurrentT);
     }
 
+
+    public void SetNexExperienceMultiplier(float nexExperienceMultiplier)
+    {
+        if(nexExperienceMultiplier <= 0)
+        {
+            Debug.LogError("Trying to set a new experience multiplier that it's too low");
+            return;
+        }
+
+        experienceMultiplier = nexExperienceMultiplier;
+    }
 }

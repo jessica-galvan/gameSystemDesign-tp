@@ -93,6 +93,11 @@ public class GameManager : MonoBehaviour
         gameplayUIManager.Initialize();
     }
 
+    private void Start()
+    {
+        ScriptableObjectManager.Instance.Resort();
+    }
+
     public static T Create<T>(string name, Transform parent = null) where T:MonoBehaviour
     {
         var container = new GameObject(name);

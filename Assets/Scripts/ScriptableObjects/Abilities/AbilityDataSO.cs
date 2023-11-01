@@ -82,4 +82,9 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     {
         return description;
     }
+
+    public bool IsPowerUp()
+    {
+        return false;
+    }
 }

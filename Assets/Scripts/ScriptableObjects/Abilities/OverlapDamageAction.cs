@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "OverlapDamageAction", menuName = "TP/AbilityData/OverlapDamageAction", order = 3)]
@@ -42,5 +43,23 @@ public class OverlapDamageAction : BaseAbilityAction
         }
 
         Debug.Log($"Ability {name} was executed");
+    }
+
+    public override void PowerUp(float amountMultiplier, float attackMultiplier)
+    {
+        if(amountMultiplier > 0)
+            Radius = Mathf.RoundToInt(Radius * amountMultiplier);
+
+        if(attackMultiplier > 0)
+            Damage = Mathf.RoundToInt(Damage * attackMultiplier);
+    }
+
+    public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)
+    {
+        if (powerUp.AmountMultiplier > 0)
+            stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 10}% of extra area of damage");
+
+        if (powerUp.AttackMultiplier > 0)
+            stringBuilder.AppendLine($"- Gains an {powerUp.AttackMultiplier * 10}% of extra damage");
     }
 }

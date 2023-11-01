@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelUpPanel : Panel
@@ -12,7 +13,9 @@ public class LevelUpPanel : Panel
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float fadeDuration = 2f;
 
-    private bool optionSelected = false, isPowerUpSelection = false;
+    [Header("Info")]
+    [SerializeField, ReadOnly] private bool optionSelected = false, isPowerUpSelection = false;
+
 
     private List<PowerUpButton> buttons = new List<PowerUpButton>();
     private HashSet<AbilityDataSO> currentAbilities = new HashSet<AbilityDataSO>();
@@ -25,7 +28,9 @@ public class LevelUpPanel : Panel
     {
         base.Initialize();
 
-        for (int i = 0; i < GameManager.Instance.playerData.maxPowerUpSelection; i++)
+        var maxSelection = Mathf.Max(GameManager.Instance.playerData.maxPowerUpSelection, GameManager.Instance.playerData.maxAbilitySelection);
+
+        for (int i = 0; i < maxSelection; i++)
         {
             var button = Instantiate(powerButtonPrefab, powerButtonPrefab.transform.parent);
             button.Initialize();
@@ -46,10 +51,16 @@ public class LevelUpPanel : Panel
 
         if (button.CurrentOption is AbilityDataSO)
         {
-            print("Ability was unlocked");
             var ability = button.CurrentOption as AbilityDataSO;
             GameManager.Instance.Player.UnlockAbility(ability);
             ScriptableObjectManager.Instance.RemoveUnlockedAbility(ability);
+        }
+
+        if(button.CurrentOption is BasePowerUpSO)
+        {
+            var powerUp = button.CurrentOption as BasePowerUpSO;
+            powerUp.Execute();
+            ScriptableObjectManager.Instance.RemoveUsedPowerUp(powerUp);
         }
 
         Close();
@@ -62,8 +73,12 @@ public class LevelUpPanel : Panel
 
         currentAbilities.Clear();
         currentPowerUps.Clear();
+
         GameManager.Instance.SetPause(true, pauseMenu: false);
         GameManager.Instance.UIEffects.SetLevelUpEffects(true);
+
+        isPowerUpSelection = !IsAbilitySelection();
+
         SetOptions();
         StartCoroutine(LevelupCoroutine());
     }
@@ -97,7 +112,9 @@ public class LevelUpPanel : Panel
 
     public void SetOptions()
     {
-        for (int i = 0; i < buttons.Count; i++)
+        var selectionAmount = isPowerUpSelection ? GameManager.Instance.playerData.maxPowerUpSelection : GameManager.Instance.playerData.maxAbilitySelection;
+
+        for (int i = 0; i < selectionAmount; i++)
         {
             ISelectableOption selection = null;
             if(isPowerUpSelection)
@@ -105,8 +122,12 @@ public class LevelUpPanel : Panel
             else
                 selection = GetAbilityRandomSelection();
 
+            buttons[i].Show(true);
             buttons[i].SetSelectableOption(selection);
         }
+
+        for (int i = selectionAmount; i < buttons.Count; i++)
+            buttons[i].Show(false);
     }
 
     public void SetOptionsEnabled(bool isEnabled)
@@ -139,9 +160,8 @@ public class LevelUpPanel : Panel
         return powerup;
     }
 
-    public void CalculateSelectionType()
+    public bool IsAbilitySelection()
     {
-        isPowerUpSelection = false;
-        //TODO logic here
+        return GameManager.Instance.experienceSystem.CurrentLevel % 3 == 0;
     }
 }

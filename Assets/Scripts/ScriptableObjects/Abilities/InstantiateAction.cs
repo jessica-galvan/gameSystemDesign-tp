@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InstantiateAction", menuName = "TP/AbilityData/InstantiateAction", order = 2)]
@@ -8,6 +9,7 @@ public class InstantiateAction : BaseAbilityAction
 {
     public GameObject objectToInstantiate;
 
+    public string itemName = "";
     public bool isProjectile = false;
     public bool useMouseDirection = false; //USE ONLY IF IS PROJECTILE
     public int baseAmount = 0;
@@ -16,7 +18,7 @@ public class InstantiateAction : BaseAbilityAction
     public Vector2[] directions;
 
     [NonSerialized] private ProjectileController projectile;
-    [field: ReadOnly, NonSerialized] public float Amount { get; set; }
+    [field: ReadOnly, NonSerialized] public int Amount { get; set; }
 
     public override void Initialize()
     {
@@ -51,5 +53,22 @@ public class InstantiateAction : BaseAbilityAction
         var aux = GameObject.Instantiate(objectToInstantiate);
         aux.transform.position = playerModel.transform.position;
         //TODO DO THIS BETTER
+    }
+
+    public override void PowerUp(float amountMultiplier, float attackMultiplier)
+    {
+        Amount = Mathf.RoundToInt(Amount * amountMultiplier);
+
+        if (attackMultiplier > 0 && projectile != null)
+            projectile.attackData.PowerUp(attackMultiplier);
+    }
+
+    public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)
+    {
+        if(powerUp.AmountMultiplier > 0)
+            stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 10}% of extra {itemName}");
+
+        if(powerUp.AttackMultiplier > 0)
+            stringBuilder.AppendLine($"- Gains an {powerUp.AttackMultiplier * 10}% of extra damage");
     }
 }

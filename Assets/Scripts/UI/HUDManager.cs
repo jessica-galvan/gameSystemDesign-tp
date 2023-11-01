@@ -73,7 +73,7 @@ public class HUDManager : Panel, IUpdate
         experienceBar.SetValue(amount);
     }
 
-    private void UpdateLevel(int level)
+    public void UpdateLevel(int level)
     {
         experienceBar.txtTitle.SetText(levelString, level);
     }

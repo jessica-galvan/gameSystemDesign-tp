@@ -11,9 +11,12 @@ public class PlayerModel : BaseCharacterModel
 
     private float cooldownShootTimer = 0f;
 
+    [Header("Info")]
     [SerializeField, ReadOnly] private bool isMoving;
+    [SerializeField, ReadOnly] private float speed;
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
+    public float Speed => speed;
     public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
     public Action<AbilityDataSO> OnUnlockedAbilityEvent;
 
@@ -22,7 +25,7 @@ public class PlayerModel : BaseCharacterModel
         base.Initialize();
 
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
-
+        SetNewSpeed(baseStats.movementSpeed);
         CanShoot = true;
     }
 
@@ -56,7 +59,7 @@ public class PlayerModel : BaseCharacterModel
     public override void Move(Vector2 direction)
     {
         currentDirection = direction.normalized;
-        rb.velocity = currentDirection * baseStats.movementSpeed * Time.deltaTime;
+        rb.velocity = currentDirection * speed * Time.deltaTime;
 
         UpdateMovementAnimation();
         Flip(currentDirection);
@@ -99,8 +102,6 @@ public class PlayerModel : BaseCharacterModel
         unlockedAbilities[currentUnlockedAbilities] = abilityData;
         currentUnlockedAbilities++;
 
-        abilityData.Initialize();
-
         OnUnlockedAbilityEvent?.Invoke(abilityData);
     }
 
@@ -112,7 +113,7 @@ public class PlayerModel : BaseCharacterModel
 
     public bool CanUseAbility(int index)
     {
-        if (unlockedAbilities.Length >= index) return false;
+        if (unlockedAbilities.Length <= index) return false;
         if (unlockedAbilities[index] == null) return false;
 
         return unlockedAbilities[index].CanBeUsed(GameManager.Instance.manaSystem.currentMana);
@@ -136,5 +137,10 @@ public class PlayerModel : BaseCharacterModel
     {
         if (collision.TryGetComponent<ICollectable>(out var collectable))
             collectable.PickUp();
+    }
+
+    public void SetNewSpeed(float newSpeed)
+    {
+        speed = newSpeed;
     }
 }

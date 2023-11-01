@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PUStat_", menuName = "TP/PowerUp/PowerUpStat", order = 0)]
+[CreateAssetMenu(fileName = "PUAbility_", menuName = "TP/PowerUp/PowerUpAbility", order = 1)]
 public class PowerUpAbilitySO : BasePowerUpSO
 {
     [Header("Ability")]
@@ -14,27 +15,54 @@ public class PowerUpAbilitySO : BasePowerUpSO
     [SerializeField] private float amountMultiplier;
     [SerializeField] private float attackMultiplier;
 
+    public float AmountMultiplier => amountMultiplier;
+    public float AttackMultiplier => attackMultiplier;
     public AbilityDataSO AbilityData => abilityData;
+
+    private string description;
+    private StringBuilder descriptionStringBuilder = new StringBuilder();
+    private string initialDescription = "Gain a new boost for the ability {0}";
+    private string reduceEnumeration = "- Reduce {0} by {1:0}%";
 
     public override void Initialize()
     {
-        newDescription = description;
+        Debug.Assert(abilityData != null, $"PowerUp {name} needs an ability");
 
-        newDescription += "<br>";
+        if(amountMultiplier > 0 || attackMultiplier > 0)
+            Debug.Assert(action != null, $"PowerUp {name} needs an action if it's going to multiply it's amount or attack");
+
+        descriptionStringBuilder = new StringBuilder();
+        descriptionStringBuilder.Clear();
+        descriptionStringBuilder.AppendFormat(initialDescription, abilityData.name);
+        descriptionStringBuilder.AppendLine();
 
         if (cooldownMultiplier > 0)
-            description += $"- Reduce Cooldown: x{cooldownMultiplier}";
+        {
+            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Cooldown", cooldownMultiplier * 10);
+            descriptionStringBuilder.AppendLine();
+        }
+
         if (manaCostMultiplier > 0)
-            description += $"- Reduce Mana: x{manaCostMultiplier}";
-        if(amountMultiplier > 0)
-            description += $"- Amount Multiplier: x{amountMultiplier}";
-        if(attackMultiplier > 0)
-            description += $"- Attack Multiplier: x{attackMultiplier}";
+        {
+            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Mana", manaCostMultiplier * 10);
+            descriptionStringBuilder.AppendLine();
+        }
+
+        if (action != null)
+            action.GetDescriptionForPowerUp(descriptionStringBuilder, this);
+
+        description = descriptionStringBuilder.ToString();
     }
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        base.Execute();
+
+        if(action != null)
+            action.PowerUp(amountMultiplier, attackMultiplier);
+
+        abilityData.cooldown = abilityData.cooldown - (abilityData.cooldown * cooldownMultiplier);
+        abilityData.manaCost = abilityData.manaCost - (int)(abilityData.manaCost * manaCostMultiplier);
     }
 
     public override string GetDescription()

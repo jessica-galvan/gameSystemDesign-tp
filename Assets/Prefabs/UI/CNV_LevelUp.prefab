@@ -991,6 +991,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6676631856921726648}
     m_Modifications:
+    - target: {fileID: 2022841395618083899, guid: 714ed6fc5dfc1f34e83a437ecc9a4e81, type: 3}
+      propertyPath: m_text
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \n-Donec vel
+        egestas dolor, nec dignissim metus."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022841395618083899, guid: 714ed6fc5dfc1f34e83a437ecc9a4e81, type: 3}
+      propertyPath: m_fontSize
+      value: 18.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3416163015534727914, guid: 714ed6fc5dfc1f34e83a437ecc9a4e81, type: 3}
       propertyPath: m_RootOrder
       value: 0

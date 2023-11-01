@@ -69,5 +69,6 @@ public class LifeController : MonoBehaviour
     {
         MaxLife = newMaxLife;
         CurrentLife = Mathf.Clamp(CurrentLife, 0, MaxLife);
+        OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
     }
 }

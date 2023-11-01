@@ -50,8 +50,7 @@ public class GameplayUIManager : MonoBehaviour
     public void LevelUp(int currentLevel)
     {
         if (!GameManager.Instance.Player.CanUnlockAbility()) return;
-
-        //TODO do logic to check if it's ability selection or upgrades
+        hudManager.UpdateLevel(currentLevel);
         levelUpPanel.Open();
     }
 }

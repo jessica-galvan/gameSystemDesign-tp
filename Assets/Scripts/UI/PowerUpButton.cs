@@ -8,10 +8,15 @@ using UnityEngine.UI;
 
 public class PowerUpButton : BaseButton
 {
+    [Header("References")]
     [SerializeField] private Image imgIcon;
     [SerializeField] private TMP_Text txtDescription;
     [SerializeField] private Image imgBorder;
     [SerializeField] private Color selectedColor = Color.white;
+    [SerializeField] private GameObject powerUpMarker;
+
+    [Header("Info")]
+    [SerializeField, ReadOnly] private bool isPowerUp = false;
 
     private Color originalBorderColor;
 
@@ -32,6 +37,9 @@ public class PowerUpButton : BaseButton
 
         if(imgIcon != null)
             imgIcon.sprite = CurrentOption.Icon;
+
+        isPowerUp = option.IsPowerUp();
+        powerUpMarker.SetActive(isPowerUp);
     }
 
     public override void Select()
