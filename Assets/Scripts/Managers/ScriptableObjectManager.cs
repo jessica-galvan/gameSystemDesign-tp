@@ -19,6 +19,9 @@ public class ScriptableObjectManager : MonoBehaviour
     [ReadOnly] public AbilityDataSO[] allAbilities = new AbilityDataSO[0];
     [ReadOnly] public BasePowerUpSO[] allPowerUps = new BasePowerUpSO[0];
     [ReadOnly] public AttackDataSO[] allAttacksData = new AttackDataSO[0];
+
+    [Header("Info")]
+    [ReadOnly, SerializeField] private int currentPowerUps = 0;
     [field: NonSerialized, ReadOnly] public List<AbilityDataSO> AllUnlockableAbilities { get; private set; }
     [field: NonSerialized, ReadOnly] public List<BasePowerUpSO> AllPowerUps { get; private set; }
 
@@ -109,6 +112,8 @@ public class ScriptableObjectManager : MonoBehaviour
             if (!abilityToPowerUpList.TryGetValue(abilityPowerUp.AbilityData, out var powerUpList)) continue;
             powerUpList.Add(abilityPowerUp);
         }
+
+        currentPowerUps = AllPowerUps.Count;
     }
 
     public void AddToPowerUpUnlockables(AbilityDataSO abilityDataSO)
@@ -124,6 +129,8 @@ public class ScriptableObjectManager : MonoBehaviour
             if (AllPowerUps.Contains(powerUpList[i])) continue;
             AllPowerUps.Add(allPowerUps[i]);
         }
+
+        currentPowerUps = AllPowerUps.Count;
     }
 
     public void RemoveUnlockedAbility(AbilityDataSO unlockedAbility)
@@ -149,5 +156,11 @@ public class ScriptableObjectManager : MonoBehaviour
         }
 
         AllPowerUps.Remove(basePowerUp);
+        currentPowerUps = AllPowerUps.Count;
+    }
+
+    public bool HasPowerUpsToUnlock(int minimumNeeded)
+    {
+        return AllPowerUps.Count >= minimumNeeded;
     }
 }

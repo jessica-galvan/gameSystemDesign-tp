@@ -49,7 +49,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void LevelUp(int currentLevel)
     {
-        if (!GameManager.Instance.Player.CanUnlockAbility()) return;
+        if (!GameManager.Instance.Player.CanUnlockAbility() && !ScriptableObjectManager.Instance.HasPowerUpsToUnlock(GameManager.Instance.playerData.maxPowerUpSelection)) return;
         hudManager.UpdateLevel(currentLevel);
         levelUpPanel.Open();
     }
