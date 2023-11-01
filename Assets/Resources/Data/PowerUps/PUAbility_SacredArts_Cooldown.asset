@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f91d61b39623fbe419414892fd7f0bcf, type: 3}
-  m_Name: PUAbility_Healing
+  m_Name: PUAbility_SacredArts_Cooldown
   m_EditorClassIdentifier: 
-  title: Healing Boost
+  title: Cooldown Sacred Arts
   icon: {fileID: 0}
   weight: 10
   reutilizableTimes: 2
-  abilityData: {fileID: 11400000, guid: 8b666a5a826b16a499922fd8ee61d654, type: 2}
-  action: {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
-  cooldownMultiplier: 0
+  abilityData: {fileID: 11400000, guid: 955d011faced07740b03658eed270aee, type: 2}
+  action: {fileID: 0}
+  cooldownMultiplier: 0.1
   manaCostMultiplier: 0
-  amountMultiplier: 0.2
+  amountMultiplier: 0
   attackMultiplier: 0

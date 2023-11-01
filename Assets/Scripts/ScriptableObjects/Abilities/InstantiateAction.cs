@@ -10,14 +10,16 @@ public class InstantiateAction : BaseAbilityAction
     public GameObject objectToInstantiate;
 
     public string itemName = "";
-    public bool isProjectile = false;
     public bool useMouseDirection = false; //USE ONLY IF IS PROJECTILE
     public int baseAmount = 0;
     public float minDistanteFromPlayer = 0f;
     public float maxDistanteFromPlayer = 5f;
     public Vector2[] directions;
 
+    [SerializeField] private bool isProjectile, canDamage;
+
     [NonSerialized] private ProjectileController projectile;
+    [NonSerialized] private IDamage damageObject;
     [field: ReadOnly, NonSerialized] public int Amount { get; set; }
 
     public override void Initialize()
@@ -26,6 +28,9 @@ public class InstantiateAction : BaseAbilityAction
 
         projectile = objectToInstantiate.GetComponent<ProjectileController>();
         isProjectile = projectile != null;
+
+        damageObject = objectToInstantiate.GetComponent<IDamage>();
+        canDamage = damageObject != null;
     }
 
     public override void Execute(PlayerModel playerModel)
@@ -59,8 +64,8 @@ public class InstantiateAction : BaseAbilityAction
     {
         Amount = Mathf.RoundToInt(Amount * amountMultiplier);
 
-        if (attackMultiplier > 0 && projectile != null)
-            projectile.attackData.PowerUp(attackMultiplier);
+        if (attackMultiplier > 0 && canDamage)
+            damageObject.AttackData.PowerUp(attackMultiplier);
     }
 
     public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)

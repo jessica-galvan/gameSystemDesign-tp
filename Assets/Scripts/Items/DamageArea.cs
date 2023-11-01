@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageArea : MonoBehaviour
+public class DamageArea : MonoBehaviour, IDamage
 {
     public LayerMask targets;
     public AttackDataSO attackSO;
     public float timeAlive = 5f;
 
     private float timeLeft;
+
+    public AttackDataSO AttackData => attackSO;
 
     //TODO implement custom update logic and pooling
     void Start()

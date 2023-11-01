@@ -8,7 +8,7 @@ public enum ProjectileType
 }
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
+public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, IDirection
 {
     public ProjectileDataSO data;
     public AttackDataSO attackData;
@@ -17,6 +17,8 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable
     private Vector2 direction;
     private float timer;
     private bool active;
+
+    public AttackDataSO AttackData => attackData;
 
     public void Initialize()
     {

@@ -10,3 +10,13 @@ public interface IDamagable
     void TakeDamage(int damage);
     void TakeDamage(int damage, Vector2 direction);
 }
+
+public interface IDamage
+{
+    AttackDataSO AttackData { get; }
+}
+
+public interface IDirection
+{
+    void SetDirection(Vector2 startingPosition, Vector2 direction, float rotation = 0f);
+}
