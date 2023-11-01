@@ -41,4 +41,9 @@ public abstract class BasePowerUpSO : ScriptableObject, ISelectableOption, IWeig
     {
         return true;
     }
+
+    public void SetOverrideIcon(Sprite sprite)
+    {
+        icon = sprite;
+    }
 }

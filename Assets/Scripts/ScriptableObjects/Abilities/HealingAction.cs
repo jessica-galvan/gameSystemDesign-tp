@@ -7,18 +7,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HealingAction", menuName = "TP/AbilityData/HealingAction", order = 3)]
 public class HealingAction : BaseAbilityAction
 {
-    public int baseHealthingAmount = 0;
+    public int baseHealthingPercentage = 0;
 
-    [field: ReadOnly, NonSerialized] public int HealingAmount { get; set; }
+    [field: ReadOnly, NonSerialized] public int HealingPercentage { get; set; }
 
     public override void Initialize()
     {
-        HealingAmount = baseHealthingAmount;
+        HealingPercentage = baseHealthingPercentage;
     }
 
     public override void Execute(PlayerModel playerModel)
     {
-        playerModel.LifeController.Heal(HealingAmount);
+        playerModel.LifeController.Heal(HealingPercentage);
 
         Debug.Log($"Ability {name} was executed");
     }
@@ -26,7 +26,7 @@ public class HealingAction : BaseAbilityAction
     public override void PowerUp(float amountMultiplier, float attackMultiplier)
     {
         if(amountMultiplier > 0)
-            HealingAmount += Mathf.RoundToInt(HealingAmount * amountMultiplier);
+            HealingPercentage += Mathf.RoundToInt(HealingPercentage * amountMultiplier);
 
         Debug.Assert(attackMultiplier <= 0, $"Trying to add attack multiplier to a healing ability {name}");
     }

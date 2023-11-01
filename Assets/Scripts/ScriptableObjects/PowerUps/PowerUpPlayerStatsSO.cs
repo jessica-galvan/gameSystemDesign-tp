@@ -25,11 +25,6 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
             description = string.Format(description, add);
         else if (multiplier > 0)
             description = string.Format(description, multiplier * 10);
-
-        //if (add > 0)
-        //    description += $"- {statsToModify}: +{add}";
-        //else if (multiplier > 0)
-        //    description += $"- {statsToModify}: x{multiplier}";
     }
 
     public override void Execute()

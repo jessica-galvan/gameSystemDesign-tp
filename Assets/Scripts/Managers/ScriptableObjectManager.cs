@@ -15,18 +15,20 @@ public class ScriptableObjectManager : MonoBehaviour
     public static ScriptableObjectManager Instance { get; private set; }
     public static bool HasInstance => Instance != null;
 
+    public Sprite defaultPowerUpIcon;
+
     [Header("Loadead SO")]
     [ReadOnly] public AbilityDataSO[] allAbilities = new AbilityDataSO[0];
     [ReadOnly] public BasePowerUpSO[] allPowerUps = new BasePowerUpSO[0];
     [ReadOnly] public AttackDataSO[] allAttacksData = new AttackDataSO[0];
 
     [Header("Info")]
+    [SerializeField, ReadOnly] private bool initialized = false;
     [ReadOnly, SerializeField] private int currentPowerUps = 0;
     [field: NonSerialized, ReadOnly] public List<AbilityDataSO> AllUnlockableAbilities { get; private set; }
     [field: NonSerialized, ReadOnly] public List<BasePowerUpSO> AllPowerUps { get; private set; }
 
-    [Header("Extra Info")]
-    [SerializeField, ReadOnly] private bool initialized = false;
+
 
     private Dictionary<AbilityDataSO, List<BasePowerUpSO>> abilityToPowerUpList = new Dictionary<AbilityDataSO, List<BasePowerUpSO>>();
     private HashSet<BaseAbilityAction> allLoadedActions = new HashSet<BaseAbilityAction>();
@@ -54,6 +56,14 @@ public class ScriptableObjectManager : MonoBehaviour
         allAbilities = Resources.LoadAll<AbilityDataSO>(ABILITIES_PATH);
         allPowerUps = Resources.LoadAll<BasePowerUpSO>(POWERUP_PATH);
         allAttacksData = Resources.LoadAll<AttackDataSO>(ATTACKDATA_PATH);
+
+        for (int i = 0; i < allPowerUps.Length; i++)
+        {
+            if (allPowerUps[i].Icon != null) continue;
+            if (allPowerUps[i] is PowerUpAbilitySO) continue;
+
+            allPowerUps[i].SetOverrideIcon(defaultPowerUpIcon);
+        }
     }
 
     public void Resort()

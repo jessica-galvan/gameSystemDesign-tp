@@ -28,6 +28,9 @@ public class PowerUpAbilitySO : BasePowerUpSO
     {
         Debug.Assert(abilityData != null, $"PowerUp {name} needs an ability");
 
+        if (icon == null)
+            icon = abilityData.Icon;
+
         if(amountMultiplier > 0 || attackMultiplier > 0)
             Debug.Assert(action != null, $"PowerUp {name} needs an action if it's going to multiply it's amount or attack");
 

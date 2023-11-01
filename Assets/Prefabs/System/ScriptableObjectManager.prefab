@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d8a87c80869a9458b705a11dd61b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultPowerUpIcon: {fileID: -538871839, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   allAbilities: []
   allPowerUps: []
+  allAttacksData: []
   initialized: 0
+  currentPowerUps: 0
