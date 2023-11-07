@@ -157,9 +157,7 @@ public class GameManager : MonoBehaviour
         GameOver = true;
         Pause = true;
 
-        gameplayUIManager.hudManager.gameOverPanel.Open();
-
-        //audioManager.PlaySFXSound(soundReferences.GameOver);
+        gameplayUIManager.specialScreensManager.GameOverPanel.Open();
         //OnWin.Invoke();
     }
 }

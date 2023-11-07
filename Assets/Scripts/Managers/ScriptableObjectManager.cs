@@ -67,6 +67,7 @@ public class ScriptableObjectManager : MonoBehaviour
     public void Resort()
     {
         abilityToPowerUpList.Clear();
+        allLoadedActions.Clear();
 
         AllUnlockableAbilities = new List<AbilityDataSO>(allAbilities);
         AllPowerUps = new List<BasePowerUpSO>();

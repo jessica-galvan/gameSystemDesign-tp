@@ -19,7 +19,7 @@ MonoBehaviour:
   updateManagerPrefab: {fileID: 2874862342044180590, guid: bab1137be00052046861f62f11c51ce0, type: 3}
   audioManagerPrefab: {fileID: 4471230464244330269, guid: 98cdb62d06feeda4da31e920d09c75d0, type: 3}
   hudManagerPrefab: {fileID: 5574007770337794900, guid: a8db92351c4e0d3479afabc0a5fcb8c9, type: 3}
-  pauseMenuPrefab: {fileID: 8244378401399495384, guid: ca69cd4708f4aad4dbf0b8cc5959a94a, type: 3}
+  specialScreensManagerPrefab: {fileID: 4667412038591059802, guid: ca69cd4708f4aad4dbf0b8cc5959a94a, type: 3}
   levelUpPanelPrefab: {fileID: 7185355693406914774, guid: b217190e33cdd684a8d1a3d8019f6c36, type: 3}
   uiEffectsPrefab: {fileID: 8301818073497795008, guid: a12c014cca97a0d44922265d2cb1b7fa, type: 3}
   playerPrefab: {fileID: 3814967593655648918, guid: b27db9e9a00ce8a4192f1572dbd1be18, type: 3}

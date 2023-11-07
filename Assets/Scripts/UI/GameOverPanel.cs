@@ -24,6 +24,12 @@ public class GameOverPanel : Panel
         quitButton.Deselect();
     }
 
+    public override void Open()
+    {
+        base.Open();
+        //audioManager.PlaySFXSound(soundReferences.GameOver);
+    }
+
     private void OnRestartButtonClick()
     {
         SceneManager.LoadScene(GameManager.Instance.globalConfig.gameScene);

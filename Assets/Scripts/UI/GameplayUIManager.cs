@@ -6,7 +6,7 @@ public class GameplayUIManager : MonoBehaviour
 {
     [Header("References")]
     public HUDManager hudManager;
-    public PauseMenu pauseMenu;
+    public SpecialScreensManager specialScreensManager;
     public LevelUpPanel levelUpPanel;
 
     public void Initialize()
@@ -17,12 +17,11 @@ public class GameplayUIManager : MonoBehaviour
         levelUpPanel = Instantiate(GameManager.Instance.prefabReferences.levelUpPanelPrefab);
         levelUpPanel.Initialize();
 
-        pauseMenu = Instantiate(GameManager.Instance.prefabReferences.pauseMenuPrefab);
-        pauseMenu.Initialize();
+        specialScreensManager = Instantiate(GameManager.Instance.prefabReferences.specialScreensManagerPrefab);
+        specialScreensManager.Initialize();
 
         hudManager.Open();
         levelUpPanel.Close();
-        pauseMenu.Close();
 
         GameManager.Instance.OnPause += OnPause;
         GameManager.Instance.experienceSystem.OnUpdateLevel += LevelUp;
@@ -38,12 +37,12 @@ public class GameplayUIManager : MonoBehaviour
         if (isPaused)
         {
             hudManager.Close();
-            pauseMenu.Open();
+            specialScreensManager.PauseMenu.Open();
         }
         else
         {
             hudManager.Open();
-            pauseMenu.Close();
+            specialScreensManager.PauseMenu.Close();
         }
     }
 

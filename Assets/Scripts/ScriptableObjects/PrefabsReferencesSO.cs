@@ -19,7 +19,7 @@ public class PrefabsReferencesSO : ScriptableObject
 
     [Header("UI")]
     public HUDManager hudManagerPrefab;
-    public PauseMenu pauseMenuPrefab;
+    public SpecialScreensManager specialScreensManagerPrefab;
     public LevelUpPanel levelUpPanelPrefab;
     public UIEffects uiEffectsPrefab;
 
