@@ -10,6 +10,9 @@ public class CharacterDataSO : ScriptableObject
     public float radius = 2f;
     public int damage = 1;
     public float experience = 1f;
+    public float takeDamageCooldown = 0f;
+    public float takeDamageRecolorTime = 0.2f;
+    public Color takeDamageColor = Color.red;
 
     [Header("Movement")]
     public bool canBeKockedBack = true;

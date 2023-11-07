@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: c246aa3c8ce24ab4591c41186d754b8c, type: 2}
+  spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   animator: {fileID: 0}
   currentDirection: {x: 0, y: 0}

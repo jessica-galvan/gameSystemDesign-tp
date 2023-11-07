@@ -125,12 +125,12 @@ public class PlayerModel : BaseCharacterModel
         unlockedAbilities[index].Execute(this);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        //TODO rethink this with cooldown and make if you stay in contact?
-        if(collision.gameObject.TryGetComponent<EnemyModel>(out var enemy))
-            TakeDamage((int)enemy.attackStats.damage);
-            //TakeDamage((int)enemy.attackStats.damage, enemy.Direction * enemy.attackStats.force);
+        if (!canTakeDamage) return;
+
+        if(collision.gameObject.TryGetComponent<IDamage>(out var idamage))
+            TakeDamage((int)idamage.AttackData.Damage);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

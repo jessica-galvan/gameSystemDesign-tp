@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyModel : BaseCharacterModel
+public class EnemyModel : BaseCharacterModel, IDamage
 {
     public AttackDataSO attackStats;
     public Pursuit pursuit;
 
     public Action OnSpawned = delegate { };
 
+    public AttackDataSO AttackData => attackStats;
+
     public override void Initialize()
     {
         base.Initialize();
+        attackStats.Initialize();
         pursuit = new Pursuit();
     }
 
@@ -33,5 +36,6 @@ public class EnemyModel : BaseCharacterModel
     public void ResetStats()
     {
         LifeController.ResetStats();
+        SetVisualTakeDamage(false);
     }
 }

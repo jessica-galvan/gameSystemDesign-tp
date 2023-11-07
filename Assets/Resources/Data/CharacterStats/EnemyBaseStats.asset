@@ -16,6 +16,9 @@ MonoBehaviour:
   radius: 2
   damage: 1
   experience: 100
+  takeDamageCooldown: 0
+  takeDamageRecolorTime: 0.5
+  takeDamageColor: {r: 0.74509805, g: 0.5254902, b: 0.5254902, a: 1}
   canBeKockedBack: 1
   movementSpeed: 500
   predictionTime: 0.000001

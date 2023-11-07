@@ -39,9 +39,9 @@ public class ParticleEffect : MonoBehaviour, IPoolable, IUpdate
             allParticles[i].Play();
     }
 
-    public void Refresh()
+    public void Refresh(float deltaTime)
     {
-        currentTimer -= Time.deltaTime;
+        currentTimer -= deltaTime;
 
         if (currentTimer <= 0)
             Die();

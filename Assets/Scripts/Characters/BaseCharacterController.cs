@@ -6,7 +6,6 @@ public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate, IFixe
 {
     public T Model { get; private set; }
 
-    //TODO RETHINK WHEN ADDING POOL
     public virtual void Initialize()
     {
         Model = GetComponent<T>();
@@ -18,7 +17,7 @@ public abstract class BaseCharacterController<T> : MonoBehaviour, IUpdate, IFixe
         return GameManager.Instance.CanUpdate; //&& Model.Alive;
     }
 
-    public abstract void Refresh();
+    public abstract void Refresh(float deltaTime);
     public abstract void FixedRefresh();
     protected abstract void AddToUpdate();
     protected abstract void RemoveFromUpdate();

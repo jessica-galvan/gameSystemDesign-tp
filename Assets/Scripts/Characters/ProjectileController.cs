@@ -57,11 +57,11 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
         Die();
     }
 
-    public void Refresh()
+    public void Refresh(float deltaTime)
     {
         if (!active) return;
         if (!GameManager.Instance.CanUpdate) return;
-        body.velocity += direction * data.speed * Time.deltaTime;
+        body.velocity += direction * data.speed * deltaTime;
 
         timer += Time.deltaTime;
         if (timer > data.totalTimeAlive)

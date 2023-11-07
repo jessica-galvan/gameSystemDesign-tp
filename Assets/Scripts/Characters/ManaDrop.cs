@@ -24,10 +24,10 @@ public class ManaDrop : MonoBehaviour, ICollectable, IUpdate, IPoolable
         Die();
     }
 
-    public void Refresh()
+    public void Refresh(float deltaTime)
     {
         if (GameManager.Instance.Pause) return;
-        currentTimer -= Time.deltaTime;
+        currentTimer -= deltaTime;
 
         if (currentTimer <= 0)
             Die(destroyed: true);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IUpdate 
 {
-    void Refresh();
+    void Refresh(float deltaTime);
 }
 
 public interface IFixedUpdate

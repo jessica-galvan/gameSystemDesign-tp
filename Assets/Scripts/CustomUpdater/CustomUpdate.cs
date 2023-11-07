@@ -9,6 +9,7 @@ public class CustomUpdate : MonoBehaviour
     private float targetTime;
     private float currentTime;
     private bool limitTargetFrame;
+    private float deltaTime;
 
     public void Initialize(int targetFrame, string displayName = "")
     {
@@ -21,11 +22,15 @@ public class CustomUpdate : MonoBehaviour
 
     public void UpdateList()
     {
+        deltaTime += Time.deltaTime;
+
         //en cada frame, nos fijamos si es el momento de updatear esta lista, si devuelve falso, no updatea y ya. 
         if (limitTargetFrame && !CanUpdate()) return;
 
         for (int i = 0; i < updatingList.Count; i++)
-            updatingList[i].Refresh();
+            updatingList[i].Refresh(deltaTime);
+
+        deltaTime = 0f;
     }
 
     private bool CanUpdate()

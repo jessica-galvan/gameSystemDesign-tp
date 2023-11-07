@@ -15,7 +15,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
         AddToUpdate();
     }
 
-    public override void Refresh()
+    public override void Refresh(float deltaTime)
     {
         if (!CanUpdate()) return;
 
@@ -41,6 +41,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
 
         Model.RefreshAbilities();
         Model.ShootingCooldown();
+        Model.Refresh(deltaTime);
 
         HandelCheatsInput();
     }

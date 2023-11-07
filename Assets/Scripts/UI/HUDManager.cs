@@ -51,7 +51,7 @@ public class HUDManager : Panel, IUpdate
         UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana);
     }
 
-    public void Refresh()
+    public void Refresh(float deltaTime)
     {
         UpdateTimer(GameManager.Instance.updateManager.CurrentTimeGameplay);
         UpdateAbilities();

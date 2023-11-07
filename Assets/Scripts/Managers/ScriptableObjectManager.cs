@@ -28,8 +28,6 @@ public class ScriptableObjectManager : MonoBehaviour
     [field: NonSerialized, ReadOnly] public List<AbilityDataSO> AllUnlockableAbilities { get; private set; }
     [field: NonSerialized, ReadOnly] public List<BasePowerUpSO> AllPowerUps { get; private set; }
 
-
-
     private Dictionary<AbilityDataSO, List<BasePowerUpSO>> abilityToPowerUpList = new Dictionary<AbilityDataSO, List<BasePowerUpSO>>();
     private HashSet<BaseAbilityAction> allLoadedActions = new HashSet<BaseAbilityAction>();
 
@@ -107,6 +105,7 @@ public class ScriptableObjectManager : MonoBehaviour
 
             if (allPowerUps[i] is PowerUpPlayerStatsSO)
             {
+                Debug.Log($"Added {allPowerUps[i].name} to AllPowerUps");
                 AllPowerUps.Add(allPowerUps[i]);
                 continue;
             }
@@ -121,6 +120,7 @@ public class ScriptableObjectManager : MonoBehaviour
 
             if (!abilityToPowerUpList.TryGetValue(abilityPowerUp.AbilityData, out var powerUpList)) continue;
             powerUpList.Add(abilityPowerUp);
+            Debug.Log($"Added {allPowerUps[i].name} to Abilities Power Up Dictionary");
         }
 
         currentPowerUps = AllPowerUps.Count;
@@ -133,6 +133,8 @@ public class ScriptableObjectManager : MonoBehaviour
             Debug.LogError(abilityDataSO.name + " is not in the dictionary");
             return;
         }
+
+        Debug.Log($"Unlocked {powerUpList.Count} Power Ups for {abilityDataSO.name}");
 
         for (int i = 0; i < powerUpList.Count; i++)
         {
@@ -166,6 +168,9 @@ public class ScriptableObjectManager : MonoBehaviour
         }
 
         AllPowerUps.Remove(basePowerUp);
+
+        Debug.Log($"Removed {basePowerUp.name} from available power ups");
+
         currentPowerUps = AllPowerUps.Count;
     }
 

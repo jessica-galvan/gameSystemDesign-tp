@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PUAbility_SacredArts_damage
   m_EditorClassIdentifier: 
   title: Boost Sacred Arts Damage
-  icon: {fileID: 0}
+  icon: {fileID: 165037031, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   weight: 10
   reutilizableTimes: 2
   abilityData: {fileID: 11400000, guid: 955d011faced07740b03658eed270aee, type: 2}
-  action: {fileID: 0}
+  action: {fileID: 11400000, guid: 31f983fd91182c94fb7eee58b7bb12ea, type: 2}
   cooldownMultiplier: 0
   manaCostMultiplier: 0
   amountMultiplier: 0

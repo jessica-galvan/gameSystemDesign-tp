@@ -48,10 +48,11 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
         }
     }
 
-    public override void Refresh()
+    public override void Refresh(float deltaTime)
     {
         if (!CanUpdate()) return;
         fsm.OnUpdate();
+        Model.Refresh(deltaTime);
     }
 
     public override void FixedRefresh()

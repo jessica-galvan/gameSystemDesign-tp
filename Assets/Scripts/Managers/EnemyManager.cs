@@ -20,13 +20,13 @@ public class EnemyManager : MonoBehaviour, IUpdate
         GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
     }
 
-    public void Refresh()
+    public void Refresh(float deltaTime)
     {
         if (!GameManager.Instance.CanUpdate) return;
 
         if (canSpawnEnemies)
         {
-            currentTime -= Time.deltaTime;
+            currentTime -= deltaTime;
 
             if (currentTime <= 0)
                 EnemySpawn();
