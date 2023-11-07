@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class LevelUpPanel : Panel
     [Header("Info")]
     [SerializeField, ReadOnly] private bool optionSelected = false, isPowerUpSelection = false;
 
-
+    private int currentAmountSelected = 0;
     private List<PowerUpButton> buttons = new List<PowerUpButton>();
     private HashSet<AbilityDataSO> currentAbilities = new HashSet<AbilityDataSO>();
     private HashSet<BasePowerUpSO> currentPowerUps = new HashSet<BasePowerUpSO>();
@@ -47,6 +48,8 @@ public class LevelUpPanel : Panel
         if (optionSelected) return;
         optionSelected = true;
 
+        currentAmountSelected++;
+
         Debug.Log($"Selected {button.CurrentOption.Title}");
 
         if (button.CurrentOption is AbilityDataSO)
@@ -63,7 +66,11 @@ public class LevelUpPanel : Panel
             ScriptableObjectManager.Instance.RemoveUsedPowerUp(powerUp);
         }
 
-        Close();
+        if (currentAmountSelected >= GameManager.Instance.experienceSystem.AmountLeveledUp)
+            Close();
+        else
+            SetUpSelection();
+
     }
 
     public override void Open()
@@ -71,16 +78,24 @@ public class LevelUpPanel : Panel
         canvasGroup.alpha = 0;
         base.Open();
 
-        currentAbilities.Clear();
-        currentPowerUps.Clear();
-
+        currentAmountSelected = 0;
         GameManager.Instance.SetPause(true, pauseMenu: false);
         GameManager.Instance.UIEffects.SetLevelUpEffects(true);
 
-        isPowerUpSelection = !IsAbilitySelection();
+        SetUpSelection();
+
+        StartCoroutine(LevelupCoroutine());
+    }
+
+    private void SetUpSelection()
+    {
+        currentAbilities.Clear();
+        currentPowerUps.Clear();
+
+        var currentLevel = GameManager.Instance.experienceSystem.CurrentLevel - (GameManager.Instance.experienceSystem.AmountLeveledUp + currentAmountSelected);
+        isPowerUpSelection = !IsAbilitySelection(currentLevel);
 
         SetOptions();
-        StartCoroutine(LevelupCoroutine());
     }
 
     private IEnumerator LevelupCoroutine()
@@ -160,8 +175,8 @@ public class LevelUpPanel : Panel
         return powerup;
     }
 
-    public bool IsAbilitySelection()
+    public bool IsAbilitySelection(float currentLevel)
     {
-        return GameManager.Instance.experienceSystem.CurrentLevel % 3 == 0;
+        return currentLevel % 3 == 0;
     }
 }

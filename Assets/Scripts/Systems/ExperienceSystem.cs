@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class ExperienceSystem : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ExperienceSystem : MonoBehaviour
     public float ExperienceMultiplier => experienceMultiplier;
     public float CurrentT { get; private set; }
     public float CurrentLevel => currentLevel;
+    public int AmountLeveledUp { get; private set; }
 
     /// <summary>
     /// Will give you the current fillAmount
@@ -27,14 +29,14 @@ public class ExperienceSystem : MonoBehaviour
     public void Initialize()
     {
         currentLevel = 1;
-        requiredXP = 100; //TODO get required XP from curve or config
+        requiredXP = GetNextLevelExp();
         currentXP = 0;
         RecalculateCurrentT();
     }
 
     public void AddExperience(float xp)
     {
-        currentXP += xp;
+        currentXP += (xp * experienceMultiplier);
 
         if (currentXP >= requiredXP)
             LevelUp();
@@ -45,12 +47,26 @@ public class ExperienceSystem : MonoBehaviour
     public void LevelUp()
     {
         currentLevel++;
-        currentXP = requiredXP - currentXP;
-        //TODO requiredXP if has a curve, should be recalculate here;
+        AmountLeveledUp = 0;
+
+        while (currentXP >= requiredXP)
+        {
+            AmountLeveledUp++;
+            currentXP = requiredXP - currentXP;
+            requiredXP = GetNextLevelExp();
+        }
+
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
 
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);
     }
+
+    private float GetNextLevelExp()
+    {
+        var experienceModifier = GameManager.Instance.playerData.experiencesModifier;
+        return currentLevel / experienceModifier + currentLevel % experienceModifier *  100f * Mathf.Pow(experienceModifier, currentLevel / experienceModifier);
+    }
+
 
     private void RecalculateCurrentT()
     {
