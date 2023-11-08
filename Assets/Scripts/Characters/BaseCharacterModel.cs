@@ -7,6 +7,7 @@ using UnityEngine;
 public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
     [SerializeField] protected CharacterDataSO baseStats;
+    [SerializeField] protected ParticleSystem[] takeDamageVFX;
     [ReadOnly, SerializeField] protected SpriteRenderer spriteRenderer;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
     [ReadOnly, SerializeField] protected Animator animator;
@@ -83,7 +84,10 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
         LifeController.TakeDamage(damage);
 
-        if(baseStats.takeDamageCooldown > 0)
+        for (int i = 0; i < takeDamageVFX.Length; i++)
+            takeDamageVFX[i].Play();
+
+        if (baseStats.takeDamageCooldown > 0)
         {
             canTakeDamage = false;
             currentTakeDamageCooldown = baseStats.takeDamageCooldown;

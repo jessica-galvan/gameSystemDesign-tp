@@ -15,6 +15,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     public int weight = 10;
 
     public BaseAbilityAction[] actions;
+    public ParticleSystem[] particleSystemsVFX;
 
     //[Header("Movement")]
     //public bool locksMovement = false;
@@ -51,6 +52,13 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
 
         foreach (var action in actions)
             action.Execute(playerModel);
+
+        for (int i = 0; i < particleSystemsVFX.Length; i++)
+        {
+            var particle = Instantiate(particleSystemsVFX[i], playerModel.transform);
+            particle.transform.position = playerModel.transform.position;
+            particle.Play();
+        }
     }
 
     private void SetCooldown()

@@ -17,5 +17,8 @@ MonoBehaviour:
   description: A short spell that will instantly heal you
   cooldown: 4
   manaCost: 5
+  weight: 10
   actions:
   - {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
+  particleSystemsVFX:
+  - {fileID: 2946756583991025655, guid: fbafb504e1164684f90e2df807764fb0, type: 3}

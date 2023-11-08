@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class ScriptableObjectManager : MonoBehaviour
@@ -140,7 +137,7 @@ public class ScriptableObjectManager : MonoBehaviour
         for (int i = 0; i < powerUpList.Count; i++)
         {
             if (AllPowerUps.Contains(powerUpList[i])) continue;
-            AllPowerUps.Add(allPowerUps[i]);
+            AllPowerUps.Add(powerUpList[i]);
         }
 
         currentPowerUps = AllPowerUps.Count;

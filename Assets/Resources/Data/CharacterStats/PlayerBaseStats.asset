@@ -17,8 +17,8 @@ MonoBehaviour:
   damage: 0
   experience: 0
   takeDamageCooldown: 0.5
-  takeDamageRecolorTime: 0.5
-  takeDamageColor: {r: 0.54901963, g: 0.39215687, b: 0.39215687, a: 1}
+  takeDamageRecolorTime: 0.2
+  takeDamageColor: {r: 0.8679245, g: 0.69324785, b: 0.69324785, a: 0.7294118}
   canBeKockedBack: 0
   movementSpeed: 300
   predictionTime: 100
