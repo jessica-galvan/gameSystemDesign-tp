@@ -21,7 +21,7 @@ public class PowerUpAbilitySO : BasePowerUpSO
 
     private string description;
     private StringBuilder descriptionStringBuilder = new StringBuilder();
-    private string initialDescription = "Gain a new boost for the ability {0}";
+    private string initialDescription = "Gain a new boost for {0}";
     private string reduceEnumeration = "- Reduce {0} by {1:0}%";
 
     public override void Initialize()
@@ -36,18 +36,18 @@ public class PowerUpAbilitySO : BasePowerUpSO
 
         descriptionStringBuilder = new StringBuilder();
         descriptionStringBuilder.Clear();
-        descriptionStringBuilder.AppendFormat(initialDescription, abilityData.name);
+        descriptionStringBuilder.AppendFormat(initialDescription, abilityData.title);
         descriptionStringBuilder.AppendLine();
 
         if (cooldownMultiplier > 0)
         {
-            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Cooldown", cooldownMultiplier * 10);
+            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Cooldown", cooldownMultiplier * 100);
             descriptionStringBuilder.AppendLine();
         }
 
         if (manaCostMultiplier > 0)
         {
-            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Mana", manaCostMultiplier * 10);
+            descriptionStringBuilder.AppendFormat(reduceEnumeration, "Mana", manaCostMultiplier * 100);
             descriptionStringBuilder.AppendLine();
         }
 

@@ -47,19 +47,29 @@ public class ExperienceSystem : MonoBehaviour
 
     public void LevelUp()
     {
-        currentLevel++;
         AmountLeveledUp = 0;
 
         while (currentXP >= requiredXP)
         {
             AmountLeveledUp++;
+
+            if (GameManager.Instance.globalConfig.CanScaleDifficult(currentLevel + AmountLeveledUp))
+                ScaleUpDifficulty();
+
             currentXP = Mathf.Abs(requiredXP - currentXP);
             requiredXP = GetNextLevelExp();
         }
 
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
 
+        currentLevel += AmountLeveledUp;
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);
+    }
+
+    private void ScaleUpDifficulty()
+    {
+        print("Difficulty scaled");
+        GameManager.Instance.globalConfig.ScaleDifficulty();
     }
 
     private float GetNextLevelExp()
