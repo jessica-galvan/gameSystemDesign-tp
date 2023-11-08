@@ -35,13 +35,25 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private void EnemySpawn()
     {
-        var enemy = GameManager.Instance.poolManager.GetEnemy();
-        enemy.Spawn(GetSpawnPos());
-        currentEnemyQuantitySpawned++;
-        totalSpawned++;
-        inLevelEnemies.Add(enemy);
-        canSpawnEnemies = HasSpaceToSpawnEnemy();
-        currentTime = UnityEngine.Random.Range(GameManager.Instance.globalConfig.minSpawnTime, GameManager.Instance.globalConfig.maxSpawnTime);
+        var amountToSpawn = GetSpawnQuantity();
+
+        for (int i = 0; i < amountToSpawn; i++)
+        {
+            var enemy = GameManager.Instance.poolManager.GetEnemy();
+            enemy.Spawn(GetSpawnPos());
+            currentEnemyQuantitySpawned++;
+            totalSpawned++;
+            inLevelEnemies.Add(enemy);
+            canSpawnEnemies = HasSpaceToSpawnEnemy();
+            currentTime = UnityEngine.Random.Range(GameManager.Instance.globalConfig.minSpawnTime, GameManager.Instance.globalConfig.maxSpawnTime);
+
+            if (!canSpawnEnemies) break;
+        }
+    }
+
+    private int GetSpawnQuantity()
+    {
+        return UnityEngine.Random.Range(1, GameManager.Instance.globalConfig.MaxSpawnedAmount);
     }
 
     private Vector2 GetSpawnPos()

@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
         Input.Gameplay.Enable();
         Input.Cheats.Enable();
 
+        globalConfig.Initialize();
+
         Input.Gameplay.Pause.performed += TogglePause;
         Input.Menu.Resume.performed += TogglePause;
 

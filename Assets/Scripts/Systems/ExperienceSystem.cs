@@ -36,6 +36,7 @@ public class ExperienceSystem : MonoBehaviour
 
     public void AddExperience(float xp)
     {
+        if (GameManager.Instance.globalConfig.HasLevelCap && currentLevel > GameManager.Instance.globalConfig.maxLevelCap) return;
         currentXP += (xp * experienceMultiplier);
 
         if (currentXP >= requiredXP)
@@ -52,7 +53,7 @@ public class ExperienceSystem : MonoBehaviour
         while (currentXP >= requiredXP)
         {
             AmountLeveledUp++;
-            currentXP = requiredXP - currentXP;
+            currentXP = Mathf.Abs(requiredXP - currentXP);
             requiredXP = GetNextLevelExp();
         }
 

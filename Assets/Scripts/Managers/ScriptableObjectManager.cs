@@ -103,7 +103,7 @@ public class ScriptableObjectManager : MonoBehaviour
 
             if (allPowerUps[i] is PowerUpPlayerStatsSO)
             {
-                Debug.Log($"Added {allPowerUps[i].name} to AllPowerUps");
+                //Debug.Log($"Added {allPowerUps[i].name} to AllPowerUps");
                 AllPowerUps.Add(allPowerUps[i]);
                 continue;
             }
@@ -118,7 +118,7 @@ public class ScriptableObjectManager : MonoBehaviour
 
             if (!abilityToPowerUpList.TryGetValue(abilityPowerUp.AbilityData, out var powerUpList)) continue;
             powerUpList.Add(abilityPowerUp);
-            Debug.Log($"Added {allPowerUps[i].name} to Abilities Power Up Dictionary");
+            //Debug.Log($"Added {allPowerUps[i].name} to Abilities Power Up Dictionary");
         }
 
         currentPowerUps = AllPowerUps.Count;
@@ -132,7 +132,7 @@ public class ScriptableObjectManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Unlocked {powerUpList.Count} Power Ups for {abilityDataSO.name}");
+        //Debug.Log($"Unlocked {powerUpList.Count} Power Ups for {abilityDataSO.name}");
 
         for (int i = 0; i < powerUpList.Count; i++)
         {
@@ -167,7 +167,7 @@ public class ScriptableObjectManager : MonoBehaviour
 
         AllPowerUps.Remove(basePowerUp);
 
-        Debug.Log($"Removed {basePowerUp.name} from available power ups");
+        //Debug.Log($"Removed {basePowerUp.name} from available power ups");
 
         currentPowerUps = AllPowerUps.Count;
     }

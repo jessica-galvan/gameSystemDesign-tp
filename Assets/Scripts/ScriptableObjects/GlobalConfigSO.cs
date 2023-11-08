@@ -13,6 +13,7 @@ public class GlobalConfigSO : ScriptableObject
     [Header("Gameplay")]
     public int maxLevelCap = 10;
     public int maxEnemiesAtAllTimes = 10;
+    public int maxAmountPerSpawn = 5;
     public float minSpawnTime = 0;
     public float maxSpawnTime = 5f;
     public int initialPool = 10;
@@ -40,5 +41,13 @@ public class GlobalConfigSO : ScriptableObject
     public PopupInfo restartPopup;
     public PopupInfo mainMenuPopup;
     public PopupInfo exitPopup;
+
+    public bool HasLevelCap => maxLevelCap > 0;
+    public int MaxSpawnedAmount { get; private set; }
+
+    public void Initialize()
+    {
+        MaxSpawnedAmount = maxAmountPerSpawn;
+    }
 
 }
