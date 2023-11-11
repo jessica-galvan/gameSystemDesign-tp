@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 [CreateAssetMenu(fileName = "OverlapDamageAction", menuName = "TP/AbilityData/OverlapDamageAction", order = 3)]
 public class OverlapDamageAction : BaseAbilityAction
@@ -10,6 +11,12 @@ public class OverlapDamageAction : BaseAbilityAction
     public AttackDataSO baseAttackData;
     public float radius;
     public LayerMask layerMask;
+
+    [Header("VFX")]
+    public ParticleSystem particleSystem;
+    public float speed = 10f;
+    public Color color;
+    private MainModule mainModule;
 
     [field: ReadOnly, NonSerialized] public int Damage { get; set; }
     [field: ReadOnly, NonSerialized] public float Force { get; set; }
@@ -40,6 +47,16 @@ public class OverlapDamageAction : BaseAbilityAction
             }
             else
                 damagable.TakeDamage(Damage);
+        }
+
+
+        if(particleSystem != null)
+        {
+            var particle = Instantiate(particleSystem, playerModel.transform);
+            mainModule = particleSystem.main;
+            mainModule.startSize = new MinMaxCurve(0.5f, Radius);
+            particle.transform.position = playerModel.transform.position;
+            particle.Play();
         }
 
         Debug.Log($"Ability {name} was executed");

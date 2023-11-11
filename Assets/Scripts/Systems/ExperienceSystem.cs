@@ -96,4 +96,9 @@ public class ExperienceSystem : MonoBehaviour
 
         experienceMultiplier = nexExperienceMultiplier;
     }
+
+    public float GetExpNeedForNextLeve()
+    {
+        return requiredXP - currentXP;
+    }
 }

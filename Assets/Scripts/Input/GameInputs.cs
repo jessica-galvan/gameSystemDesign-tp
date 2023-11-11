@@ -359,6 +359,15 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LevelUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""d30090ff-6fb2-4b7a-afaf-b5736842074e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -381,6 +390,17 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlayerInvinsible"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67ec30c2-d404-42e4-8a07-7878a86b8fa9"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -407,6 +427,7 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_AddMana = m_Cheats.FindAction("AddMana", throwIfNotFound: true);
         m_Cheats_PlayerInvinsible = m_Cheats.FindAction("PlayerInvinsible", throwIfNotFound: true);
+        m_Cheats_LevelUp = m_Cheats.FindAction("LevelUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -598,12 +619,14 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     private ICheatsActions m_CheatsActionsCallbackInterface;
     private readonly InputAction m_Cheats_AddMana;
     private readonly InputAction m_Cheats_PlayerInvinsible;
+    private readonly InputAction m_Cheats_LevelUp;
     public struct CheatsActions
     {
         private @GameInputs m_Wrapper;
         public CheatsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @AddMana => m_Wrapper.m_Cheats_AddMana;
         public InputAction @PlayerInvinsible => m_Wrapper.m_Cheats_PlayerInvinsible;
+        public InputAction @LevelUp => m_Wrapper.m_Cheats_LevelUp;
         public InputActionMap Get() { return m_Wrapper.m_Cheats; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -619,6 +642,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @PlayerInvinsible.started -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
                 @PlayerInvinsible.performed -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
                 @PlayerInvinsible.canceled -= m_Wrapper.m_CheatsActionsCallbackInterface.OnPlayerInvinsible;
+                @LevelUp.started -= m_Wrapper.m_CheatsActionsCallbackInterface.OnLevelUp;
+                @LevelUp.performed -= m_Wrapper.m_CheatsActionsCallbackInterface.OnLevelUp;
+                @LevelUp.canceled -= m_Wrapper.m_CheatsActionsCallbackInterface.OnLevelUp;
             }
             m_Wrapper.m_CheatsActionsCallbackInterface = instance;
             if (instance != null)
@@ -629,6 +655,9 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @PlayerInvinsible.started += instance.OnPlayerInvinsible;
                 @PlayerInvinsible.performed += instance.OnPlayerInvinsible;
                 @PlayerInvinsible.canceled += instance.OnPlayerInvinsible;
+                @LevelUp.started += instance.OnLevelUp;
+                @LevelUp.performed += instance.OnLevelUp;
+                @LevelUp.canceled += instance.OnLevelUp;
             }
         }
     }
@@ -653,5 +682,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     {
         void OnAddMana(InputAction.CallbackContext context);
         void OnPlayerInvinsible(InputAction.CallbackContext context);
+        void OnLevelUp(InputAction.CallbackContext context);
     }
 }

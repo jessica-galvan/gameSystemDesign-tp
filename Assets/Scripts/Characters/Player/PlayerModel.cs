@@ -8,6 +8,10 @@ public class PlayerModel : BaseCharacterModel
     public ProjectileType basicAttack;
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
     private int currentUnlockedAbilities = 0;
+    [SerializeField] private ExpandingExplosion airPushVFX;
+
+    public Gradient gradientTest;
+    public float widthTest = 5f, speedTest = 5f, radiusTest = 5f; 
 
     private float cooldownShootTimer = 0f;
 
@@ -17,12 +21,15 @@ public class PlayerModel : BaseCharacterModel
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
     public float Speed => speed;
+    public ExpandingExplosion AirPushVFX => airPushVFX;
     public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
+
     public Action<AbilityDataSO> OnUnlockedAbilityEvent;
 
     public override void Initialize()
     {
         base.Initialize();
+        airPushVFX.Initialize();
 
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
         SetNewSpeed(baseStats.movementSpeed);
@@ -89,6 +96,12 @@ public class PlayerModel : BaseCharacterModel
     {
         for (int i = 0; i < currentUnlockedAbilities; i++)
             unlockedAbilities[i].Refresh();
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+            airPushVFX.Play(gradientTest, radiusTest, speedTest, widthTest);
+
+        airPushVFX.Refresh();
     }
 
     public void UnlockAbility(AbilityDataSO abilityData)
