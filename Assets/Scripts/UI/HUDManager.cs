@@ -29,6 +29,13 @@ public class HUDManager : Panel, IUpdate
         GameManager.Instance.Player.LifeController.OnLifeUpdate += UpdatePlayerLife;
         GameManager.Instance.Player.OnUnlockedAbilityEvent += UnlockAbility;
 
+        hpBar.Initialize();
+        hpBar.SetValue(1);
+
+        manaBar.Initialize();
+        manaBar.SetValue(0);
+
+        experienceBar.Initialize();
         experienceBar.SetValue(0);
         experienceBar.txtTitle.SetText(levelString, GameManager.Instance.experienceSystem.CurrentLevel);
 
@@ -42,7 +49,7 @@ public class HUDManager : Panel, IUpdate
 
         abilityPrototype.gameObject.SetActive(false);
 
-        UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana);
+        UpdateMana(GameManager.Instance.manaSystem.CurrentT, GameManager.Instance.manaSystem.currentMana, GameManager.Instance.manaSystem.maxMana, true);
     }
 
     public void Refresh(float deltaTime)
@@ -72,15 +79,15 @@ public class HUDManager : Panel, IUpdate
         experienceBar.txtTitle.SetText(levelString, level);
     }
 
-    private void UpdateMana(float fillAmount, int currentMana, int maxMana)
+    private void UpdateMana(float fillAmount, int currentMana, int maxMana, bool expand)
     {
-        manaBar.SetValue(fillAmount);
+        manaBar.SetValue(fillAmount, expand);
         manaBar.txtTitle.SetText(manaString, currentMana, maxMana);
     }
 
-    private void UpdatePlayerLife(int currentLife, int maxLife)
+    private void UpdatePlayerLife(int currentLife, int maxLife, bool expand)
     {
-        hpBar.SetValue(Mathf.InverseLerp(0, maxLife, currentLife));
+        hpBar.SetValue(Mathf.InverseLerp(0, maxLife, currentLife), expand);
         hpBar.txtTitle.SetText(hpString, currentLife, maxLife);
     }
 

@@ -12,7 +12,7 @@ public class LifeController : MonoBehaviour
     /// <summary>
     /// Gives current and max hp
     /// </summary>
-    public Action<int, int> OnLifeUpdate;
+    public Action<int, int, bool> OnLifeUpdate;
     public Action OnDeath;
 
     public void Initialize(CharacterDataSO baseStats)
@@ -31,14 +31,14 @@ public class LifeController : MonoBehaviour
         if (CurrentLife <= 0)
             Die();
         else
-            OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
+            OnLifeUpdate?.Invoke(CurrentLife, MaxLife, false);
     }
 
     public void Heal(int heal)
     {
         if (CurrentLife == MaxLife) return;
         CurrentLife = Mathf.Clamp(CurrentLife + heal, 0, MaxLife);
-        OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
+        OnLifeUpdate?.Invoke(CurrentLife, MaxLife, false);
     }
 
     public bool CanHeal()
@@ -69,6 +69,6 @@ public class LifeController : MonoBehaviour
     {
         MaxLife = newMaxLife;
         CurrentLife = Mathf.Clamp(CurrentLife, 0, MaxLife);
-        OnLifeUpdate?.Invoke(CurrentLife, MaxLife);
+        OnLifeUpdate?.Invoke(CurrentLife, MaxLife, true);
     }
 }

@@ -37,19 +37,19 @@ public class ExpandingExplosion : MonoBehaviour
 
     public void Refresh()
     {
-        //if (!canPlay) return;
+        if (!canPlay) return;
 
-        //print("Refresh Explosion");
+        print("Refresh Explosion");
 
-        //float currentRadius = 0f;
+        float currentRadius = 0f;
 
-        //if (currentRadius < maxRadius)
-        //{
-        //    currentRadius += Time.deltaTime * speed;
-        //    Draw(currentRadius);
-        //}
-        //else
-        //    canPlay = false;
+        if (currentRadius < maxRadius)
+        {
+            currentRadius += Time.deltaTime * speed;
+            Draw(currentRadius);
+        }
+        else
+            canPlay = false;
     }
 
     private IEnumerator Blast()

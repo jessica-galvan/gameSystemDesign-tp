@@ -14,7 +14,7 @@ public class ManaSystem : MonoBehaviour
     /// <summary>
     /// Gives fillAmount, currentMana, maxMana
     /// </summary>
-    public Action<float, int, int> OnUpdateMana;
+    public Action<float, int, int, bool> OnUpdateMana;
 
     public void Initialize()
     {
@@ -51,9 +51,10 @@ public class ManaSystem : MonoBehaviour
         RecalculateCurrentT();
     }
 
-    private void RecalculateCurrentT()
+    private void RecalculateCurrentT(bool expand = false)
     {
         CurrentT = Mathf.InverseLerp(0, maxMana, currentMana);
-        OnUpdateMana?.Invoke(CurrentT, currentMana, maxMana);
+
+        OnUpdateMana?.Invoke(CurrentT, currentMana, maxMana, expand);
     }
 }
