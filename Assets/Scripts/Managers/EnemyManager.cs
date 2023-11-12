@@ -1,28 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-
-[Serializable]
-public class EnemySpawnData : IWeight
-{
-    public string poolName;
-    public EnemyController enemyPrefab;
-    public int weight;
-    [Tooltip("How many can be in the scene at the same time. If 0, there is no limit")]
-    public int limitAmount;
-    [Tooltip("How many can appear in the same run. If 0, there is no limit")]
-    public int maxLimitPerRun;
-
-    public int Index {get; set;}
-    public bool CanBeSpawned => weight > 0;
-    public bool HasMaxLimitRun => maxLimitPerRun > 0;
-    public bool HasLimitAmount => limitAmount > 0;
-    public int Weight => weight;
-}
 
 public class EnemyManager : MonoBehaviour, IUpdate
 {
@@ -50,7 +28,6 @@ public class EnemyManager : MonoBehaviour, IUpdate
             if (enemy.Weight == 0) continue;
             currentSpawnables.Add(enemy);
         }
-
     }
 
     public void Refresh(float deltaTime)
@@ -98,7 +75,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             var enemy = GameManager.Instance.poolManager.GetEnemy(enemyIndex);
             enemy.Spawn(GetSpawnPos());
 
-            RemoveIfReachedLimits(enemyIndex);
+            RemoveIfReachedLimits(enemy);
 
             totalAmountSpawnedOfEachEnemy[enemyIndex]++;
             currentEnemyQuantitySpawned++;
@@ -114,18 +91,12 @@ public class EnemyManager : MonoBehaviour, IUpdate
     private int GetEnemyTypeToSpawn()
     {
         var enemyData = RandomWeight<EnemyController>.Run(currentSpawnables, out var index);
-        return index; 
+        return GetEnemyIndex(enemyData);
     }
 
-    private void RemoveIfReachedLimits(int index)
+    private void RemoveIfReachedLimits(EnemyController enemy)
     {
-        if (GameManager.Instance.globalConfig.enemySpawnDataList.Length < index)
-        {
-            Debug.LogError("Index is longer than enemy list amount");
-            return;
-        }
-
-        var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[index];
+        var index = GetEnemyIndex(enemy);
 
         if (enemy.EnemyData.HasMaxLimitRun)
         {
@@ -140,20 +111,13 @@ public class EnemyManager : MonoBehaviour, IUpdate
         }
     }
 
-    private void ReAddIfItCanBeAdded(int index)
+    private void ReAddIfItCanBeAdded(EnemyController enemy)
     {
-        if (GameManager.Instance.globalConfig.enemySpawnDataList.Length < index)
-        {
-            Debug.LogError("Index is longer than enemy list amount");
-            return;
-        }
-
-        var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[index];
-
         if (enemy.EnemyData.HasMaxLimitRun) return;
 
         if (enemy.EnemyData.HasLimitAmount)
         {
+            var index = GetEnemyIndex(enemy);
             if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount < enemy.EnemyData.limitAmount)
                 currentSpawnables.Add(enemy);
         }
@@ -192,7 +156,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
         var enemyIndex = GetEnemyIndex(enemyKilled);
 
-        ReAddIfItCanBeAdded(enemyIndex);
+        ReAddIfItCanBeAdded(enemyKilled);
 
         inLevelEnemies.Remove(enemyKilled);
         totalKilled++;
