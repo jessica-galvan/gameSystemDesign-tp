@@ -64,8 +64,8 @@ public class PowerUpAbilitySO : BasePowerUpSO
         if(action != null)
             action.PowerUp(amountMultiplier, attackMultiplier);
 
-        abilityData.cooldown = abilityData.cooldown - (abilityData.cooldown * cooldownMultiplier);
-        abilityData.manaCost = abilityData.manaCost - (int)(abilityData.manaCost * manaCostMultiplier);
+        abilityData.Cooldown = abilityData.Cooldown - (abilityData.Cooldown * cooldownMultiplier);
+        abilityData.ManaCost = abilityData.ManaCost - (int)(abilityData.ManaCost * manaCostMultiplier);
     }
 
     public override string GetDescription()
