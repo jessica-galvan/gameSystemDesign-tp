@@ -20,5 +20,4 @@ MonoBehaviour:
   weight: 10
   actions:
   - {fileID: 11400000, guid: 42364a05e11c275408e41208e5d7af32, type: 2}
-  particleSystemsVFX:
-  - {fileID: 8458510390734884749, guid: 82d7a0bbd6ed11241870b18457b041eb, type: 3}
+  particleSystemsVFX: []

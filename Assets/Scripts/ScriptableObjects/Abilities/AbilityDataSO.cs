@@ -15,6 +15,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     public int weight = 10;
 
     public BaseAbilityAction[] actions;
+    public bool particleFollowsPlayer = false;
     public ParticleSystem[] particleSystemsVFX;
 
     //[Header("Movement")]
@@ -55,8 +56,13 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
 
         for (int i = 0; i < particleSystemsVFX.Length; i++)
         {
-            var particle = Instantiate(particleSystemsVFX[i], playerModel.transform);
+            var particle = Instantiate(particleSystemsVFX[i]);
+
+            if (particleFollowsPlayer)
+                particle.transform.parent = playerModel.transform.parent;
+
             particle.transform.position = playerModel.transform.position;
+
             particle.Play();
         }
     }

@@ -17,10 +17,10 @@ public class UIEffects : MonoBehaviour
 
     public void SetLevelUpEffects(bool enabled)
     {
-        levelUpEffect.gameObject.SetActive(enabled);
         if (enabled)
             levelUpEffect.Play();
         else
-            levelUpEffect.Stop();
+            levelUpEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        //levelUpEffect.gameObject.SetActive(enabled);
     }
 }

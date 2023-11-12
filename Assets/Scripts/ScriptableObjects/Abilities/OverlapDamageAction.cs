@@ -53,8 +53,7 @@ public class OverlapDamageAction : BaseAbilityAction
         if(particleSystem != null)
         {
             var particle = Instantiate(particleSystem, playerModel.transform);
-            mainModule = particleSystem.main;
-            mainModule.startSize = new MinMaxCurve(0.5f, Radius);
+            particle.transform.localScale = Vector3.one * Radius * 2;
             particle.transform.position = playerModel.transform.position;
             particle.Play();
         }
