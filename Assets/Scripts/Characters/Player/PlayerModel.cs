@@ -44,7 +44,6 @@ public class PlayerModel : BaseCharacterModel
         var direction = mousePos - rb.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-
         ProjectileController bullet = null;
 
         if (projectileOverride != null)
@@ -141,6 +140,13 @@ public class PlayerModel : BaseCharacterModel
     {
         if (collision.TryGetComponent<ICollectable>(out var collectable))
             collectable.PickUp();
+
+        if (CanTakeDamage)
+        {
+            if (collision.gameObject.TryGetComponent<IDamage>(out var idamage))
+                TakeDamage((int)idamage.AttackData.Damage);
+        }
+
     }
 
     public void SetNewSpeed(float newSpeed)

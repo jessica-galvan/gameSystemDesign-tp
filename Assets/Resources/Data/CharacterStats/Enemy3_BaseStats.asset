@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
-  m_Name: PlayerBaseStats
+  m_Name: Enemy3_BaseStats
   m_EditorClassIdentifier: 
-  maxLife: 100
-  radius: 0.7
-  damage: 0
-  experience: 0
-  takeDamageCooldown: 0.5
-  takeDamageRecolorTime: 0.2
-  takeDamageColor: {r: 0.8679245, g: 0.69324785, b: 0.69324785, a: 0.7294118}
-  canBeKockedBack: 0
-  movementSpeed: 300
-  predictionTime: 100
-  minDistanceFromPlayer: 0.5
+  maxLife: 2
+  radius: 2
+  damage: 1
+  experience: 100
+  takeDamageCooldown: 0
+  takeDamageRecolorTime: 0.5
+  takeDamageColor: {r: 0.74509805, g: 0.5254902, b: 0.5254902, a: 1}
+  canBeKockedBack: 1
+  movementSpeed: 500
+  predictionTime: 0.000001
+  minDistanceFromPlayer: 1

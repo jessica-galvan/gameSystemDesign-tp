@@ -1,34 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PoolManager : MonoBehaviour
 {
     [ReadOnly] public Pool playerBulletPool;
-    [ReadOnly] public Pool enemyPool;
     [ReadOnly] public Pool deathParticlePool;
     [ReadOnly] public Pool manaDestructionPool;
     [ReadOnly] public Pool manaDropPool;
+    [ReadOnly] public List<Pool> enemyPools = new List<Pool>();
 
     //[ReadOnly] public Pool bulletImpactParticlePool;
 
     public void Initialize()
     {
-        enemyPool = CreateNewPool("EnemyPool", GameManager.Instance.prefabReferences.enemyPrefab.gameObject, GameManager.Instance.globalConfig.maxEnemiesAtAllTimes);
-        playerBulletPool = CreateNewPool("PlayerBasicProjectilePool", GameManager.Instance.prefabReferences.playerBasicAttackPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
-        manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab.gameObject, GameManager.Instance.globalConfig.initialPool);
-        deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathVFX.gameObject, GameManager.Instance.globalConfig.initialPool);
-        manaDestructionPool = CreateNewPool("ManaParticlePool", GameManager.Instance.prefabReferences.manaDestructionVFX.gameObject, GameManager.Instance.globalConfig.initialPool);
+        for (int i = 0; i < GameManager.Instance.globalConfig.enemySpawnDataList.Length; i++)
+        {
+            var enemyData = GameManager.Instance.globalConfig.enemySpawnDataList[i];
+            if (!enemyData.CanBeSpawned) continue;
+
+            var initialPoolAmount = enemyData.HasMaxLimitRun ? enemyData.maxLimitPerRun : enemyData.HasLimitAmount ? enemyData.limitAmount : GameManager.Instance.globalConfig.initialPool;
+            var name = !string.IsNullOrEmpty(enemyData.poolName) ? enemyData.poolName : enemyData.enemyPrefab.gameObject.name;
+            var enemyPool = CreateNewPool($"Pool_{name}", enemyData.enemyPrefab.gameObject, initialPoolAmount, name);
+            enemyPools.Add(enemyPool);
+
+        }
+
+        playerBulletPool = CreateNewPool("PlayerBasicProjectilePool", GameManager.Instance.prefabReferences.playerBasicAttackPrefab.gameObject, GameManager.Instance.globalConfig.initialPool, "PlayerBullet");
+        manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab.gameObject, GameManager.Instance.globalConfig.initialPool, "ManaDrop");
+        deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathVFX.gameObject, GameManager.Instance.globalConfig.initialPool, "DeathVFX");
+        manaDestructionPool = CreateNewPool("ManaParticlePool", GameManager.Instance.prefabReferences.manaDestructionVFX.gameObject, GameManager.Instance.globalConfig.initialPool, "ManaDestructionVFX");
 
         //bulletImpactParticlePool = CreateNewPool("BulletImpactParticlePool", GameManager.Instance.prefabReferences.bulletImpactParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
     }
 
-    private Pool CreateNewPool(string name, GameObject prefab, int initialPoolAmount)
+    private Pool CreateNewPool(string name, GameObject prefab, int initialPoolAmount, string itemName)
     {
         var container = new GameObject(name);
         Pool newPool = container.AddComponent<Pool>();
-        newPool.Initialize(prefab, initialPoolAmount);
+        newPool.Initialize(prefab, initialPoolAmount, itemName);
         return newPool;
     }
 
@@ -64,16 +77,29 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public EnemyController GetEnemy()
+    public EnemyController GetEnemy(int index)
     {
-        return (EnemyController)enemyPool.Spawn();
+        if(index < enemyPools.Count)
+            return (EnemyController)enemyPools[index].Spawn();
+        else
+        {
+            Debug.LogError($"Index is too high");
+            return (EnemyController)enemyPools[0].Spawn();
+        }
     }
 
     public void ReturnEnemy(EnemyController enemy)
     {
-        enemyPool.BackToPool(enemy);
-    }
+        var index = GameManager.Instance.enemyManager.EnemyTypeReturnes(enemy);
 
+        if (enemyPools.Count < index ) 
+            enemyPools[index].BackToPool(enemy);
+        else
+        {
+            enemy.gameObject.SetActive(false);
+            Debug.LogError($"{enemy.gameObject.name} doesn't seem to have a pool");
+        }
+    }
 
     public ManaDrop GetManaDrop()
     {

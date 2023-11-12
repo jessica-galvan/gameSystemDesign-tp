@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4623309275699437841}
   - component: {fileID: 6949361507486080768}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: Enemy_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 869877711
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: -174683159, guid: e256c825447a2044abd8c673f49f1812, type: 3}
+  m_Sprite: {fileID: 558091070, guid: e256c825447a2044abd8c673f49f1812, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030456543, y: 0.13697815}
+  m_Offset: {x: -0.022857666, y: 0.13697815}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -136,7 +136,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9390869, y: 1.0368958}
+  m_Size: {x: 1.2090454, y: 1.0368958}
   m_EdgeRadius: 0
 --- !u!114 &7496648621089171128
 MonoBehaviour:
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e30471ea91fcd940b1423530eb63186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: b64c1d3e783b85d489b6cdffda8022e3, type: 2}
+  baseStats: {fileID: 11400000, guid: 91b697c0755447847a8dc2895a471db3, type: 2}
   takeDamageVFX:
   - {fileID: 6121357874268826454}
   spriteRenderer: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   currentDirection: {x: 0, y: 0}
   flipX: 0
-  attackStats: {fileID: 11400000, guid: e6bdd6a9d68286e4e98bbab78b9a8bf1, type: 2}
+  attackStats: {fileID: 11400000, guid: 42c0c1b895bbbfa4abdea44700b3d64d, type: 2}
 --- !u!95 &6949361507486080768
 Animator:
   serializedVersion: 5
@@ -198,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 2285333460757815228}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 65ab8b3601dfbb845bb318daf2524cba, type: 2}
+  m_Controller: {fileID: 9100000, guid: d9a256c98b3054942a08739a62b7eb2f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

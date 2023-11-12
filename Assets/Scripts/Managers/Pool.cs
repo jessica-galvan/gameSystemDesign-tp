@@ -8,10 +8,16 @@ public class Pool : MonoBehaviour
 
     private List<IPoolable> allItems = new List<IPoolable>();
     private List<IPoolable> availableItems = new List<IPoolable>();
+    private string itemName;
 
-    public void Initialize(GameObject prefab, int startingSize)
+    public int ActiveAmount => allItems.Count - availableItems.Count;
+    public int AllItems => allItems.Count;
+
+    public void Initialize(GameObject prefab, int startingSize, string itemName)
     {
         this.prefab = prefab;
+        this.itemName = itemName;
+
         for (int i = 0; i < startingSize; i++)
         {
             var item = InstantiateObject();
@@ -47,7 +53,7 @@ public class Pool : MonoBehaviour
     private IPoolable InstantiateObject()
     {
         var item = Instantiate(prefab).GetComponent<IPoolable>();
-        item.gameObject.name = $"{prefab.name}_({allItems.Count})";
+        item.gameObject.name = $"{itemName}_({allItems.Count})";
         item.gameObject.transform.SetParent(gameObject.transform);
         item.Initialize();
         allItems.Add(item);
