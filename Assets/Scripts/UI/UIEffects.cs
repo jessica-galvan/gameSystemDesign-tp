@@ -5,7 +5,10 @@ using UnityEngine;
 public class UIEffects : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
-    [SerializeField] private ParticleSystem levelUpEffect;
+
+    [Header("LevelUP Effects")]
+    [SerializeField] private ParticleSystem[] levelUpEffectsStopInstantly;
+    [SerializeField] private ParticleSystem[] levelUpEffectStopsDelay;
 
     [ReadOnly, SerializeField] private Camera uiCamera;
 
@@ -18,9 +21,20 @@ public class UIEffects : MonoBehaviour
     public void SetLevelUpEffects(bool enabled)
     {
         if (enabled)
-            levelUpEffect.Play();
+        {
+            for (int i = 0; i < levelUpEffectStopsDelay.Length; i++)
+                levelUpEffectStopsDelay[i].Play();
+
+            for (int i = 0; i < levelUpEffectsStopInstantly.Length; i++)
+                levelUpEffectsStopInstantly[i].Play();
+        }
         else
-            levelUpEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        //levelUpEffect.gameObject.SetActive(enabled);
+        {
+            for (int i = 0; i < levelUpEffectStopsDelay.Length; i++)
+                levelUpEffectStopsDelay[i].Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+            for (int i = 0; i < levelUpEffectsStopInstantly.Length; i++)
+                levelUpEffectsStopInstantly[i].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
 }
