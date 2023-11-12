@@ -40,6 +40,7 @@ public class MainMenu : MonoBehaviour
 
         for (int i = 0; i < buttons.Count; i++)
         {
+            buttons[i].Initialize();
             //buttons[i].Button.onClick.AddListener(SelectButtonSound);
             buttons[i].Deselect();
         }
@@ -64,9 +65,7 @@ public class MainMenu : MonoBehaviour
     private void OnDestroy()
     {
         for (int i = 0; i < buttons.Count; i++)
-        {
             buttons[i].Button.onClick.RemoveAllListeners();
-        }
 
         _inputs.Menu.GoBack.performed -= GoBack;
     }

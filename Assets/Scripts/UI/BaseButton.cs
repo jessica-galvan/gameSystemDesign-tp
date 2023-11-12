@@ -9,10 +9,15 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     public TMP_Text txtTitle;
     public GameObject selectedMarker;
+
+    public bool Initialized { get; private set; }
     public Button Button { get; private set; }
 
     public virtual void Initialize()
     {
+        if (Initialized) return;
+        Initialized = true;
+
         Button = GetComponent<Button>();
         Deselect();
     }
@@ -54,6 +59,13 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public virtual void Show(bool show)
     {
         gameObject.SetActive(show);
+    }
+
+
+    private void RemoveAllListeners()
+    {
+        if (Button == null) return;
+        Button.onClick.RemoveAllListeners();
     }
 }
 
