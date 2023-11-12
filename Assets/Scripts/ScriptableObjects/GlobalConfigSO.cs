@@ -23,7 +23,7 @@ public class GlobalConfigSO : ScriptableObject
     public bool respawnEnemiesWhenTooFar = true;
     [Tooltip("When not inside this area, that centers at the player's position, the enemies will be respawned")]
     public Vector2 invisibleCollision = new Vector2(5f, 10f);
-    public EnemySpawnData[] enemySpawnDataList = new EnemySpawnData[0];
+    public EnemyController[] enemySpawnDataList = new EnemyController[0];
 
     [Header("Overtime changes")]
     [Tooltip("Every this amount of levels, the overtime changes will be applied")]

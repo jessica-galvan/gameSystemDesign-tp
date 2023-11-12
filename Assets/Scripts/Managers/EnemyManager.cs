@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
 [Serializable]
-public struct EnemySpawnData : IWeight
+public class EnemySpawnData : IWeight
 {
     public string poolName;
     public EnemyController enemyPrefab;
@@ -16,6 +17,7 @@ public struct EnemySpawnData : IWeight
     [Tooltip("How many can appear in the same run. If 0, there is no limit")]
     public int maxLimitPerRun;
 
+    public int Index {get; set;}
     public bool CanBeSpawned => weight > 0;
     public bool HasMaxLimitRun => maxLimitPerRun > 0;
     public bool HasLimitAmount => limitAmount > 0;
@@ -33,7 +35,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
     private float currentTime;
     private List<EnemyController> inLevelEnemies = new List<EnemyController>();
     private List<int> totalAmountSpawnedOfEachEnemy = new List<int>();
-    private List<EnemySpawnData> currentSpawnables = new List<EnemySpawnData> { };
+    private List<EnemyController> currentSpawnables = new List<EnemyController> { };
 
     public void Initialize()
     {
@@ -44,9 +46,9 @@ public class EnemyManager : MonoBehaviour, IUpdate
         {
             totalAmountSpawnedOfEachEnemy.Add(0);
 
-            var enemySpawnData = GameManager.Instance.globalConfig.enemySpawnDataList[i];
-            if (!enemySpawnData.CanBeSpawned) continue;
-            currentSpawnables.Add(enemySpawnData);
+            var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[i];
+            if (enemy.Weight == 0) continue;
+            currentSpawnables.Add(enemy);
         }
 
     }
@@ -96,6 +98,8 @@ public class EnemyManager : MonoBehaviour, IUpdate
             var enemy = GameManager.Instance.poolManager.GetEnemy(enemyIndex);
             enemy.Spawn(GetSpawnPos());
 
+            RemoveIfReachedLimits(enemyIndex);
+
             totalAmountSpawnedOfEachEnemy[enemyIndex]++;
             currentEnemyQuantitySpawned++;
             totalSpawned++;
@@ -109,20 +113,61 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private int GetEnemyTypeToSpawn()
     {
-        var enemyData = RandomWeight<EnemySpawnData>.Run(currentSpawnables, out var index);
-        return EnemyTypeReturnes(enemyData.enemyPrefab); 
+        var enemyData = RandomWeight<EnemyController>.Run(currentSpawnables, out var index);
+        return index; 
     }
 
-    public int EnemyTypeReturnes(EnemyController enemy)
+    private void RemoveIfReachedLimits(int index)
+    {
+        if (GameManager.Instance.globalConfig.enemySpawnDataList.Length < index)
+        {
+            Debug.LogError("Index is longer than enemy list amount");
+            return;
+        }
+
+        var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[index];
+
+        if (enemy.EnemyData.HasMaxLimitRun)
+        {
+            if (totalAmountSpawnedOfEachEnemy[index] >= enemy.EnemyData.maxLimitPerRun)
+                currentSpawnables.Remove(enemy);
+        }
+
+        if (enemy.EnemyData.HasLimitAmount)
+        {
+            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount >= enemy.EnemyData.limitAmount)
+                currentSpawnables.Remove(enemy);
+        }
+    }
+
+    private void ReAddIfItCanBeAdded(int index)
+    {
+        if (GameManager.Instance.globalConfig.enemySpawnDataList.Length < index)
+        {
+            Debug.LogError("Index is longer than enemy list amount");
+            return;
+        }
+
+        var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[index];
+
+        if (enemy.EnemyData.HasMaxLimitRun) return;
+
+        if (enemy.EnemyData.HasLimitAmount)
+        {
+            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount < enemy.EnemyData.limitAmount)
+                currentSpawnables.Add(enemy);
+        }
+    }
+
+    public int GetEnemyIndex(EnemyController enemy)
     {
         for (int i = 0; i < GameManager.Instance.globalConfig.enemySpawnDataList.Length; i++)
         {
-            if (GameManager.Instance.globalConfig.enemySpawnDataList[i].enemyPrefab != enemy) continue;
+            if (enemy.EnemyData != GameManager.Instance.globalConfig.enemySpawnDataList[i].EnemyData) continue;
             return i;
         }
 
-        Debug.LogError($"EnemyType returns was an error.Cant find the {enemy.gameObject.name} in the array");
-        return 0;
+        return enemy.Index;
     }
 
     private int GetSpawnQuantity()
@@ -139,12 +184,15 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     public void EnemyKilled(EnemyController enemyKilled)
     {
-
         GameManager.Instance.experienceSystem.AddExperience(enemyKilled.Model.BaseStats.experience);
 
         var mana = GameManager.Instance.poolManager.GetManaDrop();
         mana.transform.position = enemyKilled.transform.position;
         mana.Restart();
+
+        var enemyIndex = GetEnemyIndex(enemyKilled);
+
+        ReAddIfItCanBeAdded(enemyIndex);
 
         inLevelEnemies.Remove(enemyKilled);
         totalKilled++;

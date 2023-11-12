@@ -9,11 +9,15 @@ public enum EnemyStates
     Move,
 }
 
-public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
+public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable, IWeight
 {
     [ReadOnly, SerializeField] private EnemyStates currentEnemyState;
+    [SerializeField] private EnemyDataSO enemyData;
+    public int Index { get; set; }
 
     private FSM<EnemyStates> fsm;
+    public EnemyDataSO EnemyData => enemyData;
+    public int Weight => enemyData.Weight;
 
     public override void Initialize()
     {

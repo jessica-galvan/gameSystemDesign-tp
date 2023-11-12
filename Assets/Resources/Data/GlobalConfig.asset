@@ -23,36 +23,12 @@ MonoBehaviour:
   respawnEnemiesWhenTooFar: 1
   invisibleCollision: {x: 45, y: 27}
   enemySpawnDataList:
-  - poolName: Enemy_NoFace
-    enemyPrefab: {fileID: 7672375688410834417, guid: 1cee0ad3f6d88ec4992b898fe70f27bd, type: 3}
-    weight: 10
-    limitAmount: 0
-    maxLimitPerRun: 0
-  - poolName: Enemy_FatBat
-    enemyPrefab: {fileID: 7672375688410834417, guid: b08c63e4472ef3546b4fc59c17db0abd, type: 3}
-    weight: 10
-    limitAmount: 0
-    maxLimitPerRun: 0
-  - poolName: Enemy_Bird
-    enemyPrefab: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
-    weight: 10
-    limitAmount: 0
-    maxLimitPerRun: 0
-  - poolName: Enemy_Slug
-    enemyPrefab: {fileID: 7672375688410834417, guid: d64d8b7357da4704ab23a6caef1f801b, type: 3}
-    weight: 5
-    limitAmount: 5
-    maxLimitPerRun: 0
-  - poolName: Enemy_Curly
-    enemyPrefab: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
-    weight: 10
-    limitAmount: 0
-    maxLimitPerRun: 0
-  - poolName: Enemy_LittlePoop
-    enemyPrefab: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
-    weight: 5
-    limitAmount: 5
-    maxLimitPerRun: 0
+  - {fileID: 7672375688410834417, guid: 1cee0ad3f6d88ec4992b898fe70f27bd, type: 3}
+  - {fileID: 7672375688410834417, guid: b08c63e4472ef3546b4fc59c17db0abd, type: 3}
+  - {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
+  - {fileID: 7672375688410834417, guid: d64d8b7357da4704ab23a6caef1f801b, type: 3}
+  - {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
+  - {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
   amountLevelsUpDifficulty: 5
   maxEnemiesAmountMultiplier: 0.1
   maxAmountPerSpawnMultiplier: 0.1

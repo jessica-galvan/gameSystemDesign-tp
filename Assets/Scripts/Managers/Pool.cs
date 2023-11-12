@@ -1,22 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool : MonoBehaviour
+public class Pool<T>  where T : MonoBehaviour, IPoolable
 {
-    [ReadOnly][SerializeField] private GameObject prefab;
+    [ReadOnly][SerializeField] private T prefab;
+    private Transform parent;
 
-    private List<IPoolable> allItems = new List<IPoolable>();
-    private List<IPoolable> availableItems = new List<IPoolable>();
+    private List<T> allItems = new List<T>();
+    private List<T> availableItems = new List<T>();
     private string itemName;
 
     public int ActiveAmount => allItems.Count - availableItems.Count;
     public int AllItems => allItems.Count;
 
-    public void Initialize(GameObject prefab, int startingSize, string itemName)
+    public Action<T, Pool<T>> OnCreate;
+
+
+    public void Initialize(T prefab,  int startingSize, string itemName, Transform parent = null, Action<T, Pool<T>> OnCreate = null)
     {
         this.prefab = prefab;
         this.itemName = itemName;
+        this.OnCreate = OnCreate;
+        this.parent = parent;
 
         for (int i = 0; i < startingSize; i++)
         {
@@ -26,9 +33,10 @@ public class Pool : MonoBehaviour
         }
     }
 
-    public IPoolable Spawn()
+
+    public T Spawn()
     {
-        IPoolable item = null;
+        T item = null;
         if(availableItems.Count > 0)
         {
             item = availableItems[0];
@@ -41,7 +49,7 @@ public class Pool : MonoBehaviour
         return item;
     }
 
-    public void BackToPool(IPoolable item)
+    public void BackToPool(T item)
     {
         if (allItems.Contains(item))
         {
@@ -50,13 +58,17 @@ public class Pool : MonoBehaviour
         }
     }
 
-    private IPoolable InstantiateObject()
+    private T InstantiateObject()
     {
-        var item = Instantiate(prefab).GetComponent<IPoolable>();
+        var item = GameObject.Instantiate(prefab).GetComponent<T>();
         item.gameObject.name = $"{itemName}_({allItems.Count})";
-        item.gameObject.transform.SetParent(gameObject.transform);
+        item.gameObject.transform.SetParent(parent);
         item.Initialize();
         allItems.Add(item);
+
+        if(OnCreate != null)
+            OnCreate(item, this);
+
         return item;
     }
 }
