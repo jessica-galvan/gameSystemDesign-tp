@@ -53,11 +53,31 @@ public class CameraController : MonoBehaviour
         maxRandom = allSpawnPoints.Count - 1;
     }
 
-    public Vector2 GetSpawnPoint(Vector2 direction)
+    public Vector2 GetSpawnPoint(Vector2 direction, bool extraRandom)
     {
         Vector2Int dir = new Vector2Int((int)direction.x, (int)direction.y);
         if (spawnPoints.TryGetValue(dir, out Transform point))
-            return point.position;
+        {
+            var position = point.position;
+            if (extraRandom)
+            {
+                if (direction.x != 0)
+                {
+                    var area = GameManager.Instance.globalConfig.invisibleCollision.y / 2 - 1;
+                    var newY = Mathf.Clamp(Random.Range(-area, area) + position.y, -area, area);
+                    position.y = newY;
+                }
+
+                if(direction.y != 0)
+                {
+                    var area = GameManager.Instance.globalConfig.invisibleCollision.x / 2 - 1;
+                    var newY = Mathf.Clamp(Random.Range(-area, area) + position.x, -area, area);
+                    position.x = newY;
+                }
+            }
+
+            return position;
+        }
 
         return GetRandomDirection();
     }

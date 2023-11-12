@@ -13,11 +13,15 @@ public class GlobalConfigSO : ScriptableObject
     [Header("Gameplay")]
     [Tooltip("Amount of levels the player can level up to. If 0, it will level upt infinetly")]
     public int maxLevelCap = 0;
+    public int initialPool = 10;
+
+    [Header("Enemy Spawn Logic")]
     public int maxEnemiesAtAllTimes = 10;
     public int maxAmountPerSpawn = 5;
     public float minSpawnTime = 0;
     public float maxSpawnTime = 5f;
-    public int initialPool = 10;
+    public Vector2 invisibleCollision = new Vector2(5f, 10f);
+    public EnemySpawnData[] enemySpawnDataList = new EnemySpawnData[0];
 
     [Header("Overtime changes")]
     [Tooltip("Every this amount of levels, the overtime changes will be applied")]
