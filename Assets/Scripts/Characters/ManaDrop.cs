@@ -41,6 +41,9 @@ public class ManaDrop : MonoBehaviour, ICollectable, IUpdate, IPoolable
             vfx.Set(transform);
         }
 
+        var sound = destroyed ? GameManager.Instance.soundReferences.manaPopSound : GameManager.Instance.soundReferences.manaPickUpSound;
+        GameManager.Instance.audioManager.PlaySFXSound(sound);
+
         GameManager.Instance.poolManager.ReturnManaDrop(this);
     }
 

@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i < buttons.Count; i++)
         {
             buttons[i].Initialize();
-            //buttons[i].Button.onClick.AddListener(SelectButtonSound);
+            buttons[i].OnSelected += SelectButtonSound;
             buttons[i].Deselect();
         }
 
@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        //audioManager.PlayMusic(soundReferences.mainMenu);
+        audioManager.PlayMusic(soundReferences.mainMenuMusic);
         currentSelectedButton = playButton;
         GoBack();
     }
@@ -90,7 +90,7 @@ public class MainMenu : MonoBehaviour
 
     private void SelectButtonSound()
     {
-        //audioManager.PlaySFXSound(soundReferences.selectButton);
+        audioManager.PlaySFXSound(soundReferences.hoverButtonSound);
     }
 
     private void OnClickPlayHandler()

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public bool canPlaySounds = true;
+
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource sfxAudioSource;
 
     public void PlayMusic(AudioClip audio)
     {
-        if (audio == null) return;
+        if (!canPlaySounds || audio == null) return;
 
         if (musicAudioSource.isPlaying)
             musicAudioSource.Stop();
@@ -20,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFXSound(AudioClip audio)
     {
-        if (audio == null) return;
+        if (!canPlaySounds ||  audio == null) return;
         sfxAudioSource.PlayOneShot(audio);
     }
 

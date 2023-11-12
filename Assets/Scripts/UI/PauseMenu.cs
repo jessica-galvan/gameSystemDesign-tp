@@ -79,8 +79,11 @@ public class PauseMenu : Panel
     public override void Open()
     {
         base.Open();
+
         currentButton = resumeButton;
         SetSelectedButton();
+
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.pauseSound);
     }
 
     private void PauseInput(InputAction.CallbackContext cxt)

@@ -14,6 +14,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     public int manaCost = 5;
     public int weight = 10;
 
+    public AudioClip sfx;
     public BaseAbilityAction[] actions;
     public bool particleFollowsPlayer = false;
     public ParticleSystem[] particleSystemsVFX;
@@ -50,6 +51,9 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
     public void Execute(PlayerModel playerModel)
     {
         SetCooldown();
+
+        if (sfx != null)
+            GameManager.Instance.audioManager.PlaySFXSound(sfx);
 
         foreach (var action in actions)
             action.Execute(playerModel);

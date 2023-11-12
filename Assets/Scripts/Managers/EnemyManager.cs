@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public struct EnemySpawnData
 {
     public EnemyController enemyPrefab;
@@ -47,10 +48,13 @@ public class EnemyManager : MonoBehaviour, IUpdate
         }
 
         //This is to limit if enemies go to far, we realocated them near 
-        for (int i = 0; i < inLevelEnemies.Count; i++)
+        if (GameManager.Instance.globalConfig.respawnEnemiesWhenTooFar)
         {
-            if (IsInsideDesignatedArea(inLevelEnemies[i].transform.position) ) continue;
-            inLevelEnemies[i].transform.position = GetSpawnPos(extraRandomness: true);
+            for (int i = 0; i < inLevelEnemies.Count; i++)
+            {
+                if (IsInsideDesignatedArea(inLevelEnemies[i].transform.position)) continue;
+                inLevelEnemies[i].transform.position = GetSpawnPos(extraRandomness: true);
+            }
         }
     }
 
@@ -117,8 +121,11 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(GameManager.Instance.Player.transform.position, new Vector3(GameManager.Instance.globalConfig.invisibleCollision.x, GameManager.Instance.globalConfig.invisibleCollision.y, 0f));
+        if (GameManager.Instance.globalConfig.respawnEnemiesWhenTooFar)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(GameManager.Instance.Player.transform.position, new Vector3(GameManager.Instance.globalConfig.invisibleCollision.x, GameManager.Instance.globalConfig.invisibleCollision.y, 0f));
+        }
     }
 
     private void OnDestroy()

@@ -28,6 +28,8 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public CharacterDataSO BaseStats => baseStats;
     public Animator Animator => animator;
 
+    public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible;
+
     public virtual void Initialize()
     {
         LifeController = GetComponent<LifeController>();
@@ -79,8 +81,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public virtual void TakeDamage(int damage)
     {
-        if (LifeController.Invincible) return;
-        if (!canTakeDamage) return;
+        if (!CanTakeDamage) return;
 
         LifeController.TakeDamage(damage);
 
@@ -114,8 +115,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public virtual void TakeDamage(int damage, Vector2 direction)
     {
-        if (LifeController.Invincible) return;
-        if (!canTakeDamage) return;
+        if (!CanTakeDamage) return;
 
         TakeDamage(damage);
 

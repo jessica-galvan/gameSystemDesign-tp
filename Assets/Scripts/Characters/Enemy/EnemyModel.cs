@@ -38,4 +38,11 @@ public class EnemyModel : BaseCharacterModel, IDamage
         LifeController.ResetStats();
         SetVisualTakeDamage(false);
     }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.enemyTakeDamageSound);
+    }
 }

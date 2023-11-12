@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,8 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public bool Initialized { get; private set; }
     public Button Button { get; private set; }
 
+    public event Action OnSelected;
+
     public virtual void Initialize()
     {
         if (Initialized) return;
@@ -24,10 +27,13 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public virtual void Select()
     {
-        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.hoverButton);
+        if(GameManager.HasInstance)
+            GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.hoverButtonSound);
 
         if (selectedMarker != null)
             selectedMarker.SetActive(true);
+
+        OnSelected?.Invoke();
     }
 
     public virtual void Deselect()
@@ -60,7 +66,6 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         gameObject.SetActive(show);
     }
-
 
     private void RemoveAllListeners()
     {

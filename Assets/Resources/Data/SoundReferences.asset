@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c737fcfb3b954a4cbd7fb78149fb142, type: 3}
   m_Name: SoundReferences
   m_EditorClassIdentifier: 
-  hoverButton: {fileID: 0}
-  selectButton: {fileID: 0}
-  pauseSound: {fileID: 0}
-  mainMenu: {fileID: 0}
-  playerDeath: {fileID: 0}
-  enemyDeath: {fileID: 0}
-  negativeShootSound: {fileID: 0}
-  playerShoot: {fileID: 0}
-  enemyShoot: {fileID: 0}
-  spawnSound: {fileID: 0}
-  win: {fileID: 0}
-  levelMusic: {fileID: 0}
+  canPlaySounds: 1
+  hoverButtonSound: {fileID: 8300000, guid: 491c8ab02282d474592a0fefd39f38ef, type: 3}
+  selectButtonSound: {fileID: 0}
+  pauseSound: {fileID: 8300000, guid: 41fbc6c8940339e4392cee3740594947, type: 3}
+  openPopup: {fileID: 0}
+  closePopup: {fileID: 0}
+  abilitySelectedSound: {fileID: 8300000, guid: 3c6eb3745d4bd7647ae1b97c925d1b7d, type: 3}
+  powerUpSelectedSound: {fileID: 8300000, guid: 3c6eb3745d4bd7647ae1b97c925d1b7d, type: 3}
+  playerTakeDamageSound: {fileID: 8300000, guid: 9e8f1d58ca82bd34a8f3caf7013ec574, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 250b3c2d33e0685489794e1b975d6584, type: 3}
+  enemyTakeDamageSound: {fileID: 8300000, guid: 8c188799071757d49a74b2c049243905, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 8204271bc81b3f4458df827703408814, type: 3}
+  playerShootSound: {fileID: 8300000, guid: 54d29ffa19aae8d41aa5ca3deb7ef0d1, type: 3}
+  negativeShootSound: {fileID: 8300000, guid: 1c140b0453f24b1499e6ad71f52482e1, type: 3}
+  manaPickUpSound: {fileID: 8300000, guid: cb500b7ce1cffb247b96b6e06d01d9a7, type: 3}
+  manaPopSound: {fileID: 8300000, guid: 3a168d0c4dbc3e844920131117400a37, type: 3}
+  levelUpSound: {fileID: 8300000, guid: f34ebd7f6edafff49bb6421de4518b79, type: 3}
+  GameOverMusic: {fileID: 0}
+  levelMusic: {fileID: 8300000, guid: 3faadc2ff9726494eba2c581434729ae, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 7ec6d6e4512b2724abc493b679d231a7, type: 3}

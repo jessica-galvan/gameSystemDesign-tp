@@ -19,7 +19,9 @@ MonoBehaviour:
   cooldown: 2.187
   manaCost: 5
   weight: 10
+  sfx: {fileID: 8300000, guid: 53b64bb58f1c9ec44901fbe3b3e0dd17, type: 3}
   actions:
   - {fileID: 11400000, guid: 31f983fd91182c94fb7eee58b7bb12ea, type: 2}
+  particleFollowsPlayer: 0
   particleSystemsVFX:
   - {fileID: 8592692054251267553, guid: fe5f77bdddcd658439f22d885e71d7ee, type: 3}

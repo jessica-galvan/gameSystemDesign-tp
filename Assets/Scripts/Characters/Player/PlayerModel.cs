@@ -57,7 +57,7 @@ public class PlayerModel : BaseCharacterModel
         CanShoot = false;
         cooldownShootTimer = 0f;
 
-        //GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShoot);
+       GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerShootSound);
     }
 
     public override void Move(Vector2 direction)
@@ -131,7 +131,7 @@ public class PlayerModel : BaseCharacterModel
 
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if (!canTakeDamage) return;
+        if (!CanTakeDamage) return;
 
         if(collision.gameObject.TryGetComponent<IDamage>(out var idamage))
             TakeDamage((int)idamage.AttackData.Damage);
@@ -146,5 +146,12 @@ public class PlayerModel : BaseCharacterModel
     public void SetNewSpeed(float newSpeed)
     {
         speed = newSpeed;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        if (!CanTakeDamage) return;
+        base.TakeDamage(damage);
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerTakeDamageSound);
     }
 }

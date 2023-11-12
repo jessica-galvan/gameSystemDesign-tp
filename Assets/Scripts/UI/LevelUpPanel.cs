@@ -57,6 +57,7 @@ public class LevelUpPanel : Panel
             var ability = button.CurrentOption as AbilityDataSO;
             GameManager.Instance.Player.UnlockAbility(ability);
             ScriptableObjectManager.Instance.RemoveUnlockedAbility(ability);
+            GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.abilitySelectedSound);
         }
 
         if(button.CurrentOption is BasePowerUpSO)
@@ -64,6 +65,7 @@ public class LevelUpPanel : Panel
             var powerUp = button.CurrentOption as BasePowerUpSO;
             powerUp.Execute();
             ScriptableObjectManager.Instance.RemoveUsedPowerUp(powerUp);
+            GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.powerUpSelectedSound);
         }
 
         if (currentAmountSelected >= GameManager.Instance.experienceSystem.AmountLeveledUp)

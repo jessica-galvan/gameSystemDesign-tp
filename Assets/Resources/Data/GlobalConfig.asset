@@ -15,11 +15,17 @@ MonoBehaviour:
   gameScene: Gameplay
   menuScene: MainMenu
   maxLevelCap: 0
-  maxEnemiesAtAllTimes: 10
+  initialPool: 10
+  maxEnemiesAtAllTimes: 100
   maxAmountPerSpawn: 5
   minSpawnTime: 0
   maxSpawnTime: 5
-  initialPool: 10
+  respawnEnemiesWhenTooFar: 1
+  invisibleCollision: {x: 45, y: 27}
+  enemySpawnDataList: []
+  amountLevelsUpDifficulty: 5
+  maxEnemiesAmountMultiplier: 0.1
+  maxAmountPerSpawnMultiplier: 0.1
   gameplayFPSTarget: 0
   uiFPSTarget: 60
   pointsFormat: 00000

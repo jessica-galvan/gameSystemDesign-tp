@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ScriptableObjectManager.Instance.Resort();
+        audioManager.PlayMusic(soundReferences.levelMusic);
     }
 
     public static T Create<T>(string name, Transform parent = null) where T:MonoBehaviour

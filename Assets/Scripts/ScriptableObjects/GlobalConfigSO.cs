@@ -20,6 +20,8 @@ public class GlobalConfigSO : ScriptableObject
     public int maxAmountPerSpawn = 5;
     public float minSpawnTime = 0;
     public float maxSpawnTime = 5f;
+    public bool respawnEnemiesWhenTooFar = true;
+    [Tooltip("When not inside this area, that centers at the player's position, the enemies will be respawned")]
     public Vector2 invisibleCollision = new Vector2(5f, 10f);
     public EnemySpawnData[] enemySpawnDataList = new EnemySpawnData[0];
 

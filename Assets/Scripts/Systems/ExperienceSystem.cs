@@ -63,6 +63,8 @@ public class ExperienceSystem : MonoBehaviour
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
 
         currentLevel += AmountLeveledUp;
+
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.levelUpSound);
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);
     }
 
@@ -78,13 +80,11 @@ public class ExperienceSystem : MonoBehaviour
         return currentLevel / experienceModifier + currentLevel % experienceModifier *  100f * Mathf.Pow(experienceModifier, currentLevel / experienceModifier);
     }
 
-
     private void RecalculateCurrentT()
     {
         CurrentT = Mathf.InverseLerp(0, requiredXP, currentXP);
         OnUpdateExperience?.Invoke(CurrentT);
     }
-
 
     public void SetNexExperienceMultiplier(float nexExperienceMultiplier)
     {

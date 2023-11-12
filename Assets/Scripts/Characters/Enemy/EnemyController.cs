@@ -77,6 +77,7 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
     {
         GameManager.Instance.poolManager.ReturnEnemy(this);
         GameManager.Instance.enemyManager.EnemyKilled(this);
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.enemyDeathSound);
 
         var deathVFX = GameManager.Instance.poolManager.GetParticle(ParticleEffect.ParticleType.Death);
         deathVFX.Set(Model.transform);
