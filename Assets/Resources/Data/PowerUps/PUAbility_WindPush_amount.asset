@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91d61b39623fbe419414892fd7f0bcf, type: 3}
+  m_Name: PUAbility_WindPush_amount
+  m_EditorClassIdentifier: 
+  title: Wind Push Extra Radius
+  icon: {fileID: 0}
+  weight: 10
+  reutilizableTimes: 2
+  abilityData: {fileID: 11400000, guid: 30aa20423bd0547478ad8823b11f4901, type: 2}
+  action: {fileID: 11400000, guid: 42364a05e11c275408e41208e5d7af32, type: 2}
+  cooldownMultiplier: 0
+  manaCostMultiplier: 0
+  amountMultiplier: 0.2
+  attackMultiplier: 0

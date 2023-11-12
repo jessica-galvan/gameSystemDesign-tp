@@ -59,7 +59,7 @@ public class AbilityDataSO : ScriptableObject, ISelectableOption, IWeight
             var particle = Instantiate(particleSystemsVFX[i]);
 
             if (particleFollowsPlayer)
-                particle.transform.parent = playerModel.transform.parent;
+                particle.transform.parent = playerModel.transform;
 
             particle.transform.position = playerModel.transform.position;
 

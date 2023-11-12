@@ -14,9 +14,7 @@ public class OverlapDamageAction : BaseAbilityAction
 
     [Header("VFX")]
     public ParticleSystem particleSystem;
-    public float speed = 10f;
-    public Color color;
-    private MainModule mainModule;
+    public bool followPlayer;
 
     [field: ReadOnly, NonSerialized] public int Damage { get; set; }
     [field: ReadOnly, NonSerialized] public float Force { get; set; }
@@ -52,7 +50,11 @@ public class OverlapDamageAction : BaseAbilityAction
 
         if(particleSystem != null)
         {
-            var particle = Instantiate(particleSystem, playerModel.transform);
+            var particle = Instantiate(particleSystem);
+
+            if (followPlayer)
+                particle.transform.parent = playerModel.transform;
+
             particle.transform.localScale = Vector3.one * Radius * 2;
             particle.transform.position = playerModel.transform.position;
             particle.Play();
@@ -64,10 +66,10 @@ public class OverlapDamageAction : BaseAbilityAction
     public override void PowerUp(float amountMultiplier, float attackMultiplier)
     {
         if(amountMultiplier > 0)
-            Radius = Mathf.RoundToInt(Radius * amountMultiplier);
+            Radius = Mathf.RoundToInt(Radius + Radius * amountMultiplier);
 
         if(attackMultiplier > 0)
-            Damage = Mathf.RoundToInt(Damage * attackMultiplier);
+            Damage = Mathf.RoundToInt(Damage + Damage * attackMultiplier);
     }
 
     public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)
