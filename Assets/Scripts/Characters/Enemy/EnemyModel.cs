@@ -12,9 +12,9 @@ public class EnemyModel : BaseCharacterModel, IDamage
 
     public AttackDataSO AttackData => attackStats;
 
-    public override void Initialize()
+    public override void Initialize(CharacterDataSO stats)
     {
-        base.Initialize();
+        base.Initialize(stats);
         attackStats.Initialize();
         pursuit = new Pursuit();
     }

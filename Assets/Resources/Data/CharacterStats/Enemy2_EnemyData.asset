@@ -15,4 +15,11 @@ MonoBehaviour:
   poolName: Enemy_FatBat
   weight: 10
   limitAmount: 0
+  minLevel: 2
+  maxLevel: -1
   maxLimitPerRun: 0
+  weightMultiplier: -1
+  limitAmountMultiplierWithScaleDifficulty: -1
+  healthMultiplier: -1
+  speedMultiplier: -1
+  experienceMultiplier: -1

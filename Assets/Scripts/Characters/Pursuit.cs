@@ -20,7 +20,7 @@ public class Pursuit
         if (!target.Alive) return Vector2.zero;
 
         float distance = Vector2.Distance(entity.transform.position, target.transform.position) - EPSILON;
-        var speed = Mathf.Clamp(target.BaseStats.movementSpeed * entity.BaseStats.predictionTime, -distance, distance);
+        var speed = Mathf.Clamp(target.BaseStats.MovementSpeed * entity.BaseStats.predictionTime, -distance, distance);
         Vector2 targetPoint = (Vector2) target.transform.position + target.Direction * speed;
         Vector2 dir = targetPoint - (Vector2) entity.transform.position;
         return dir.normalized;

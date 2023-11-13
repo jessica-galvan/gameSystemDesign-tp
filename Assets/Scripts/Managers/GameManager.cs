@@ -82,11 +82,11 @@ public class GameManager : MonoBehaviour
         poolManager = GetComponent<PoolManager>();
         poolManager.Initialize();
 
-        enemyManager = GetComponent<EnemyManager>();
-        enemyManager.Initialize();
-
         experienceSystem = Create<ExperienceSystem>("PlayerSystems");
         experienceSystem.Initialize();
+
+        enemyManager = GetComponent<EnemyManager>();
+        enemyManager.Initialize();
 
         manaSystem = experienceSystem.AddComponent<ManaSystem>();
         manaSystem.Initialize();

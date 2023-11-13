@@ -16,20 +16,17 @@ public class PlayerModel : BaseCharacterModel
 
     [Header("Info")]
     [SerializeField, ReadOnly] private bool isMoving;
-    [SerializeField, ReadOnly] private float speed;
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
-    public float Speed => speed;
     public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
 
     public Action<AbilityDataSO> OnUnlockedAbilityEvent;
 
-    public override void Initialize()
+    public override void Initialize(CharacterDataSO stats)
     {
-        base.Initialize();
+        base.Initialize(stats);
 
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
-        SetNewSpeed(baseStats.movementSpeed);
         CanShoot = true;
     }
 
@@ -62,7 +59,7 @@ public class PlayerModel : BaseCharacterModel
     public override void Move(Vector2 direction)
     {
         currentDirection = direction.normalized;
-        rb.velocity = currentDirection * speed * Time.deltaTime;
+        rb.velocity = currentDirection * baseStats.MovementSpeed * Time.deltaTime;
 
         UpdateMovementAnimation();
         Flip(currentDirection);
@@ -71,6 +68,7 @@ public class PlayerModel : BaseCharacterModel
     public void UpdateMovementAnimation()
     {
         var moving = Mathf.Abs(rb.velocity.x) > float.Epsilon || Mathf.Abs(rb.velocity.y) > float.Epsilon;
+
         if (isMoving == moving) return;
         isMoving = moving;
 
@@ -151,7 +149,7 @@ public class PlayerModel : BaseCharacterModel
 
     public void SetNewSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        baseStats.ChangeSpeed(newSpeed);
     }
 
     public override void TakeDamage(int damage)

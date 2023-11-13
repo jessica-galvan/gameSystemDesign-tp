@@ -63,12 +63,21 @@ public class GlobalConfigSO : ScriptableObject
     {
         MaxSpawnedAmount = maxAmountPerSpawn;
         MaxEnemiesAmount = maxEnemiesAtAllTimes;
+
+        for (int i = 0; i < enemySpawnDataList.Length; i++)
+        {
+            enemySpawnDataList[i].EnemyData.Initialize();
+            enemySpawnDataList[i].Stats.Initialize();
+        }
     }
 
     public void ScaleDifficulty()
     {
         MaxSpawnedAmount += Mathf.RoundToInt(MaxSpawnedAmount * maxAmountPerSpawnMultiplier);
         MaxEnemiesAmount += Mathf.RoundToInt(MaxEnemiesAmount * maxEnemiesAmountMultiplier);
+
+        for (int i = 0; i < enemySpawnDataList.Length; i++)
+            enemySpawnDataList[i].ScaleUpDifficulty();
     }
 
     public bool CanScaleDifficult(int currentLevel)

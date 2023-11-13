@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
             var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[i];
             if (!enemy.EnemyData.CanBeSpawned) continue;
             enemy.Index = i;
-            var initialPoolAmount = enemy.EnemyData.HasMaxLimitRun ? enemy.EnemyData.maxLimitPerRun : enemy.EnemyData.HasLimitAmount ? enemy.EnemyData.limitAmount : GameManager.Instance.globalConfig.initialPool;
+            var initialPoolAmount = enemy.EnemyData.HasMaxLimitRun ? enemy.EnemyData.MaxLimitPerRun : enemy.EnemyData.HasLimitAmount ? enemy.EnemyData.LimitAmount : GameManager.Instance.globalConfig.initialPool;
             var name = !string.IsNullOrEmpty(enemy.EnemyData.poolName) ? enemy.EnemyData.poolName : enemy.gameObject.name;
             var enemyPool = CreateNewPool($"Pool_{name}", enemy, initialPoolAmount, name, OnEnemyCreated);
             enemyPools.Add(enemyPool);

@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Invincible>k__BackingField: 0
   <CurrentLife>k__BackingField: 0
-  <MaxLife>k__BackingField: 0
   <Alive>k__BackingField: 0
 --- !u!114 &7672375688410834417
 MonoBehaviour:
@@ -166,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443ec84c857d94249835012c318fc557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 6e050936104a15645b9dd8a3629dc8f5, type: 2}
   currentEnemyState: 0
   enemyData: {fileID: 11400000, guid: 97dd1addf7025eb4da9ef44bde45f005, type: 2}
 --- !u!114 &4623309275699437841

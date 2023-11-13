@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(LifeController), typeof(Rigidbody2D))]
 public class BaseCharacterModel : MonoBehaviour, IDamagable
 {
-    [SerializeField] protected CharacterDataSO baseStats;
+    [SerializeField, ReadOnly] protected CharacterDataSO baseStats;
     [SerializeField] protected ParticleSystem[] takeDamageVFX;
     [ReadOnly, SerializeField] protected SpriteRenderer spriteRenderer;
     [ReadOnly, SerializeField] protected Rigidbody2D rb;
@@ -27,11 +27,12 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public bool FlipX => flipX;
     public CharacterDataSO BaseStats => baseStats;
     public Animator Animator => animator;
-
+    public float Speed => baseStats.MovementSpeed;
     public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible;
 
-    public virtual void Initialize()
+    public virtual void Initialize(CharacterDataSO stats)
     {
+        baseStats = stats;
         LifeController = GetComponent<LifeController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -66,7 +67,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public virtual void Move(Vector2 direction)
     {
         currentDirection = direction;
-        rb.AddForce(currentDirection * baseStats.movementSpeed * Time.deltaTime);
+        rb.AddForce(currentDirection * Speed * Time.deltaTime);
 
         Flip(currentDirection);
 

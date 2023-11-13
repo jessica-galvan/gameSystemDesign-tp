@@ -100,4 +100,9 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable, I
         gameObject.SetActive(true);
         AddToUpdate();
     }
+
+    public void ScaleUpDifficulty()
+    {
+        enemyData.ScaleUpDifficulty(stats);
+    }
 }

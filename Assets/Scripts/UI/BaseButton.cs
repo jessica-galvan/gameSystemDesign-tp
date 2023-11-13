@@ -11,6 +11,8 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public TMP_Text txtTitle;
     public GameObject selectedMarker;
 
+    [SerializeField, ReadOnly] private bool shown, shownMarkers;
+ 
     public bool Initialized { get; private set; }
     public Button Button { get; private set; }
 
@@ -21,6 +23,8 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (Initialized) return;
         Initialized = true;
 
+        ShowMarkers(false, force: true);
+
         Button = GetComponent<Button>();
         Deselect();
     }
@@ -30,16 +34,14 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if(GameManager.HasInstance)
             GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.hoverButtonSound);
 
-        if (selectedMarker != null)
-            selectedMarker.SetActive(true);
+        ShowMarkers(true);
 
         OnSelected?.Invoke();
     }
 
     public virtual void Deselect()
     {
-        if (selectedMarker != null)
-            selectedMarker.SetActive(false);
+        ShowMarkers(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -62,9 +64,19 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Deselect();
     }
 
-    public virtual void Show(bool show)
+    public void Show(bool show, bool force = false)
     {
-        gameObject.SetActive(show);
+        if (show == shown && !force) return;
+        shown = show;
+        gameObject.SetActive(shown);
+    }
+
+    public void ShowMarkers(bool show, bool force = false)
+    {
+        if (selectedMarker == null) return;
+        if (show == shownMarkers && !force) return;
+        shownMarkers = show;
+        selectedMarker.SetActive(shownMarkers);
     }
 
     private void RemoveAllListeners()

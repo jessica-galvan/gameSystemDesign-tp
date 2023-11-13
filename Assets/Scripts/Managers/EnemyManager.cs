@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour, IUpdate
@@ -17,6 +18,8 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     public void Initialize()
     {
+        GameManager.Instance.experienceSystem.OnUpdateLevel += OnCharacterLevelUp;
+
         canSpawnEnemies = true;
         GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
 
@@ -94,19 +97,40 @@ public class EnemyManager : MonoBehaviour, IUpdate
         return GetEnemyIndex(enemyData);
     }
 
+    private void OnCharacterLevelUp(int currentLevel)
+    {
+        for (int i = 0; i < GameManager.Instance.globalConfig.enemySpawnDataList.Length; i++)
+        {
+            var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[i];
+
+            bool isGreaterMinimunLevel = enemy.EnemyData.MinLevel < 0  || currentLevel >= enemy.EnemyData.MinLevel;
+            bool isLowerMaximumLevel = enemy.EnemyData.MaxLevel < 0 || currentLevel <= enemy.EnemyData.MaxLevel;
+            bool isCurrentlyThere = currentSpawnables.Contains(enemy);
+
+            bool shouldBeInside = isLowerMaximumLevel && isGreaterMinimunLevel;
+
+            if (shouldBeInside && isCurrentlyThere) continue;
+
+            if (shouldBeInside && !isCurrentlyThere)
+                currentSpawnables.Add(enemy);
+            else if (!shouldBeInside && isCurrentlyThere)
+                currentSpawnables.Remove(enemy);
+        }
+    }
+
     private void RemoveIfReachedLimits(EnemyController enemy)
     {
         var index = GetEnemyIndex(enemy);
 
         if (enemy.EnemyData.HasMaxLimitRun)
         {
-            if (totalAmountSpawnedOfEachEnemy[index] >= enemy.EnemyData.maxLimitPerRun)
+            if (totalAmountSpawnedOfEachEnemy[index] >= enemy.EnemyData.MaxLimitPerRun)
                 currentSpawnables.Remove(enemy);
         }
 
         if (enemy.EnemyData.HasLimitAmount)
         {
-            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount >= enemy.EnemyData.limitAmount)
+            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount >= enemy.EnemyData.LimitAmount)
                 currentSpawnables.Remove(enemy);
         }
     }
@@ -118,7 +142,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         if (enemy.EnemyData.HasLimitAmount)
         {
             var index = GetEnemyIndex(enemy);
-            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount < enemy.EnemyData.limitAmount)
+            if (GameManager.Instance.poolManager.enemyPools[index].ActiveAmount < enemy.EnemyData.LimitAmount)
                 currentSpawnables.Add(enemy);
         }
     }
@@ -148,7 +172,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     public void EnemyKilled(EnemyController enemyKilled)
     {
-        GameManager.Instance.experienceSystem.AddExperience(enemyKilled.Model.BaseStats.experience);
+        GameManager.Instance.experienceSystem.AddExperience(enemyKilled.Model.BaseStats.Experience);
 
         var mana = GameManager.Instance.poolManager.GetManaDrop();
         mana.transform.position = enemyKilled.transform.position;

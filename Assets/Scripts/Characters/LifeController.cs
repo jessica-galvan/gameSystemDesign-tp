@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
+    private CharacterDataSO baseStats;
     [field: SerializeField] public bool Invincible { get; private set; }
     [field: SerializeField, ReadOnly] public int CurrentLife { get; private set; }
-    [field: SerializeField, ReadOnly] public int MaxLife { get; private set; }
     [field: SerializeField, ReadOnly] public bool Alive { get; private set; }
-    /// <summary>
-    /// Gives current and max hp
-    /// </summary>
+
+    public int MaxLife => baseStats.MaxLife;
+
     public Action<int, int, bool> OnLifeUpdate;
     public Action OnDeath;
 
     public void Initialize(CharacterDataSO baseStats)
     {
+        this.baseStats = baseStats;
+
         Alive = true;
-        MaxLife = baseStats.maxLife;
         CurrentLife = MaxLife;
     }
 
@@ -67,7 +68,7 @@ public class LifeController : MonoBehaviour
 
     public void SetNewMaxLife(int newMaxLife)
     {
-        MaxLife = newMaxLife;
+        baseStats.ChangeMaxLife(newMaxLife);
         CurrentLife = Mathf.Clamp(CurrentLife, 0, MaxLife);
         OnLifeUpdate?.Invoke(CurrentLife, MaxLife, true);
     }

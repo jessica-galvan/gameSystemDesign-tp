@@ -12,6 +12,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
     public override void Initialize()
     {
         base.Initialize();
+        stats.Initialize();
         AddToUpdate();
     }
 

@@ -723,7 +723,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jessica Galvan
+  m_text: "Jessica Galvan\n\n\n\n<i>Special Thanks to Mart\xEDn Moge for the all
+    the Pixel Art</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a952a6bf9319cb40959abfcacbd2825, type: 2}
   m_sharedMaterial: {fileID: 137427663490862294, guid: 7a952a6bf9319cb40959abfcacbd2825, type: 2}

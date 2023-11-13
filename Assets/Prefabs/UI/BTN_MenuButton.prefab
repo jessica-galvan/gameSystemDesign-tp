@@ -167,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &652250971153428006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -540,3 +540,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtTitle: {fileID: 1695295142469619334}
   selectedMarker: {fileID: 3255892724387346959}
+  shown: 0
+  shownMarkers: 0
