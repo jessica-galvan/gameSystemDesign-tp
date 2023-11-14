@@ -35,12 +35,13 @@ public class LevelUpPanel : Panel
         {
             var button = Instantiate(powerButtonPrefab, powerButtonPrefab.transform.parent);
             button.Initialize();
+            button.Show(false, force: true);
             buttons.Add(button);
             button.txtTitle.SetText("Option {0}", i+1);
             button.Button.onClick.AddListener(() => { OnPowerButtonSelected(button); });
         }
 
-        powerButtonPrefab.Show(false);
+        powerButtonPrefab.Show(false, force: true);
     }
 
     private void OnPowerButtonSelected(PowerUpButton button)
