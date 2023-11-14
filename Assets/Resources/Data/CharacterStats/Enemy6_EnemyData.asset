@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e7136fbc389d544932cf47e90b4da2, type: 3}
   m_Name: Enemy6_EnemyData
   m_EditorClassIdentifier: 
-  poolName: Enemy_LittlePoop
+  poolName: Enemy_LittleSeed
   id: 5

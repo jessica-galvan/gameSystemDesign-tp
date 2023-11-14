@@ -51,29 +51,40 @@ public class EnemyData : IWeight
     public int maxLimitPerStage;
 
     [Header("Difficulty Scalers")]
-    [Tooltip("If you want the enemy gain more hp, change the hp multiplier. can be used to increase or decrease. Default: -1 so it doesn't multiply. Will Reset to base life before applying multiplied")]
-    public float healthMultiplier = -1;
+    [Tooltip("if you want the stats to be reseted before applying the new multiplier")]
+    public bool resetStatsBeforeMultiply = false;
+    [Tooltip("If you want the enemy gain more hp, change the hp multiplier. can be used to increase or decrease. Default: 0 so it doesn't multiply")]
+    public float healthMultiplier = 0;
     [Tooltip("Same as Health Multiplier")]
-    public float speedMultiplier = -1;
+    public float speedMultiplier = 0;
     [Tooltip("Same as Health Multiplier")]
-    public float experienceMultiplier = -1;
+    public float experienceMultiplier = 0;
+    [Tooltip("Same as Health Multiplier")]
+    public float damageMultiplier = 0;
 
     public int Weight => weight;
     public bool HasMaxLimitRun => maxLimitPerStage > 0;
     public bool HasLimitAmount => limitAmountAtSameTime > 0;
 
-    public void ScaleUpDifficulty(CharacterDataSO data)
+    public void ScaleUpDifficulty()
     {
-        data.Reset(healthMultiplier > 0, experienceMultiplier > 0, speedMultiplier > 0);
+        if (resetStatsBeforeMultiply)
+            enemyController.Stats.Reset(healthMultiplier > 0, experienceMultiplier > 0, speedMultiplier > 0);
 
         if (healthMultiplier > 0)
-            data.ChangeMaxLife(Mathf.RoundToInt(data.MaxLife + data.MaxLife * healthMultiplier));
+            enemyController.Stats.ChangeMaxLife(Mathf.RoundToInt(enemyController.Stats.MaxLife + enemyController.Stats.MaxLife * healthMultiplier));
 
         if (speedMultiplier > 0)
-            data.ChangeMaxLife(Mathf.RoundToInt(data.MovementSpeed + data.MovementSpeed * speedMultiplier));
+            enemyController.Stats.ChangeMaxLife(Mathf.RoundToInt(enemyController.Stats.MovementSpeed + enemyController.Stats.MovementSpeed * speedMultiplier));
 
         if (experienceMultiplier > 0)
-            data.ChangeMaxLife(Mathf.RoundToInt(data.Experience + data.Experience * experienceMultiplier));
+            enemyController.Stats.ChangeMaxLife(Mathf.RoundToInt(enemyController.Stats.Experience + enemyController.Stats.Experience * experienceMultiplier));
+
+        if(damageMultiplier > 0)
+        {
+            var damage = resetStatsBeforeMultiply ? enemyController.AttackData.damage : enemyController.AttackData.Damage;
+            enemyController.AttackData.Damage = Mathf.RoundToInt(damage + damage * damageMultiplier);
+        }
     }
 }
 
@@ -96,6 +107,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
     private float nextStageTime = 0;
     private EnemyStage currentStage;
     private bool isOverTime = false;
+    private bool stageHasEnemiesToSpawn = true;
 
     public void Initialize()
     {
@@ -122,7 +134,6 @@ public class EnemyManager : MonoBehaviour, IUpdate
                 nextStageTime = GameManager.Instance.globalConfig.allStages[currentIndex + 1].startTime;
             else
                 nextStageTime = 1f;
-
         }
         else
         {
@@ -131,6 +142,10 @@ public class EnemyManager : MonoBehaviour, IUpdate
             currentStage = GameManager.Instance.globalConfig.lastStage;
         }
 
+        for (int i = 0; i < currentStage.allEnemyData.Count; i++)
+            currentStage.allEnemyData[i].ScaleUpDifficulty();
+
+        stageHasEnemiesToSpawn = currentStage.allEnemyData.Count > 0;
         RefreshSpawnableList();
     }
 
@@ -148,7 +163,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             }
         }
 
-        if (canSpawnEnemies)
+        if (canSpawnEnemies && stageHasEnemiesToSpawn)
         {
             currentTime -= deltaTime;
 
@@ -213,6 +228,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private void RefreshSpawnableList()
     {
+        if (!stageHasEnemiesToSpawn) return;
         currentSpawnables.Clear();
         for (int i = 0; i < currentStage.allEnemyData.Count; i++)
         {

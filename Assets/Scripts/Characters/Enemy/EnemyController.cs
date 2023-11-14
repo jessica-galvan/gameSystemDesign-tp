@@ -12,15 +12,18 @@ public enum EnemyStates
 public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
 {
     [SerializeField] private EnemyDataSO enemyData;
+    [SerializeField] private AttackDataSO attackStats;
     [ReadOnly, SerializeField] private EnemyStates currentEnemyState;
 
     private FSM<EnemyStates> fsm;
     public EnemyDataSO EnemyData => enemyData;
+    public AttackDataSO AttackData => attackStats;
     public int ID => enemyData.ID;
 
     public override void Initialize()
     {
         base.Initialize();
+        Model.attackStats = attackStats;
         Model.LifeController.OnDeath += OnDie;
         InitializeFSM();
     }
@@ -100,8 +103,4 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
         AddToUpdate();
     }
 
-    public void ScaleUpDifficulty()
-    {
-
-    }
 }

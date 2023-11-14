@@ -24,9 +24,26 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 20
       maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
       experienceMultiplier: 0
+      damageMultiplier: 0
+    maxSpawnedAtTheSameTime: 5
+    maxTotalEnemies: 100
+    minSpawnWaitTime: 0.5
+    maxSpawnWaitTime: 5
+  - startTime: 0.093
+    allEnemyData:
+    - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
+      weight: 10
+      limitAmountAtSameTime: 70
+      maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
+      healthMultiplier: 0
+      speedMultiplier: 0
+      experienceMultiplier: 0
+      damageMultiplier: 0
     maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 100
     minSpawnWaitTime: 0.5
@@ -37,11 +54,37 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 20
       maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
       experienceMultiplier: 0
+      damageMultiplier: 0
+    - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
+      weight: 10
+      limitAmountAtSameTime: 40
+      maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
+      healthMultiplier: 0
+      speedMultiplier: 0
+      experienceMultiplier: 0
+      damageMultiplier: 0
     maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 100
+    minSpawnWaitTime: 0.5
+    maxSpawnWaitTime: 5
+  - startTime: 0.093
+    allEnemyData:
+    - enemyController: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
+      weight: 10
+      limitAmountAtSameTime: 70
+      maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
+      healthMultiplier: 0
+      speedMultiplier: 0
+      experienceMultiplier: 0
+      damageMultiplier: 0
+    maxSpawnedAtTheSameTime: 5
+    maxTotalEnemies: 500
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
   lastStage:
