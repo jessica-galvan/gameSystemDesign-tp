@@ -13,13 +13,4 @@ MonoBehaviour:
   m_Name: Enemy4_EnemyData
   m_EditorClassIdentifier: 
   poolName: Enemy_Slug
-  weight: 5
-  limitAmount: 5
-  minLevel: 7
-  maxLevel: -1
-  maxLimitPerRun: 0
-  weightMultiplier: -1
-  limitAmountMultiplierWithScaleDifficulty: -1
-  healthMultiplier: -1
-  speedMultiplier: -1
-  experienceMultiplier: -1
+  id: 3

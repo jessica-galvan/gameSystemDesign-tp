@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: Enemy1_EnemyData
   m_EditorClassIdentifier: 
   poolName: Enemy_NoFace
-  weight: 10
-  limitAmount: 0
-  maxLimitPerRun: 0
+  id: 0

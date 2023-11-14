@@ -13,13 +13,4 @@ MonoBehaviour:
   m_Name: Enemy3_EnemyData
   m_EditorClassIdentifier: 
   poolName: Enemy_Bird
-  weight: 10
-  limitAmount: 2
-  minLevel: 5
-  maxLevel: -1
-  maxLimitPerRun: 0
-  weightMultiplier: -1
-  limitAmountMultiplierWithScaleDifficulty: -1
-  healthMultiplier: -1
-  speedMultiplier: -1
-  experienceMultiplier: -1
+  id: 2

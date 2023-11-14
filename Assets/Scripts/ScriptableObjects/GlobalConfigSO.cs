@@ -16,14 +16,14 @@ public class GlobalConfigSO : ScriptableObject
     public int initialPool = 10;
 
     [Header("Enemy Spawn Logic")]
-    public int maxEnemiesAtAllTimes = 10;
-    public int maxAmountPerSpawn = 5;
-    public float minSpawnTime = 0;
-    public float maxSpawnTime = 5f;
+    public float gameplayDuration = 600f;
+    public EnemyStage[] allStages = new EnemyStage[0];
+    public EnemyStage lastStage;
+    public int enemyInitialPool = 5;
     public bool respawnEnemiesWhenTooFar = true;
     [Tooltip("When not inside this area, that centers at the player's position, the enemies will be respawned")]
     public Vector2 invisibleCollision = new Vector2(5f, 10f);
-    public EnemyController[] enemySpawnDataList = new EnemyController[0];
+    public EnemyController[] allEnemies = new EnemyController[0];
 
     [Header("Overtime changes")]
     [Tooltip("Every this amount of levels, the overtime changes will be applied")]
@@ -61,23 +61,19 @@ public class GlobalConfigSO : ScriptableObject
 
     public void Initialize()
     {
-        MaxSpawnedAmount = maxAmountPerSpawn;
-        MaxEnemiesAmount = maxEnemiesAtAllTimes;
-
-        for (int i = 0; i < enemySpawnDataList.Length; i++)
+        for (int i = 0; i < allEnemies.Length; i++)
         {
-            enemySpawnDataList[i].EnemyData.Initialize();
-            enemySpawnDataList[i].Stats.Initialize();
+            allEnemies[i].Stats.Initialize();
         }
     }
 
     public void ScaleDifficulty()
     {
-        MaxSpawnedAmount += Mathf.RoundToInt(MaxSpawnedAmount * maxAmountPerSpawnMultiplier);
-        MaxEnemiesAmount += Mathf.RoundToInt(MaxEnemiesAmount * maxEnemiesAmountMultiplier);
+        //MaxSpawnedAmount += Mathf.RoundToInt(MaxSpawnedAmount * maxAmountPerSpawnMultiplier);
+        //MaxEnemiesAmount += Mathf.RoundToInt(MaxEnemiesAmount * maxEnemiesAmountMultiplier);
 
-        for (int i = 0; i < enemySpawnDataList.Length; i++)
-            enemySpawnDataList[i].ScaleUpDifficulty();
+        //for (int i = 0; i < allEnemies.Length; i++)
+        //    allEnemies[i].ScaleUpDifficulty();
     }
 
     public bool CanScaleDifficult(int currentLevel)

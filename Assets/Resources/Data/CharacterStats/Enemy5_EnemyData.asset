@@ -13,13 +13,4 @@ MonoBehaviour:
   m_Name: Enemy5_EnemyData
   m_EditorClassIdentifier: 
   poolName: Enemy_Curly
-  weight: 10
-  limitAmount: 0
-  minLevel: 1
-  maxLevel: -1
-  maxLimitPerRun: 0
-  weightMultiplier: -1
-  limitAmountMultiplierWithScaleDifficulty: -1
-  healthMultiplier: -1
-  speedMultiplier: -1
-  experienceMultiplier: -1
+  id: 4

@@ -11,23 +11,22 @@ public class PoolManager : MonoBehaviour
     [ReadOnly] public Pool<ParticleEffect> deathParticlePool;
     [ReadOnly] public Pool<ParticleEffect> manaDestructionPool;
     [ReadOnly] public Pool<ManaDrop> manaDropPool;
-    [ReadOnly] public List<Pool<EnemyController>> enemyPools = new List<Pool<EnemyController>>();
+    [ReadOnly] public Dictionary<int, Pool<EnemyController>> enemyPools = new Dictionary<int, Pool<EnemyController>>();
 
     //[ReadOnly] public Pool bulletImpactParticlePool;
 
     public void Initialize()
     {
-        for (int i = 0; i < GameManager.Instance.globalConfig.enemySpawnDataList.Length; i++)
+        for (int i = 0; i < GameManager.Instance.globalConfig.allEnemies.Length; i++)
         {
-            var enemy = GameManager.Instance.globalConfig.enemySpawnDataList[i];
-            if (!enemy.EnemyData.CanBeSpawned) continue;
-            enemy.Index = i;
-            var initialPoolAmount = enemy.EnemyData.HasMaxLimitRun ? enemy.EnemyData.MaxLimitPerRun : enemy.EnemyData.HasLimitAmount ? enemy.EnemyData.LimitAmount : GameManager.Instance.globalConfig.initialPool;
-            var name = !string.IsNullOrEmpty(enemy.EnemyData.poolName) ? enemy.EnemyData.poolName : enemy.gameObject.name;
-            var enemyPool = CreateNewPool($"Pool_{name}", enemy, initialPoolAmount, name, OnEnemyCreated);
-            enemyPools.Add(enemyPool);
-
+            var enemy = GameManager.Instance.globalConfig.allEnemies[i];
+            var enemyPool = CreateNewPool($"Pool_{name}", enemy, GameManager.Instance.globalConfig.enemyInitialPool, enemy.gameObject.name, OnEnemyCreated, initStartingSize: false);
+            enemyPools.Add(enemy.ID, enemyPool);
         }
+
+        foreach (var item in enemyPools)
+            item.Value.InstantiateSartingSize();
+
 
         playerBulletPool = CreateNewPool("PlayerBasicProjectilePool", GameManager.Instance.prefabReferences.playerBasicAttackPrefab, GameManager.Instance.globalConfig.initialPool, "PlayerBullet");
         manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab, GameManager.Instance.globalConfig.initialPool, "ManaDrop");
@@ -37,23 +36,18 @@ public class PoolManager : MonoBehaviour
         //bulletImpactParticlePool = CreateNewPool("BulletImpactParticlePool", GameManager.Instance.prefabReferences.bulletImpactParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
     }
 
-    private Pool<T> CreateNewPool<T>(string name, T prefab, int initialPoolAmount, string itemName, Action<T, Pool<T>> OnCreate = null)
+    private Pool<T> CreateNewPool<T>(string name, T prefab, int initialPoolAmount, string itemName, Action<T, Pool<T>> OnCreate = null, bool initStartingSize = true)
         where T:  MonoBehaviour, IPoolable
     {
         var container = new GameObject(name);
         Pool<T> newPool = new Pool<T>();
-        newPool.Initialize(prefab, initialPoolAmount, itemName, container.transform, OnCreate);
+        newPool.Initialize(prefab, initialPoolAmount, itemName, container.transform, OnCreate, initStartingSize);
         return newPool;
     }
 
     private void OnEnemyCreated(EnemyController enemyController, Pool<EnemyController> pool)
     {
-        for (int i = 0; i < enemyPools.Count; i++)
-        {
-            if (pool != enemyPools[i]) continue;
-            enemyController.Index = i;
-            enemyController.EnemyData.Index = i;
-        }
+
     }
 
     //TODO rethink this to work with an ID???
@@ -98,13 +92,12 @@ public class PoolManager : MonoBehaviour
 
     public void ReturnEnemy(EnemyController enemy)
     {
-        var index = GameManager.Instance.enemyManager.GetEnemyIndex(enemy);
-        if (enemyPools.Count > index ) 
-            enemyPools[index].BackToPool(enemy);
+        if(enemyPools.TryGetValue(enemy.ID, out var enemyPool))
+            enemyPool.BackToPool(enemy);
         else
         {
+            Debug.LogError($"{enemy.gameObject.name} doesn't seem to havxe a pool");
             enemy.gameObject.SetActive(false);
-            Debug.LogError($"{enemy.gameObject.name} doesn't seem to have a pool");
         }
     }
 

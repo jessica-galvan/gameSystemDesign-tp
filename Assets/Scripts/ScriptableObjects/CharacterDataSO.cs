@@ -55,4 +55,16 @@ public class CharacterDataSO : ScriptableObject
     {
         Experience = experience;
     }
+
+    public void Reset(bool maxLifeReset = false, bool experienceReset = false, bool speedReset = false)
+    {
+        if (maxLifeReset)
+            MaxLife = this.maxLife;
+
+        if (speedReset)
+            Experience = this.experience;
+
+        if (speedReset)
+            MovementSpeed = this.movementSpeed;
+    }
 }

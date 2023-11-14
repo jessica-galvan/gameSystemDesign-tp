@@ -13,13 +13,4 @@ MonoBehaviour:
   m_Name: Enemy6_EnemyData
   m_EditorClassIdentifier: 
   poolName: Enemy_LittlePoop
-  weight: 5
-  limitAmount: 5
-  minLevel: 2
-  maxLevel: 10
-  maxLimitPerRun: 0
-  weightMultiplier: -1
-  limitAmountMultiplierWithScaleDifficulty: -1
-  healthMultiplier: -1
-  speedMultiplier: -1
-  experienceMultiplier: -1
+  id: 5

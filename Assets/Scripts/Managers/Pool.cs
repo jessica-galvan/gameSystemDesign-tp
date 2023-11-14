@@ -11,6 +11,8 @@ public class Pool<T>  where T : MonoBehaviour, IPoolable
     private List<T> allItems = new List<T>();
     private List<T> availableItems = new List<T>();
     private string itemName;
+    private int startingSize;
+
 
     public int ActiveAmount => allItems.Count - availableItems.Count;
     public int AllItems => allItems.Count;
@@ -18,13 +20,20 @@ public class Pool<T>  where T : MonoBehaviour, IPoolable
     public Action<T, Pool<T>> OnCreate;
 
 
-    public void Initialize(T prefab,  int startingSize, string itemName, Transform parent = null, Action<T, Pool<T>> OnCreate = null)
+    public void Initialize(T prefab,  int startingSize, string itemName, Transform parent = null, Action<T, Pool<T>> OnCreate = null, bool initStartingSize = true)
     {
         this.prefab = prefab;
         this.itemName = itemName;
         this.OnCreate = OnCreate;
         this.parent = parent;
+        this.startingSize = startingSize;
 
+        if (initStartingSize)
+            InstantiateSartingSize();
+    }
+
+    public void InstantiateSartingSize()
+    {
         for (int i = 0; i < startingSize; i++)
         {
             var item = InstantiateObject();
@@ -32,7 +41,6 @@ public class Pool<T>  where T : MonoBehaviour, IPoolable
             availableItems.Add(item);
         }
     }
-
 
     public T Spawn()
     {

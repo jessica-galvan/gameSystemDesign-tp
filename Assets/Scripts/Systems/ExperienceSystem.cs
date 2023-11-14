@@ -70,8 +70,8 @@ public class ExperienceSystem : MonoBehaviour
 
     private void ScaleUpDifficulty()
     {
-        print("Difficulty scaled");
-        GameManager.Instance.globalConfig.ScaleDifficulty();
+        //print("Difficulty scaled");
+        //GameManager.Instance.globalConfig.ScaleDifficulty();
     }
 
     private float GetNextLevelExp()
