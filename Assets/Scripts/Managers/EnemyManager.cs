@@ -8,7 +8,9 @@ public class EnemyStage
     [Tooltip("The range is between 0 and 1, taking into account the per")]
     [Range(0f, 1f)] public float startTime = 0f;
     public List<EnemyData> allEnemyData;
+    [Tooltip("The max number of enemies that can be spawned in one go")]
     public int maxSpawnedAtTheSameTime;
+    [Tooltip("The max number of enemies that can be alive at the same time")]
     public int maxTotalEnemies;
     public float minSpawnWaitTime = 0.5f;
     public float maxSpawnWaitTime = 1f;
@@ -114,7 +116,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         canSpawnEnemies = true;
         GameManager.Instance.updateManager.uncappedCustomUpdate.Add(this);
 
-        for (int i = 0; i < GameManager.Instance.globalConfig.allStages.Length; i++)
+        for (int i = 0; i < GameManager.Instance.globalConfig.allEnemies.Length; i++)
             totalAmountSpawnedOfEachEnemy.Add(0);
 
         ChangeStage(0);
@@ -202,7 +204,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             if (!TryGetEnemyTypeToSpawn(out int enemyIndex)) break;
 
             var enemy = GameManager.Instance.poolManager.GetEnemy(enemyIndex);
-            enemy.Spawn(GetSpawnPos());
+            enemy.Spawn(GetSpawnPos(true));
 
             RefreshSpawnableList();
 
@@ -271,6 +273,9 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private bool HasSpaceToSpawnEnemy()
     {
+        if (currentStage.maxTotalEnemies == 0)
+            return true;
+
         return currentEnemyQuantitySpawned < currentStage.maxTotalEnemies;
     }
 

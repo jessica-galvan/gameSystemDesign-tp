@@ -27,6 +27,7 @@ public class GameOverPanel : Panel
     public override void Open()
     {
         base.Open();
+        GameManager.Instance.gameplayUIManager.hudManager.Close();
         //audioManager.PlaySFXSound(soundReferences.GameOver);
     }
 

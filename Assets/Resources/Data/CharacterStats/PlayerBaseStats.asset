@@ -20,6 +20,6 @@ MonoBehaviour:
   takeDamageRecolorTime: 0.2
   takeDamageColor: {r: 0.8679245, g: 0.69324785, b: 0.69324785, a: 0.7294118}
   canBeKockedBack: 0
-  movementSpeed: 300
+  movementSpeed: 200
   predictionTime: 100
   minDistanceFromPlayer: 0.5

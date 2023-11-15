@@ -138,13 +138,6 @@ public class PlayerModel : BaseCharacterModel
     {
         if (collision.TryGetComponent<ICollectable>(out var collectable))
             collectable.PickUp();
-
-        if (CanTakeDamage)
-        {
-            if (collision.gameObject.TryGetComponent<IDamage>(out var idamage))
-                TakeDamage((int)idamage.AttackData.Damage);
-        }
-
     }
 
     public void SetNewSpeed(float newSpeed)
