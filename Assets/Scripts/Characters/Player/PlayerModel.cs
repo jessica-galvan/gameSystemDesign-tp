@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class PlayerModel : BaseCharacterModel
 {
-    public ProjectileType basicAttack;
+    [ReadOnly] public ProjectileType basicAttack;
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
     private int currentUnlockedAbilities = 0;
 
     public Gradient gradientTest;
-    public float widthTest = 5f, speedTest = 5f, radiusTest = 5f; 
+    public float widthTest = 5f, speedTest = 5f, radiusTest = 5f;
 
-    private float cooldownShootTimer = 0f;
+    [SerializeField, ReadOnly] private float cooldown = 0;
+    [SerializeField, ReadOnly] private float cooldownShootTimer = 0f;
 
     [Header("Info")]
     [SerializeField, ReadOnly] private bool isMoving;
@@ -26,6 +27,7 @@ public class PlayerModel : BaseCharacterModel
     {
         base.Initialize(stats);
 
+        cooldown = GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown;
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
         CanShoot = true;
     }
@@ -82,7 +84,7 @@ public class PlayerModel : BaseCharacterModel
         cooldownShootTimer += Time.deltaTime;
 
         //TODO rethink this for the ability cooldown
-        if (cooldownShootTimer >= GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown)
+        if (cooldownShootTimer >= cooldown)
             CanShoot = true;
     }
 
@@ -143,6 +145,11 @@ public class PlayerModel : BaseCharacterModel
     public void SetNewSpeed(float newSpeed)
     {
         baseStats.ChangeSpeed(newSpeed);
+    }
+
+    public void SetNewBaseAttackCooldown(float newCooldown)
+    {
+        cooldown = newCooldown;
     }
 
     public override void TakeDamage(int damage)

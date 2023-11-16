@@ -29,10 +29,9 @@ public class RandomWeight<T> where T : IWeight
     {
         index = 0;
         int total = 0;
+
         foreach (var item in items)
-        {
             total += item.Weight;
-        }
 
         int random = Random.Range(0, total + 1);
 

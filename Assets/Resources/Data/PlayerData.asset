@@ -17,3 +17,5 @@ MonoBehaviour:
   maxPowerUpSelection: 3
   maxAbilitySelection: 2
   canCheat: 1
+  startingRequiredExp: 100
+  experienceGrowth: 1.5

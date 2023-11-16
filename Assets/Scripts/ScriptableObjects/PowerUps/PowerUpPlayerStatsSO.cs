@@ -10,7 +10,9 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
         Mana,
         Life,
         Speed,
-        ExperienceMultiplier
+        ExperienceMultiplier,
+        BaseAttackCooldown,
+        BaseAttackDamage,
     }
     [TextArea, SerializeField] private string description = "Add a description here";
     [SerializeField] private Stats statsToModify;
@@ -48,6 +50,14 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
             case Stats.ExperienceMultiplier:
                 var newExperience = NewValue(GameManager.Instance.experienceSystem.ExperienceMultiplier);
                 GameManager.Instance.experienceSystem.SetNexExperienceMultiplier(newExperience);
+                break;
+            case Stats.BaseAttackDamage:
+                Debug.Assert(multiplier > 0, "Attack Damage can only be multiplied");
+                GameManager.Instance.prefabReferences.playerBasicAttackPrefab.attackData.PowerUp(multiplier);
+                break;
+            case Stats.BaseAttackCooldown:
+                var newCooldown = NewValue(GameManager.Instance.experienceSystem.ExperienceMultiplier);
+                GameManager.Instance.Player.SetNewBaseAttackCooldown(newCooldown);
                 break;
             default:
                 break;

@@ -58,7 +58,7 @@ public class PlayerController : BaseCharacterController<PlayerModel>
             Model.LifeController.SetInivincibility(!Model.LifeController.Invincible);
 
         if (GameManager.Instance.Input.Cheats.LevelUp.WasPerformedThisFrame())
-            GameManager.Instance.experienceSystem.AddExperience(GameManager.Instance.experienceSystem.GetExpNeedForNextLeve());
+            GameManager.Instance.experienceSystem.AddExperience(GameManager.Instance.experienceSystem.GetExpNeedForNextLeve(), false);
     }
 
     public override void FixedRefresh()

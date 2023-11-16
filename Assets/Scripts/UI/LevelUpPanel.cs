@@ -78,6 +78,8 @@ public class LevelUpPanel : Panel
 
     public override void Open()
     {
+        if (!GameManager.Instance.Player.CanUnlockAbility() && !ScriptableObjectManager.Instance.HasPowerUpsToUnlock(GameManager.Instance.playerData.maxPowerUpSelection)) return;
+
         canvasGroup.alpha = 0;
         base.Open();
 
@@ -92,11 +94,12 @@ public class LevelUpPanel : Panel
 
     private void SetUpSelection()
     {
+        optionSelected = false;
         currentAbilities.Clear();
         currentPowerUps.Clear();
 
         var currentLevel = GameManager.Instance.experienceSystem.CurrentLevel - (GameManager.Instance.experienceSystem.AmountLeveledUp + currentAmountSelected);
-        isPowerUpSelection = !IsAbilitySelection(currentLevel);
+        isPowerUpSelection = GameManager.Instance.Player.CanUnlockAbility() && !IsAbilitySelection(currentLevel);
 
         SetOptions();
     }
@@ -114,7 +117,7 @@ public class LevelUpPanel : Panel
         }
 
         SetOptionsEnabled(true);
-        buttons[0].Button.Select();
+        //buttons[0].Button.Select();
     }
 
     public override void Close()
@@ -180,6 +183,6 @@ public class LevelUpPanel : Panel
 
     public bool IsAbilitySelection(float currentLevel)
     {
-        return currentLevel % 3 == 0;
+        return currentLevel % 3 == 0 && ScriptableObjectManager.Instance.AllUnlockableAbilities.Count >  GameManager.Instance.playerData.maxAbilitySelection;
     }
 }

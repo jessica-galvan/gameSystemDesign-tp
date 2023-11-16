@@ -12,5 +12,8 @@ public class PlayerDataSO : ScriptableObject
     public int maxPowerUpSelection = 3;
     public int maxAbilitySelection = 2;
     public bool canCheat = false;
-    public float experiencesModifier = 10f;
+
+    [Header("Experience")]
+    public float startingRequiredExp = 100f;
+    public float experienceGrowth = 2;
 }

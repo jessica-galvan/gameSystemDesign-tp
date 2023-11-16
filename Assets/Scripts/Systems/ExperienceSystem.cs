@@ -6,10 +6,11 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public class ExperienceSystem : MonoBehaviour
 {
-    [ReadOnly] private float currentXP;
-    [ReadOnly] private float requiredXP;
-    [ReadOnly] private int currentLevel = 0;
-    [ReadOnly] private float experienceMultiplier = 1;
+    [ReadOnly, SerializeField] private float currentXP;
+    [ReadOnly, SerializeField] private float requiredXP;
+    [ReadOnly, SerializeField] private int currentLevel = 0;
+    [ReadOnly, SerializeField] private float experienceMultiplier = 1;
+    [ReadOnly, SerializeField] private float totalExperienceGained = 0;
 
     public float ExperienceMultiplier => experienceMultiplier;
     public float CurrentT { get; private set; }
@@ -29,15 +30,20 @@ public class ExperienceSystem : MonoBehaviour
     public void Initialize()
     {
         currentLevel = 1;
-        requiredXP = GetNextLevelExp();
+        requiredXP = GameManager.Instance.playerData.startingRequiredExp;
         currentXP = 0;
         RecalculateCurrentT();
     }
 
-    public void AddExperience(float xp)
+    public void AddExperience(float xp, bool withBonusMultiplier = true)
     {
         if (GameManager.Instance.globalConfig.HasLevelCap && currentLevel > GameManager.Instance.globalConfig.maxLevelCap) return;
-        currentXP += (xp * experienceMultiplier);
+
+        if (withBonusMultiplier)
+            xp += (xp * experienceMultiplier);
+        
+        currentXP += xp;
+        totalExperienceGained += xp;
 
         if (currentXP >= requiredXP)
             LevelUp();
@@ -51,18 +57,18 @@ public class ExperienceSystem : MonoBehaviour
 
         while (currentXP >= requiredXP)
         {
+            currentLevel++;
             AmountLeveledUp++;
 
-            if (GameManager.Instance.globalConfig.CanScaleDifficult(currentLevel + AmountLeveledUp))
+            if (GameManager.Instance.globalConfig.CanScaleDifficult(currentLevel))
                 ScaleUpDifficulty();
 
             currentXP = Mathf.Abs(requiredXP - currentXP);
             requiredXP = GetNextLevelExp();
+            print($"Required XP for level {currentLevel}: {requiredXP}");
         }
 
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
-
-        currentLevel += AmountLeveledUp;
 
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.levelUpSound);
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);
@@ -76,8 +82,9 @@ public class ExperienceSystem : MonoBehaviour
 
     private float GetNextLevelExp()
     {
-        var experienceModifier = GameManager.Instance.playerData.experiencesModifier;
-        return currentLevel / experienceModifier + currentLevel % experienceModifier *  100f * Mathf.Pow(experienceModifier, currentLevel / experienceModifier);
+        return Mathf.Round(requiredXP + Mathf.Abs((requiredXP * currentLevel * Mathf.Log(GameManager.Instance.playerData.experienceGrowth, currentLevel))));
+        //return Mathf.Sqrt(experienceModifier * (power * totalExperienceGained + 25) + 50) / 100;
+        //return (currentLevel ^ power + currentLevel) / power * experienceModifier - (currentLevel * experienceModifier); 
     }
 
     private void RecalculateCurrentT()
