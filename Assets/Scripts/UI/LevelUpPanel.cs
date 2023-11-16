@@ -13,6 +13,7 @@ public class LevelUpPanel : Panel
     [SerializeField] private PowerUpButton powerButtonPrefab;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float fadeDuration = 2f;
+    [ReadOnly, SerializeField] private int currentLevel = 1;
 
     [Header("Info")]
     [SerializeField, ReadOnly] private bool optionSelected = false, isPowerUpSelection = false;
@@ -49,8 +50,6 @@ public class LevelUpPanel : Panel
         if (optionSelected) return;
         optionSelected = true;
 
-        currentAmountSelected++;
-
         Debug.Log($"Selected {button.CurrentOption.Title}");
 
         if (button.CurrentOption is AbilityDataSO)
@@ -79,7 +78,7 @@ public class LevelUpPanel : Panel
     public override void Open()
     {
         if (!GameManager.Instance.Player.CanUnlockAbility() && !ScriptableObjectManager.Instance.HasPowerUpsToUnlock(GameManager.Instance.playerData.maxPowerUpSelection)) return;
-
+        currentLevel++;
         canvasGroup.alpha = 0;
         base.Open();
 
@@ -97,8 +96,8 @@ public class LevelUpPanel : Panel
         optionSelected = false;
         currentAbilities.Clear();
         currentPowerUps.Clear();
-
-        var currentLevel = GameManager.Instance.experienceSystem.CurrentLevel - (GameManager.Instance.experienceSystem.AmountLeveledUp + currentAmountSelected);
+        currentAmountSelected++;
+        var currentLevel = GameManager.Instance.experienceSystem.CurrentLevel - GameManager.Instance.experienceSystem.AmountLeveledUp + currentAmountSelected;
         isPowerUpSelection = GameManager.Instance.Player.CanUnlockAbility() && !IsAbilitySelection(currentLevel);
 
         SetOptions();
@@ -183,6 +182,6 @@ public class LevelUpPanel : Panel
 
     public bool IsAbilitySelection(float currentLevel)
     {
-        return currentLevel % 3 == 0 && ScriptableObjectManager.Instance.AllUnlockableAbilities.Count >  GameManager.Instance.playerData.maxAbilitySelection;
+        return (currentLevel % GameManager.Instance.playerData.unlockAbilityEveryAmountLevels) == 0 && ScriptableObjectManager.Instance.AllUnlockableAbilities.Count >=  GameManager.Instance.playerData.maxAbilitySelection;
     }
 }

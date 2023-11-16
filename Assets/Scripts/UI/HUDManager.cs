@@ -111,4 +111,24 @@ public class HUDManager : Panel, IUpdate
 
         ability.SetAbility(abilityData, currentIndex);
     }
+
+    public void UpdateManaCostAbility(AbilityDataSO abilityData)
+    {
+        var ability = GetAbilityUI(abilityData);
+
+        if (ability == null) return;
+        ability.UpdateManaCost();
+    }
+
+    private AbilityUI GetAbilityUI(AbilityDataSO abilityData)
+    {
+        for (int i = 0; i < abilityUIList.Count; i++)
+        {
+            if (abilityData != abilityUIList[i].AbilityData) continue;
+            return abilityUIList[i];
+        }
+
+        Debug.LogError($"Trying to get the AbilityUI for {abilityData.name} but nothing was found ");
+        return null;
+    }
 }

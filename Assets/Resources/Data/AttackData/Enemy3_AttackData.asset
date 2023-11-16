@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Enemy3_AttackData
   m_EditorClassIdentifier: 
   damage: 5
-  applyKnockback: 1
+  applyKnockback: 0
   force: 0

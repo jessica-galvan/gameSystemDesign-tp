@@ -22,6 +22,7 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
 
     public void Initialize()
     {
+        attackData.Initialize();
         body = GetComponent<Rigidbody2D>();
         transform.position = Vector2.zero;
     }
@@ -47,10 +48,10 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
             if(attackData.force > 0)
             {
                 var knockback = direction.normalized * attackData.force;
-                damagable.TakeDamage(attackData.damage, knockback); //TODO: add multipliers
+                damagable.TakeDamage(attackData.Damage, knockback); //TODO: add multipliers
             }
             else
-                damagable.TakeDamage(attackData.damage); //TODO: add multipliers
+                damagable.TakeDamage(attackData.Damage); //TODO: add multipliers
 
         }
 

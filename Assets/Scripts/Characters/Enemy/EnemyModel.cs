@@ -39,9 +39,21 @@ public class EnemyModel : BaseCharacterModel, IDamage
         SetVisualTakeDamage(false);
     }
 
-    public override void TakeDamage(int damage)
+
+    public override void TakeDamage(int damage, bool ignoreCooldown = true)
     {
-        base.TakeDamage(damage);
+        if (!CanTakeDamage && !ignoreCooldown) return;
+
+        base.TakeDamage(damage, ignoreCooldown);
+
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.enemyTakeDamageSound);
+    }
+
+    public override void TakeDamage(int damage, Vector2 knockback,  bool ignoreCooldown = true)
+    {
+        if (!CanTakeDamage && !ignoreCooldown) return;
+
+        base.TakeDamage(damage, knockback, ignoreCooldown);
 
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.enemyTakeDamageSound);
     }

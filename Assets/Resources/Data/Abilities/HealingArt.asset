@@ -15,8 +15,8 @@ MonoBehaviour:
   title: Healing Arts
   icon: {fileID: 1643539559, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   description: A short spell that will instantly heal you
-  cooldown: 4
-  manaCost: 5
+  cooldown: 10
+  manaCost: 20
   weight: 10
   sfx: {fileID: 8300000, guid: 90dcaaa72912c6b48be35ca2f03d8e81, type: 3}
   actions:

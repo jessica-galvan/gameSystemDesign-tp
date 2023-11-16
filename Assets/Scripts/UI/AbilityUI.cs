@@ -78,11 +78,16 @@ public class AbilityUI : MonoBehaviour
 
         SetAbilityAsEnable(true);
 
-        txtManaCost.SetText(abilityData.manaCost.ToString());
         imgKey.sprite = GameManager.Instance.globalConfig.keyAbilitiesSprite[index];
         imgIcon.sprite = abilityData.icon;
+        UpdateManaCost();
 
         CheckStatus(force: true);
+    }
+
+    public void UpdateManaCost()
+    {
+        txtManaCost.SetText(abilityData.manaCost.ToString());
     }
 
     private void UpdateTimer(float currentTime)

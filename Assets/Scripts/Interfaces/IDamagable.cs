@@ -7,8 +7,8 @@ public interface IDamagable
     public LifeController LifeController { get; }
     public bool Alive { get; }
 
-    void TakeDamage(int damage);
-    void TakeDamage(int damage, Vector2 direction);
+    void TakeDamage(int damage, bool ignoreCooldown = true);
+    void TakeDamage(int damage, Vector2 direction, bool ignoreCooldown = true);
 }
 
 public interface IDamage

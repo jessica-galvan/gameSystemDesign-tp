@@ -87,7 +87,7 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 0
-    maxTotalEnemies: 0
+    maxTotalEnemies: 200
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
   - startTime: 0.5
@@ -120,7 +120,7 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 5
-    maxTotalEnemies: 500
+    maxTotalEnemies: 300
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
   - startTime: 0.7
@@ -159,7 +159,7 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 0
-    maxTotalEnemies: 0
+    maxTotalEnemies: 400
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
   lastStage:

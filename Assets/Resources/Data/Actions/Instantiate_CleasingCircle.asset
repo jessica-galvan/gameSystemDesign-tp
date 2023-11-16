@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Instantiate_CleasingCircle
   m_EditorClassIdentifier: 
   objectToInstantiate: {fileID: 4021260704073861571, guid: 043e57c67dc5440479c531e291800e3b, type: 3}
-  isProjectile: 0
+  itemName: 
   useMouseDirection: 0
   baseAmount: 1
   minDistanteFromPlayer: 0
-  maxDistanteFromPlayer: 5
+  maxDistanteFromPlayer: 0
   directions: []
+  isProjectile: 0
+  canDamage: 1

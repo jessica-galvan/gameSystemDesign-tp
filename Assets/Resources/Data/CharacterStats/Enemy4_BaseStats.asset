@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bfa8bcb0691224a95db76ee419314a, type: 3}
   m_Name: Enemy4_BaseStats
   m_EditorClassIdentifier: 
-  maxLife: 2
+  maxLife: 8
   radius: 2
-  damage: 1
-  experience: 100
-  takeDamageCooldown: 0
+  damage: 3
+  experience: 150
+  takeDamageCooldown: 0.5
   takeDamageRecolorTime: 0.5
   takeDamageColor: {r: 0.74509805, g: 0.5254902, b: 0.5254902, a: 1}
   canBeKockedBack: 1

@@ -16,8 +16,8 @@ MonoBehaviour:
   icon: {fileID: 165037031, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   description: "Creates a area that damages all evil when they enter. \nWill dissapear
     after some time"
-  cooldown: 2.187
-  manaCost: 5
+  cooldown: 8
+  manaCost: 10
   weight: 10
   sfx: {fileID: 8300000, guid: 53b64bb58f1c9ec44901fbe3b3e0dd17, type: 3}
   actions:

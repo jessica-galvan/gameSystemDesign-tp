@@ -147,12 +147,12 @@ public class PlayerModel : BaseCharacterModel
         baseStats.ChangeSpeed(newSpeed);
     }
 
-    public void SetNewBaseAttackCooldown(float newCooldown)
+    public void ReduceCooldown(float cooldownMultiplier)
     {
-        cooldown = newCooldown;
+        cooldown = cooldown - (cooldown * cooldownMultiplier);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool ignoreCooldown = true)
     {
         if (!CanTakeDamage) return;
         base.TakeDamage(damage);

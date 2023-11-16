@@ -26,10 +26,10 @@ public class DamageArea : MonoBehaviour, IDamage
             Die();
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
-        if(MiscUtils.IsInLayerMask(collision.gameObject.layer, targets) && collision.TryGetComponent<IDamagable>(out var damagable))
-            damagable.TakeDamage(attackSO.damage);
+        if (MiscUtils.IsInLayerMask(collision.gameObject.layer, targets) && collision.TryGetComponent<IDamagable>(out var damagable))
+            damagable.TakeDamage(attackSO.damage, ignoreCooldown: false);
     }
 
     private void Die()

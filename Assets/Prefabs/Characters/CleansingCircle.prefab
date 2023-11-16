@@ -4930,7 +4930,7 @@ MonoBehaviour:
   targets:
     serializedVersion: 2
     m_Bits: 256
-  attackSO: {fileID: 11400000, guid: e6bdd6a9d68286e4e98bbab78b9a8bf1, type: 2}
+  attackSO: {fileID: 11400000, guid: 2bc702d611b660f4faf505aa793f03ff, type: 2}
   timeAlive: 10
 --- !u!1 &8771195145265968162
 GameObject:

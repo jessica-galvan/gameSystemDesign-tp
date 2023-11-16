@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Wind Push
   icon: {fileID: 1932835989, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
-  description: All enemies are push back, giving you a small breather
-  cooldown: 2
+  description: All enemies are push back and a small damaged is applied, giving you
+    a small breather
+  cooldown: 3
   manaCost: 5
   weight: 10
   sfx: {fileID: 8300000, guid: f3854719ca2c39a4c8d34d7fc6bb9aff, type: 3}

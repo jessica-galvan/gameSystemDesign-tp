@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cffe56f5bcf1a94fa99bce8fef676db, type: 3}
   m_Name: Enemy5_AttackData
   m_EditorClassIdentifier: 
-  damage: 5
-  applyKnockback: 1
+  damage: 2
+  applyKnockback: 0
   force: 0

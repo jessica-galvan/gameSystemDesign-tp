@@ -20,6 +20,6 @@ public class AttackDataSO : ScriptableObject
     public void PowerUp(float attackMultiplier)
     {
         if(attackMultiplier > 0)
-            Damage = Mathf.RoundToInt(Damage * attackMultiplier);
+            Damage += Mathf.RoundToInt(Damage * attackMultiplier);
     }
 }

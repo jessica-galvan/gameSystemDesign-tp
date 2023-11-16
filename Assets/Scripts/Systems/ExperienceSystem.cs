@@ -11,6 +11,7 @@ public class ExperienceSystem : MonoBehaviour
     [ReadOnly, SerializeField] private int currentLevel = 0;
     [ReadOnly, SerializeField] private float experienceMultiplier = 1;
     [ReadOnly, SerializeField] private float totalExperienceGained = 0;
+    [ReadOnly, SerializeField] private int killedEnemiesThisLevel = 0;
 
     public float ExperienceMultiplier => experienceMultiplier;
     public float CurrentT { get; private set; }
@@ -39,6 +40,8 @@ public class ExperienceSystem : MonoBehaviour
     {
         if (GameManager.Instance.globalConfig.HasLevelCap && currentLevel > GameManager.Instance.globalConfig.maxLevelCap) return;
 
+        killedEnemiesThisLevel++;
+
         if (withBonusMultiplier)
             xp += (xp * experienceMultiplier);
         
@@ -65,10 +68,12 @@ public class ExperienceSystem : MonoBehaviour
 
             currentXP = Mathf.Abs(requiredXP - currentXP);
             requiredXP = GetNextLevelExp();
-            print($"Required XP for level {currentLevel}: {requiredXP}");
+            print($"Required XP for level {currentLevel}: {requiredXP}. Killed Enemies: {killedEnemiesThisLevel}");
         }
 
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
+
+        killedEnemiesThisLevel = 0;
 
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.levelUpSound);
         GameManager.Instance.gameplayUIManager.LevelUp(currentLevel);

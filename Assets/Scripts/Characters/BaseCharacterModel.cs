@@ -80,7 +80,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
         //flipX = dir.x > 0.1f;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, bool ignoreCooldown = true)
     {
         if (!CanTakeDamage) return;
 
@@ -114,7 +114,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector2 direction)
+    public virtual void TakeDamage(int damage, Vector2 direction, bool ignoreCooldown = true)
     {
         if (!CanTakeDamage) return;
 

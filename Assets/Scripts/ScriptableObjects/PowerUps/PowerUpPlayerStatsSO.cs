@@ -26,7 +26,7 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
         if (add > 0)
             description = string.Format(description, add);
         else if (multiplier > 0)
-            description = string.Format(description, multiplier * 10);
+            description = string.Format(description, multiplier * 100);
     }
 
     public override void Execute()
@@ -56,8 +56,8 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
                 GameManager.Instance.prefabReferences.playerBasicAttackPrefab.attackData.PowerUp(multiplier);
                 break;
             case Stats.BaseAttackCooldown:
-                var newCooldown = NewValue(GameManager.Instance.experienceSystem.ExperienceMultiplier);
-                GameManager.Instance.Player.SetNewBaseAttackCooldown(newCooldown);
+                Debug.Assert(multiplier > 0, "Attack Damage can only be multiplied");
+                GameManager.Instance.Player.ReduceCooldown(multiplier);
                 break;
             default:
                 break;
