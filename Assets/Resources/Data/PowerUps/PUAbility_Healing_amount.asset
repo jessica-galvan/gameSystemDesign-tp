@@ -20,5 +20,5 @@ MonoBehaviour:
   action: {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
   cooldownMultiplier: 0
   manaCostMultiplier: 0
-  amountMultiplier: 0.1
+  amountMultiplier: 0.2
   attackMultiplier: 0

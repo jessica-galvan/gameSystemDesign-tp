@@ -69,7 +69,7 @@ public class PowerUpAbilitySO : BasePowerUpSO
 
         if(manaCostMultiplier != 0)
         {
-            abilityData.ManaCost = abilityData.ManaCost - (int)(abilityData.ManaCost * manaCostMultiplier);
+            abilityData.ManaCost = Mathf.RoundToInt(abilityData.ManaCost - (abilityData.ManaCost * manaCostMultiplier));
             GameManager.Instance.gameplayUIManager.hudManager.UpdateManaCostAbility(AbilityData);
         }
     }

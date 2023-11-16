@@ -87,7 +87,7 @@ public class AbilityUI : MonoBehaviour
 
     public void UpdateManaCost()
     {
-        txtManaCost.SetText(abilityData.manaCost.ToString());
+        txtManaCost.SetText(abilityData.ManaCost.ToString());
     }
 
     private void UpdateTimer(float currentTime)
