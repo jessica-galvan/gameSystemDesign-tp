@@ -24,7 +24,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.5
+      probabilityOfDrop: 0.7
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 10
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 100
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 3
@@ -128,10 +128,10 @@ MonoBehaviour:
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 10
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 200
-    minSpawnWaitTime: 0
-    maxSpawnWaitTime: 0
+    minSpawnWaitTime: 0.5
+    maxSpawnWaitTime: 3
   - startTime: 0.5
     allEnemyData: []
     maxSpawnedAtTheSameTime: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
     maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 300
     minSpawnWaitTime: 0.5
-    maxSpawnWaitTime: 5
+    maxSpawnWaitTime: 4
   - startTime: 0.7
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
@@ -206,7 +206,7 @@ MonoBehaviour:
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 10
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 400
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 3
@@ -242,7 +242,7 @@ MonoBehaviour:
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 0
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 400
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
@@ -288,10 +288,10 @@ MonoBehaviour:
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 0
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 500
     minSpawnWaitTime: 0.5
-    maxSpawnWaitTime: 5
+    maxSpawnWaitTime: 3
   lastStage:
     startTime: 1
     allEnemyData:

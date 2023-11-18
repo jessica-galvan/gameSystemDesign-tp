@@ -28,7 +28,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public CharacterDataSO BaseStats => baseStats;
     public Animator Animator => animator;
     public float Speed => baseStats.MovementSpeed;
-    public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible;
+    public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible && Alive;
 
     public virtual void Initialize(CharacterDataSO stats)
     {

@@ -152,7 +152,16 @@ public class PlayerModel : BaseCharacterModel
     public override void TakeDamage(int damage, bool ignoreCooldown = true)
     {
         if (!CanTakeDamage) return;
+        Debug.Log($"Player takes damage {damage}. CurrentLife: {LifeController.CurrentLife}");
         base.TakeDamage(damage);
+        GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerTakeDamageSound);
+    }
+
+    public override void TakeDamage(int damage, Vector2 direction, bool ignoreCooldown = true)
+    {
+        if (!CanTakeDamage) return;
+        Debug.Log($"Player takes damage {damage}. CurrentLife: {LifeController.CurrentLife}");
+        base.TakeDamage(damage, direction, ignoreCooldown);
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerTakeDamageSound);
     }
 }
