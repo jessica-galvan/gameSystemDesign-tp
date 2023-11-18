@@ -13,7 +13,10 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
         ExperienceMultiplier,
         BaseAttackCooldown,
         BaseAttackDamage,
+        BaseAttackRange,
+        BaseAttackSpeed,
     }
+
     [TextArea, SerializeField] private string description = "Add a description here";
     [SerializeField] private Stats statsToModify;
     [SerializeField] private float add = 0;
@@ -57,10 +60,18 @@ public class PowerUpPlayerStatsSO : BasePowerUpSO
                 break;
             case Stats.BaseAttackCooldown:
                 Debug.Assert(multiplier > 0, "Attack Damage can only be multiplied");
-                GameManager.Instance.Player.ReduceCooldown(multiplier);
+                GameManager.Instance.Player.ProjectileData.ReduceCooldown(multiplier);
+                break;
+            case Stats.BaseAttackRange:
+                Debug.Assert(multiplier > 0, "Attack Range can only be multiplied");
+                GameManager.Instance.Player.ProjectileData.PowerUpTimeAlive(multiplier);
+                break;
+            case Stats.BaseAttackSpeed:
+                Debug.Assert(multiplier > 0, "Attack Range can only be multiplied");
+                GameManager.Instance.Player.ProjectileData.PowerUpSpeed(multiplier);
                 break;
             default:
-                break;
+                break; 
         }
     }
 

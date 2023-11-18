@@ -75,32 +75,35 @@ public class CameraController : MonoBehaviour
         maxRandom = allSpawnPoints.Count - 1;
     }
 
-    public Vector2 GetSpawnPoint(Vector2 direction, bool extraRandom)
+    public Vector2 GetSpawnPoint(Vector2 direction, bool extraRandom, bool isCompletlyRandom = false)
     {
-        Vector2Int dir = new Vector2Int((int)direction.x, (int)direction.y);
-        if (spawnPoints.TryGetValue(dir, out List<Transform> points))
+        if (!isCompletlyRandom)
         {
-            var random = Random.Range(0, points.Count - 1);
-            var position = points[random].position;
-
-            if (extraRandom)
+            Vector2Int dir = new Vector2Int((int)direction.x, (int)direction.y);
+            if (spawnPoints.TryGetValue(dir, out List<Transform> points))
             {
-                if (direction.x != 0)
+                var random = Random.Range(0, points.Count - 1);
+                var position = points[random].position;
+
+                if (extraRandom)
                 {
-                    var area = GameManager.Instance.globalConfig.invisibleCollision.y / 2 - 1;
-                    var newY = Mathf.Clamp(Random.Range(-area, area) + position.y, -area, area);
-                    position.y = newY;
+                    if (direction.x != 0)
+                    {
+                        var area = GameManager.Instance.globalConfig.invisibleCollision.y / 2 - 1;
+                        var newY = Mathf.Clamp(Random.Range(-area, area) + position.y, -area, area);
+                        position.y = newY;
+                    }
+
+                    if (direction.y != 0)
+                    {
+                        var area = GameManager.Instance.globalConfig.invisibleCollision.x / 2 - 1;
+                        var newY = Mathf.Clamp(Random.Range(-area, area) + position.x, -area, area);
+                        position.x = newY;
+                    }
                 }
 
-                if(direction.y != 0)
-                {
-                    var area = GameManager.Instance.globalConfig.invisibleCollision.x / 2 - 1;
-                    var newY = Mathf.Clamp(Random.Range(-area, area) + position.x, -area, area);
-                    position.x = newY;
-                }
+                return position;
             }
-
-            return position;
         }
 
         return GetRandomDirection();
@@ -116,6 +119,16 @@ public class CameraController : MonoBehaviour
     {
         var mousePos = Mouse.current.position.ReadValue();
         return main.ScreenToWorldPoint(mousePos);
+    }
+
+    public bool IsInsideFrustrum(Vector3 currentPos)
+    {
+        Vector3 distance = transform.position - currentPos;
+        distance = new Vector3(Mathf.Abs(distance.x), Mathf.Abs(distance.y), 0f);
+        bool xDistance = distance.x <= GameManager.Instance.globalConfig.invisibleCollision.x / 2;
+        bool yDistance = distance.y <= GameManager.Instance.globalConfig.invisibleCollision.y / 2;
+
+        return xDistance && yDistance;
     }
 
     private void OnDrawGizmosSelected()

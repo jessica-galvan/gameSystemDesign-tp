@@ -6,19 +6,20 @@ using UnityEngine;
 public class PlayerModel : BaseCharacterModel
 {
     [ReadOnly] public ProjectileType basicAttack;
+    [ReadOnly] private ProjectileDataSO projectileData;
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
     private int currentUnlockedAbilities = 0;
 
     public Gradient gradientTest;
     public float widthTest = 5f, speedTest = 5f, radiusTest = 5f;
 
-    [SerializeField, ReadOnly] private float cooldown = 0;
     [SerializeField, ReadOnly] private float cooldownShootTimer = 0f;
 
     [Header("Info")]
     [SerializeField, ReadOnly] private bool isMoving;
     [field: SerializeField, ReadOnly] public bool CanShoot { get; private set; }
 
+    public ProjectileDataSO ProjectileData => projectileData;
     public int UnlockedAbilitiesCounter => unlockedAbilities.Length;
 
     public Action<AbilityDataSO> OnUnlockedAbilityEvent;
@@ -27,7 +28,8 @@ public class PlayerModel : BaseCharacterModel
     {
         base.Initialize(stats);
 
-        cooldown = GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data.cooldown;
+        projectileData = GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data;
+        projectileData.Initialize();
         unlockedAbilities = new AbilityDataSO[GameManager.Instance.playerData.maxAbilities];
         CanShoot = true;
     }
@@ -84,7 +86,7 @@ public class PlayerModel : BaseCharacterModel
         cooldownShootTimer += Time.deltaTime;
 
         //TODO rethink this for the ability cooldown
-        if (cooldownShootTimer >= cooldown)
+        if (cooldownShootTimer >= projectileData.Cooldown)
             CanShoot = true;
     }
 
@@ -145,11 +147,6 @@ public class PlayerModel : BaseCharacterModel
     public void SetNewSpeed(float newSpeed)
     {
         baseStats.ChangeSpeed(newSpeed);
-    }
-
-    public void ReduceCooldown(float cooldownMultiplier)
-    {
-        cooldown = cooldown - (cooldown * cooldownMultiplier);
     }
 
     public override void TakeDamage(int damage, bool ignoreCooldown = true)

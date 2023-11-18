@@ -11,6 +11,8 @@ public class CustomUpdate : MonoBehaviour
     private bool limitTargetFrame;
     private float deltaTime;
 
+    public float DeltaTime => deltaTime;
+
     public void Initialize(int targetFrame, string displayName = "")
     {
         updaterName = displayName;

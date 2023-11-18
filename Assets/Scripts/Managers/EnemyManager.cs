@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class EnemyStage
@@ -149,6 +151,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
         stageHasEnemiesToSpawn = currentStage.allEnemyData.Count > 0;
         RefreshSpawnableList();
+        EnemySpawn();
     }
 
     public void Refresh(float deltaTime)
@@ -179,7 +182,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             for (int i = 0; i < inLevelEnemies.Count; i++)
             {
                 if (IsInsideDesignatedArea(inLevelEnemies[i].transform.position)) continue;
-                inLevelEnemies[i].transform.position = GetSpawnPos(extraRandomness: true);
+                inLevelEnemies[i].transform.position = GetSpawnPos(extraPosRandom: true);
             }
         }
     }
@@ -187,12 +190,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private bool IsInsideDesignatedArea(Vector3 currentEnemyPos)
     {
-        Vector3 distance = GameManager.Instance.Player.transform.position - currentEnemyPos;
-        distance = new Vector3(Mathf.Abs(distance.x), Mathf.Abs(distance.y), 0f);
-        bool xDistance = distance.x <= GameManager.Instance.globalConfig.invisibleCollision.x / 2;
-        bool yDistance = distance.y <= GameManager.Instance.globalConfig.invisibleCollision.y / 2;
-
-        return xDistance && yDistance;
+        return GameManager.Instance.cameraController.IsInsideFrustrum(currentEnemyPos);
     }
 
     private void EnemySpawn()
@@ -204,7 +202,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             if (!TryGetEnemyTypeToSpawn(out int enemyIndex)) break;
 
             var enemy = GameManager.Instance.poolManager.GetEnemy(enemyIndex);
-            enemy.Spawn(GetSpawnPos(true));
+            enemy.Spawn(GetSpawnPos(extraPosRandom: true, isCompletetlyRandom: Random.Range(0, 3) == 3));
 
             RefreshSpawnableList();
 
@@ -247,10 +245,10 @@ public class EnemyManager : MonoBehaviour, IUpdate
         return UnityEngine.Random.Range(1, currentStage.maxSpawnedAtTheSameTime);
     }
 
-    private Vector2 GetSpawnPos(bool extraRandomness = false)
+    private Vector2 GetSpawnPos(bool extraPosRandom = false, bool isCompletetlyRandom = false)
     {
         var direction = GameManager.Instance.Player.Direction;
-        var spawnPoint = GameManager.Instance.cameraController.GetSpawnPoint(direction, extraRandomness);
+        var spawnPoint = GameManager.Instance.cameraController.GetSpawnPoint(direction, extraPosRandom, isCompletetlyRandom);
         return spawnPoint;
     }
 
@@ -281,7 +279,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
     private void OnDrawGizmosSelected()
     {
-        if (GameManager.Instance.globalConfig.respawnEnemiesWhenTooFar)
+        if (GameManager.HasInstance && GameManager.Instance.globalConfig.respawnEnemiesWhenTooFar)
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireCube(GameManager.Instance.Player.transform.position, new Vector3(GameManager.Instance.globalConfig.invisibleCollision.x, GameManager.Instance.globalConfig.invisibleCollision.y, 0f));

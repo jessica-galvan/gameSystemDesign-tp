@@ -31,11 +31,12 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
     {
         transform.position = startingPosition;
         
-        this.direction = direction;
+        this.direction = direction.normalized;
         transform.eulerAngles = Vector3.forward * rotation;
         timer = 0f;
         SetVisibility(true);
         active = true;
+        body.velocity = this.direction * data.StartingSpeed;
         GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
     }
 
@@ -62,10 +63,13 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
     {
         if (!active) return;
         if (!GameManager.Instance.CanUpdate) return;
-        body.velocity += direction * data.speed * deltaTime;
+        body.velocity += direction * data.Speed * deltaTime;
 
-        timer += Time.deltaTime;
-        if (timer > data.totalTimeAlive)
+        if (!GameManager.Instance.cameraController.IsInsideFrustrum(transform.position))
+            Die();
+
+        timer += deltaTime;
+        if (timer > data.TimeAlive)
             Die();
     }
 
@@ -85,8 +89,11 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
         gameObject.SetActive(value);
     }
 
-    private void Die()
+    private void Die(bool timeOver = false)
     {
+        if(timeOver && data.bulletDestructionVFX != null)
+            Instantiate(data.bulletDestructionVFX);
+
         GameManager.Instance.poolManager.ReturnBullet(this);
     }
 }

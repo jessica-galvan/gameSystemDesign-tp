@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6b620e590bd964ebdd988119c8f259, type: 3}
   m_Name: PUStat_Speed
   m_EditorClassIdentifier: 
-  title: Extra Speed
+  title: Extra Movement Speed
   icon: {fileID: -538871839, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   weight: 10
   reutilizableTimes: 2

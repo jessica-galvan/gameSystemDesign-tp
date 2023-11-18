@@ -18,7 +18,7 @@ MonoBehaviour:
   initialPool: 10
   gameplayDuration: 300
   allStages:
-  - startTime: 0
+  - startTime: 0.368
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
       weight: 10
@@ -31,8 +31,8 @@ MonoBehaviour:
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 3
     maxTotalEnemies: 10
-    minSpawnWaitTime: 0
-    maxSpawnWaitTime: 1
+    minSpawnWaitTime: 0.5
+    maxSpawnWaitTime: 5
   - startTime: 0.1
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
@@ -46,7 +46,7 @@ MonoBehaviour:
       damageMultiplier: 0
     - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
       weight: 20
-      limitAmountAtSameTime: 50
+      limitAmountAtSameTime: 20
       maxLimitPerStage: 0
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 5
-    maxTotalEnemies: 100
+    maxTotalEnemies: 25
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
   - startTime: 0.3
@@ -87,7 +87,13 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 0
-    maxTotalEnemies: 200
+    maxTotalEnemies: 50
+    minSpawnWaitTime: 0
+    maxSpawnWaitTime: 0
+  - startTime: 0.7
+    allEnemyData: []
+    maxSpawnedAtTheSameTime: 0
+    maxTotalEnemies: 0
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
   - startTime: 0.5
@@ -123,12 +129,6 @@ MonoBehaviour:
     maxTotalEnemies: 300
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
-  - startTime: 0.7
-    allEnemyData: []
-    maxSpawnedAtTheSameTime: 0
-    maxTotalEnemies: 0
-    minSpawnWaitTime: 0
-    maxSpawnWaitTime: 0
   - startTime: 0.8
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}

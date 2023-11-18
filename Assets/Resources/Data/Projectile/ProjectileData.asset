@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86f988867271e24a8d762344d5d953a, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
+  bulletDestructionVFX: {fileID: 528528486115267802, guid: 593ff70cbc103ef41ab95c342cf10b4f, type: 3}
   type: 0
+  startingSpeed: 10
   speed: 10
   cooldown: 0.5
-  totalTimeAlive: 5
+  totalTimeAlive: 0.5

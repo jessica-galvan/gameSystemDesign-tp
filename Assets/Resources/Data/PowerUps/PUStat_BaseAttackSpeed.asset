@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc6b620e590bd964ebdd988119c8f259, type: 3}
-  m_Name: PUStat_Mana
+  m_Name: PUStat_BaseAttackSpeed
   m_EditorClassIdentifier: 
-  title: 'Expand Your Mana '
+  title: Extra Base Attack Speed
   icon: {fileID: -538871839, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   weight: 10
   reutilizableTimes: 5
-  description: 'Gain a  10% extra total mana '
-  statsToModify: 0
+  description: Now your projectile moves 10% faster
+  statsToModify: 7
   add: 0
   multiplier: 0.1

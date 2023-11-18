@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6b620e590bd964ebdd988119c8f259, type: 3}
   m_Name: PUStat_BaseAttackDamage
   m_EditorClassIdentifier: 
-  title: Power Up Base Attack
+  title: Extra Base Attack Damage
   icon: {fileID: -538871839, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
-  weight: 100
+  weight: 10
   reutilizableTimes: 5
   description: Double you bassic attack damage
   statsToModify: 5
