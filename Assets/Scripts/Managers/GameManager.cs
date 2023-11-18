@@ -123,6 +123,12 @@ public class GameManager : MonoBehaviour
 
     public void SetPause(bool value, bool pauseMenu = true)
     {
+        if (gameplayUIManager.specialScreensManager.PauseMenu.IsPopupOpen)
+        {
+            gameplayUIManager.specialScreensManager.PauseMenu.ClosePopup();
+            return;
+        }
+
         if (Pause == value) return;
 
         if (value)
@@ -142,10 +148,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = Pause ? 0 : 1;
 
         if (pauseMenu)
-        {
             gameplayUIManager.OnPause(Pause);
-            //OnPause.Invoke(Pause);
-        }
     }
 
     private void TogglePause()

@@ -16,9 +16,9 @@ MonoBehaviour:
   menuScene: MainMenu
   maxLevelCap: 0
   initialPool: 10
-  gameplayDuration: 300
+  gameplayDuration: 600
   allStages:
-  - startTime: 0.368
+  - startTime: 0
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
       weight: 10
@@ -30,23 +30,23 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     maxSpawnedAtTheSameTime: 3
-    maxTotalEnemies: 10
+    maxTotalEnemies: 15
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
   - startTime: 0.1
     allEnemyData:
-    - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
-      weight: 10
-      limitAmountAtSameTime: 3
+    - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
+      weight: 20
+      limitAmountAtSameTime: 0
       maxLimitPerStage: 0
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
       experienceMultiplier: 0
       damageMultiplier: 0
-    - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
-      weight: 20
-      limitAmountAtSameTime: 20
+    - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
+      weight: 10
+      limitAmountAtSameTime: 2
       maxLimitPerStage: 0
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
@@ -59,8 +59,17 @@ MonoBehaviour:
     maxSpawnWaitTime: 0
   - startTime: 0.3
     allEnemyData:
+    - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
+      weight: 20
+      limitAmountAtSameTime: 0
+      maxLimitPerStage: 0
+      resetStatsBeforeMultiply: 0
+      healthMultiplier: 0
+      speedMultiplier: 0
+      experienceMultiplier: 0
+      damageMultiplier: 0
     - enemyController: {fileID: 7672375688410834417, guid: 0ff51117ffdeb22408e2c3931dc2f8cf, type: 3}
-      weight: 0
+      weight: 15
       limitAmountAtSameTime: 20
       maxLimitPerStage: 0
       resetStatsBeforeMultiply: 0
@@ -69,17 +78,8 @@ MonoBehaviour:
       experienceMultiplier: 0
       damageMultiplier: 0
     - enemyController: {fileID: 7672375688410834417, guid: d64d8b7357da4704ab23a6caef1f801b, type: 3}
-      weight: 0
+      weight: 7
       limitAmountAtSameTime: 4
-      maxLimitPerStage: 0
-      resetStatsBeforeMultiply: 0
-      healthMultiplier: 0
-      speedMultiplier: 0
-      experienceMultiplier: 0
-      damageMultiplier: 0
-    - enemyController: {fileID: 7672375688410834417, guid: e5b30680f2b971d4089692638d1c65ef, type: 3}
-      weight: 0
-      limitAmountAtSameTime: 0
       maxLimitPerStage: 0
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
@@ -90,13 +90,13 @@ MonoBehaviour:
     maxTotalEnemies: 50
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
-  - startTime: 0.7
+  - startTime: 0.4
     allEnemyData: []
     maxSpawnedAtTheSameTime: 0
     maxTotalEnemies: 0
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
-  - startTime: 0.5
+  - startTime: 0.45
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: d64d8b7357da4704ab23a6caef1f801b, type: 3}
       weight: 10
@@ -129,7 +129,7 @@ MonoBehaviour:
     maxTotalEnemies: 300
     minSpawnWaitTime: 0.5
     maxSpawnWaitTime: 5
-  - startTime: 0.8
+  - startTime: 0.5
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
       weight: 0

@@ -19,21 +19,27 @@ public class PauseMenu : Panel
     private List<MenuButton> buttons = new List<MenuButton>();
     private MenuButton currentButton;
 
+    public bool IsPopupOpen => IsOpen && warningPopup.IsOpen;
+
     public override void Initialize()
     {
         base.Initialize();
 
         buttons.Add(resumeButton);
+        resumeButton.Initialize();
         resumeButton.Button.onClick.AddListener(OnClickResumeHandler);
 
         buttons.Add(restartButton);
+        restartButton.Initialize();
         restartButton.Button.onClick.AddListener(OpenRestartPopup);
 
         buttons.Add(menuButton);
+        menuButton.Initialize();
         menuButton.Button.onClick.AddListener(OpenMainMenuPopup);
         menuButton.enabled = false;
 
         buttons.Add(quitButton);
+        quitButton.Initialize();
         quitButton.Button.onClick.AddListener(OpenExitPopup);
 
         for (int i = 0; i < buttons.Count; i++)
@@ -86,16 +92,21 @@ public class PauseMenu : Panel
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.pauseSound);
     }
 
-    private void PauseInput(InputAction.CallbackContext cxt)
+    public override void Close()
+    {
+        if (warningPopup.IsOpen)
+            warningPopup.Close();
+
+        base.Close();
+    }
+
+    public void ClosePopup()
     {
         if (warningPopup.IsOpen)
         {
             warningPopup.Close();
             SetSelectedButton();
-        }
-        else
-        {
-            GameManager.Instance.SetPause(false);
+            return;
         }
     }
 

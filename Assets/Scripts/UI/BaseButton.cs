@@ -11,7 +11,7 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public TMP_Text txtTitle;
     public GameObject selectedMarker;
 
-    [SerializeField, ReadOnly] private bool shown, shownMarkers;
+    [SerializeField, ReadOnly] private bool shown, shownMarkers, mouseOver;
  
     public bool Initialized { get; private set; }
     public Button Button { get; private set; }
@@ -23,9 +23,9 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (Initialized) return;
         Initialized = true;
 
-        ShowMarkers(false, force: true);
-
         Button = GetComponent<Button>();
+
+        ShowMarkers(false, force: true);
         Deselect();
     }
 
@@ -46,11 +46,13 @@ public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        mouseOver = true;
         Select();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        mouseOver = false;
         Deselect();
     }
 
