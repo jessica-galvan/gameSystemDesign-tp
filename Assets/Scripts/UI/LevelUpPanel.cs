@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,9 +14,15 @@ public class LevelUpPanel : Panel
     [SerializeField] private PowerUpButton powerButtonPrefab;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float fadeDuration = 2f;
-    [ReadOnly, SerializeField] private int currentLevel = 1;
+    [SerializeField] private TMP_Text txtSelect;
+    [SerializeField] private TMP_Text txtAbilityExplanation;
+
+    [Header("Texts")]
+    public string selectAbilityString = "Select a new ability.";
+    public string selectPowerUpString = "Select a new power up.";
 
     [Header("Info")]
+    [ReadOnly, SerializeField] private int currentLevel = 1;
     [SerializeField, ReadOnly] private bool optionSelected = false, isPowerUpSelection = false;
 
     private int currentAmountSelected = 0;
@@ -99,6 +106,9 @@ public class LevelUpPanel : Panel
         currentAmountSelected++;
         var currentLevel = GameManager.Instance.experienceSystem.CurrentLevel - GameManager.Instance.experienceSystem.AmountLeveledUp + currentAmountSelected;
         isPowerUpSelection = !IsAbilitySelection(currentLevel);
+
+        txtSelect.SetText(isPowerUpSelection ? selectPowerUpString : selectAbilityString);
+        txtAbilityExplanation.enabled = !isPowerUpSelection;
 
         SetOptions();
     }
