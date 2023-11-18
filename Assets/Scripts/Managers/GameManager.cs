@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool HasInstance => Instance != null;
 
     [Header("References")]
+    [SerializeField] private GameObject hints;
     public GlobalConfigSO globalConfig;
     public PrefabsReferencesSO prefabReferences;
     public SoundReferencesSO soundReferences;
@@ -93,6 +94,9 @@ public class GameManager : MonoBehaviour
 
         gameplayUIManager = gameObject.AddComponent<GameplayUIManager>();
         gameplayUIManager.Initialize();
+
+        if(hints != null)
+            Destroy(hints, 5f);
     }
 
     private void Start()

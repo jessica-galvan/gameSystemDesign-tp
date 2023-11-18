@@ -301,36 +301,36 @@ MonoBehaviour:
       maxLimitPerStage: 0
       probabilityOfDrop: 1
       resetStatsBeforeMultiply: 0
-      healthMultiplier: 0
+      healthMultiplier: 0.5
       speedMultiplier: 0
       experienceMultiplier: 0
-      damageMultiplier: 0
+      damageMultiplier: 0.5
     - enemyController: {fileID: 7672375688410834417, guid: b08c63e4472ef3546b4fc59c17db0abd, type: 3}
       weight: 20
       limitAmountAtSameTime: 200
       maxLimitPerStage: 0
       probabilityOfDrop: 0.8
       resetStatsBeforeMultiply: 0
-      healthMultiplier: 0
+      healthMultiplier: 0.3
       speedMultiplier: 0
       experienceMultiplier: 0
-      damageMultiplier: 0
+      damageMultiplier: 0.5
     - enemyController: {fileID: 7672375688410834417, guid: eb22da700ccb7c749b46cf32e30c55d6, type: 3}
-      weight: 10
+      weight: 20
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
       probabilityOfDrop: 0.5
       resetStatsBeforeMultiply: 0
-      healthMultiplier: 0
+      healthMultiplier: 0.5
       speedMultiplier: 0
       experienceMultiplier: 0
-      damageMultiplier: 0
-    maxSpawnedAtTheSameTime: 10
+      damageMultiplier: 0.5
+    maxSpawnedAtTheSameTime: 5
     maxTotalEnemies: 1000
     minSpawnWaitTime: 0.5
-    maxSpawnWaitTime: 5
+    maxSpawnWaitTime: 1
   defaultManaDropProbability: 0.1
-  enemyInitialPool: 5
+  enemyInitialPool: 10
   respawnEnemiesWhenTooFar: 1
   invisibleCollision: {x: 45, y: 27}
   allEnemies:
@@ -348,8 +348,8 @@ MonoBehaviour:
   pointsFormat: 00000
   timeFormat: mm':'ss
   keyAbilitiesSprite:
-  - {fileID: 21300000, guid: afeaf44658fba744da505b8a183cfc26, type: 3}
-  - {fileID: 21300000, guid: 1de995dc71a94cb40a8295e047e1adbb, type: 3}
+  - {fileID: 21300000, guid: 4953f4f0fd0734241b5739a53bc72546, type: 3}
+  - {fileID: 21300000, guid: cacc8a2df5559d84988c1c515b95f7f8, type: 3}
   - {fileID: 21300000, guid: 3dc1d2ea94ecd1548bb0b0ceca1ae07b, type: 3}
   restartPopup:
     title: Sure you want to restart?

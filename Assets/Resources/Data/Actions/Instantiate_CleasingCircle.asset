@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: 
   useMouseDirection: 0
   baseAmount: 1
-  timeAlive: 3
+  timeAlive: 5
   minDistanteFromPlayer: 0
   maxDistanteFromPlayer: 0
   directions: []

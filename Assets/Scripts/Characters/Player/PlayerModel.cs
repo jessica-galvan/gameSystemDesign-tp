@@ -23,6 +23,7 @@ public class PlayerModel : BaseCharacterModel
 
     public override void Initialize(CharacterDataSO stats)
     {
+        stats.Initialize();
         base.Initialize(stats);
 
         Debug.Assert(LifeController.CurrentLife == LifeController.MaxLife, $"Player life({LifeController.CurrentLife}) is less than max life ({LifeController.MaxLife})");
