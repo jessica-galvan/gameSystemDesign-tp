@@ -129,7 +129,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
     {
         if(currentIndex < GameManager.Instance.globalConfig.allStages.Length)
         {
-            Debug.Log($"Current Stage: {currentIndex} Time: {GameManager.Instance.GetCurrentTime()}");
+            Debug.Log($"Current Stage: {currentIndex} - Player Level {GameManager.Instance.experienceSystem.CurrentLevel}. Time: {GameManager.Instance.GetCurrentTime()}");
 
             currentStage = GameManager.Instance.globalConfig.allStages[currentIndex];
             currentStageIndex = currentIndex;
@@ -142,7 +142,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
         }
         else
         {
-            print($"Current Stage: Last Stage");
+            print($"Current Stage: Last Stage - Player Level {GameManager.Instance.experienceSystem.CurrentLevel}. Time: {GameManager.Instance.GetCurrentTime()}");
             isOverTime = true;
             currentStage = GameManager.Instance.globalConfig.lastStage;
         }
