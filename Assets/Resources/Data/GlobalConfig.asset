@@ -144,7 +144,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 40
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.9
+      probabilityOfDrop: 0.7
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.7
+      probabilityOfDrop: 0.8
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 10
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.3
+      probabilityOfDrop: 0.9
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 50
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.4
+      probabilityOfDrop: 0.6
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
       weight: 20
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.5
+      probabilityOfDrop: 0.8
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
       weight: 10
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.7
+      probabilityOfDrop: 0.9
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
       weight: 0
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.4
+      probabilityOfDrop: 0.6
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
       weight: 0
       limitAmountAtSameTime: 100
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.5
+      probabilityOfDrop: 0.7
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
       weight: 0
       limitAmountAtSameTime: 10
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.7
+      probabilityOfDrop: 0.9
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
       weight: 25
       limitAmountAtSameTime: 0
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.4
+      probabilityOfDrop: 0.8
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
       weight: 15
       limitAmountAtSameTime: 25
       maxLimitPerStage: 0
-      probabilityOfDrop: 0.5
+      probabilityOfDrop: 0.9
       resetStatsBeforeMultiply: 0
       healthMultiplier: 0
       speedMultiplier: 0

@@ -12,6 +12,7 @@ public class InstantiateAction : BaseAbilityAction
     public string itemName = "";
     public bool useMouseDirection = false; //USE ONLY IF IS PROJECTILE
     public int baseAmount = 0;
+    public float timeAlive = 5f;
     public float minDistanteFromPlayer = 0f;
     public float maxDistanteFromPlayer = 5f;
     public Vector2[] directions;
@@ -55,9 +56,12 @@ public class InstantiateAction : BaseAbilityAction
 
     private void SetObject(PlayerModel playerModel)
     {
+        //TODO DO THIS BETTER
         var aux = GameObject.Instantiate(objectToInstantiate);
         aux.transform.position = playerModel.transform.position;
-        //TODO DO THIS BETTER
+
+        if (aux.TryGetComponent<IInstantiableAction>(out IInstantiableAction item))
+            item.Initialize(timeAlive);
     }
 
     public override void PowerUp(float amountMultiplier, float attackMultiplier)

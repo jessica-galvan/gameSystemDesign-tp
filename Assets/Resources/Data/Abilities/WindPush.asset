@@ -17,7 +17,7 @@ MonoBehaviour:
   description: All enemies are push back and a small damaged is applied, giving you
     a small breather
   cooldown: 3
-  manaCost: 5
+  manaCost: 10
   weight: 10
   sfx: {fileID: 8300000, guid: f3854719ca2c39a4c8d34d7fc6bb9aff, type: 3}
   actions:

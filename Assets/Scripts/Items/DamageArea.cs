@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageArea : MonoBehaviour, IDamage
+public class DamageArea : MonoBehaviour, IDamage, IUpdate, IInstantiableAction
 {
     public LayerMask targets;
     public AttackDataSO attackSO;
-    public float timeAlive = 5f;
 
     private float timeLeft;
 
     public AttackDataSO AttackData => attackSO;
 
-    //TODO implement custom update logic and pooling
-    void Start()
+    public void Initialize(float timeAlive)
     {
         timeLeft = timeAlive;
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Add(this);
     }
 
-    void Update()
+    public void Refresh(float deltaTime)
     {
-        timeLeft -= Time.deltaTime;
+        timeLeft -= deltaTime;
 
         if (timeLeft <= 0)
             Die();
@@ -34,6 +33,7 @@ public class DamageArea : MonoBehaviour, IDamage
 
     private void Die()
     {
+        GameManager.Instance.updateManager.gameplayCustomUpdate.Remove(this);
         Destroy(gameObject);
     }
 }
