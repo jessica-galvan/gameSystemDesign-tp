@@ -10,9 +10,6 @@ public class PlayerModel : BaseCharacterModel
     [SerializeField] private AbilityDataSO[] unlockedAbilities;
     private int currentUnlockedAbilities = 0;
 
-    public Gradient gradientTest;
-    public float widthTest = 5f, speedTest = 5f, radiusTest = 5f;
-
     [SerializeField, ReadOnly] private float cooldownShootTimer = 0f;
 
     [Header("Info")]
@@ -27,6 +24,9 @@ public class PlayerModel : BaseCharacterModel
     public override void Initialize(CharacterDataSO stats)
     {
         base.Initialize(stats);
+
+        Debug.Assert(LifeController.CurrentLife == LifeController.MaxLife, $"Player life({LifeController.CurrentLife}) is less than max life ({LifeController.MaxLife})");
+        Debug.Log($"Player Start Life({LifeController.CurrentLife})");
 
         projectileData = GameManager.Instance.prefabReferences.playerBasicAttackPrefab.data;
         projectileData.Initialize();
@@ -135,7 +135,7 @@ public class PlayerModel : BaseCharacterModel
         if (!CanTakeDamage) return;
 
         if(collision.gameObject.TryGetComponent<IDamage>(out var idamage))
-            TakeDamage((int)idamage.AttackData.Damage);
+            TakeDamage(idamage.AttackData.Damage);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

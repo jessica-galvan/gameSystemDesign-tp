@@ -33,6 +33,6 @@ public class HealingAction : BaseAbilityAction
 
     public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)
     {
-        stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 10}% of extra healing");
+        stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 100}% of extra healing");
     }
 }

@@ -359,5 +359,4 @@ MonoBehaviour:
     description: Warning! Going back to the menu will lose all your points and gameplay.
   exitPopup:
     title: Sure you want to quit?
-    description: "Warning! The game has no save system, exiting will make you lose\r
-      all your points!"
+    description: 'Warning! The game has no save system. '

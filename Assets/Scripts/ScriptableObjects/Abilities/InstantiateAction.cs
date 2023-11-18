@@ -75,9 +75,9 @@ public class InstantiateAction : BaseAbilityAction
     public override void GetDescriptionForPowerUp(StringBuilder stringBuilder, PowerUpAbilitySO powerUp)
     {
         if(powerUp.AmountMultiplier > 0)
-            stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 10}% of extra {itemName}");
+            stringBuilder.AppendLine($"- Gains an {powerUp.AmountMultiplier * 100}% of extra {itemName}");
 
         if(powerUp.AttackMultiplier > 0)
-            stringBuilder.AppendLine($"- Gains an {powerUp.AttackMultiplier * 10}% of extra damage");
+            stringBuilder.AppendLine($"- Gains an {powerUp.AttackMultiplier * 100}% of extra damage");
     }
 }

@@ -115,4 +115,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaAmount: 5
-  lifeTimer: 5
+  lifeTimer: 10
