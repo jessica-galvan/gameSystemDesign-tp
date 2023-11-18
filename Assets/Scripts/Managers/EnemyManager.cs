@@ -53,6 +53,7 @@ public class EnemyData : IWeight
     public int limitAmountAtSameTime;
     [Tooltip("How many can appear in the same run. If 0, there is no limit")]
     public int maxLimitPerStage;
+    [Range(0, 1)] public float probabilityOfDrop = 0.1f;
 
     [Header("Difficulty Scalers")]
     [Tooltip("if you want the stats to be reseted before applying the new multiplier")]
@@ -128,7 +129,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
     {
         if(currentIndex < GameManager.Instance.globalConfig.allStages.Length)
         {
-            print($"Current Stage: {currentIndex}");
+            Debug.Log($"Current Stage: {currentIndex} Time: {GameManager.Instance.GetCurrentTime()}");
 
             currentStage = GameManager.Instance.globalConfig.allStages[currentIndex];
             currentStageIndex = currentIndex;
@@ -202,7 +203,7 @@ public class EnemyManager : MonoBehaviour, IUpdate
             if (!TryGetEnemyTypeToSpawn(out int enemyIndex)) break;
 
             var enemy = GameManager.Instance.poolManager.GetEnemy(enemyIndex);
-            enemy.Spawn(GetSpawnPos(extraPosRandom: true, isCompletetlyRandom: Random.Range(0, 3) == 3));
+            enemy.Spawn(GetSpawnPos(extraPosRandom: true, isCompletetlyRandom: true)); //Random.Range(0, 3) == 3)
 
             RefreshSpawnableList();
 
@@ -215,6 +216,25 @@ public class EnemyManager : MonoBehaviour, IUpdate
 
             if (!canSpawnEnemies) break;
         }
+    }
+
+    public bool CanSpawnDrop(float probability)
+    {
+        var random = Random.Range(0, 1f);
+        return random <= probability;
+    }
+
+    private bool TryGetEnemyData(EnemyController enemyController, out EnemyData data)
+    {
+        data = null;
+        for (int i = 0; i < currentStage.allEnemyData.Count; i++)
+        {
+            if (currentStage.allEnemyData[i].EnemyID == enemyController.ID) continue;
+            data = currentStage.allEnemyData[i];
+            return true;
+        }
+
+        return false;
     }
 
     private bool TryGetEnemyTypeToSpawn(out int ID)
@@ -255,10 +275,19 @@ public class EnemyManager : MonoBehaviour, IUpdate
     public void EnemyKilled(EnemyController enemyKilled)
     {
         GameManager.Instance.experienceSystem.AddExperience(enemyKilled.Model.BaseStats.Experience);
+        bool spawnMana = false;
 
-        var mana = GameManager.Instance.poolManager.GetManaDrop();
-        mana.transform.position = enemyKilled.transform.position;
-        mana.Restart();
+        if(TryGetEnemyData(enemyKilled, out var enemyData))
+            spawnMana = CanSpawnDrop(enemyData.probabilityOfDrop);
+        else
+            spawnMana = CanSpawnDrop(GameManager.Instance.globalConfig.defaultManaDropProbability);
+
+        if (spawnMana)
+        {
+            var mana = GameManager.Instance.poolManager.GetManaDrop();
+            mana.transform.position = enemyKilled.transform.position;
+            mana.Restart();
+        }
 
         RefreshSpawnableList();
 

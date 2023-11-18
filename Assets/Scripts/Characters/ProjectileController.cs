@@ -70,7 +70,7 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
 
         timer += deltaTime;
         if (timer > data.TimeAlive)
-            Die();
+            Die(timeOver: true);
     }
 
     public void ReturnToPool()
@@ -92,7 +92,10 @@ public class ProjectileController : MonoBehaviour, IUpdate, IPoolable, IDamage, 
     private void Die(bool timeOver = false)
     {
         if(timeOver && data.bulletDestructionVFX != null)
-            Instantiate(data.bulletDestructionVFX);
+        {
+            var vfx = Instantiate(data.bulletDestructionVFX);
+            vfx.transform.position = transform.position;
+        }
 
         GameManager.Instance.poolManager.ReturnBullet(this);
     }

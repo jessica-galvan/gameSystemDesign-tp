@@ -19,6 +19,7 @@ public class GlobalConfigSO : ScriptableObject
     public float gameplayDuration = 600f;
     public EnemyStage[] allStages = new EnemyStage[0];
     public EnemyStage lastStage;
+    public float defaultManaDropProbability = 0.1f;
     public int enemyInitialPool = 5;
     public bool respawnEnemiesWhenTooFar = true;
     [Tooltip("When not inside this area, that centers at the player's position, the enemies will be respawned")]

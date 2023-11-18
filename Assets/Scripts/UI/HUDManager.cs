@@ -8,10 +8,12 @@ public class HUDManager : Panel, IUpdate
 {
     [Header("Top")]
     public TMP_Text txtTimer;
+    public TMP_Text txtKillCount;
     public SimpleBar experienceBar;
     public string levelString = "Level {0}";
     public SimpleBar hpBar;
     public string hpString = "HP {0}/{1}";
+    public string killAmountFormat = "0000";
 
     [Header("Bottom")]
     public SimpleBar manaBar;
@@ -25,6 +27,7 @@ public class HUDManager : Panel, IUpdate
         GameManager.Instance.updateManager.uiCustomUpdate.Add(this);
         GameManager.Instance.experienceSystem.OnUpdateExperience += UpdateExperience;
         GameManager.Instance.experienceSystem.OnUpdateLevel += UpdateLevel;
+        GameManager.Instance.enemyManager.OnEnemyKilled += UpdateKillCount;
         GameManager.Instance.manaSystem.OnUpdateMana += UpdateMana;
         GameManager.Instance.Player.LifeController.OnLifeUpdate += UpdatePlayerLife;
         GameManager.Instance.Player.OnUnlockedAbilityEvent += UnlockAbility;
@@ -66,7 +69,7 @@ public class HUDManager : Panel, IUpdate
 
     public void UpdateTimer(float timeInSeconds)
     {
-        txtTimer.SetText(TimeSpan.FromSeconds(timeInSeconds).ToString(GameManager.Instance.globalConfig.timeFormat));
+        txtTimer.SetText(GameManager.Instance.GetCurrentTime());
     }
 
     private void UpdateExperience(float amount)
@@ -118,6 +121,11 @@ public class HUDManager : Panel, IUpdate
 
         if (ability == null) return;
         ability.UpdateManaCost();
+    }
+
+    public void UpdateKillCount(int currentKillAmount)
+    {
+        txtKillCount.SetText(currentKillAmount.ToString(killAmountFormat));
     }
 
     private AbilityUI GetAbilityUI(AbilityDataSO abilityData)

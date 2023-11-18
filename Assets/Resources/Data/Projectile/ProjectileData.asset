@@ -17,4 +17,4 @@ MonoBehaviour:
   startingSpeed: 10
   speed: 10
   cooldown: 0.5
-  totalTimeAlive: 0.5
+  totalTimeAlive: 0.3

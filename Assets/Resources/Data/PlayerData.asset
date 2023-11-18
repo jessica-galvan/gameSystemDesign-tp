@@ -18,5 +18,5 @@ MonoBehaviour:
   maxAbilitySelection: 2
   canCheat: 1
   unlockAbilityEveryAmountLevels: 5
-  startingRequiredExp: 250
+  startingRequiredExp: 300
   experienceGrowth: 1.3

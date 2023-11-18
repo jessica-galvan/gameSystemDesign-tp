@@ -166,4 +166,9 @@ public class GameManager : MonoBehaviour
         gameplayUIManager.specialScreensManager.GameOverPanel.Open();
         //OnWin.Invoke();
     }
+
+    public string GetCurrentTime()
+    {
+        return TimeSpan.FromSeconds(updateManager.CurrentTimeGameplay).ToString(GameManager.Instance.globalConfig.timeFormat);
+    }
 }

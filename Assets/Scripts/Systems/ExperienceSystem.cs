@@ -30,7 +30,7 @@ public class ExperienceSystem : MonoBehaviour
 
     public void Initialize()
     {
-        currentLevel = 1;
+        currentLevel = 0;
         requiredXP = GameManager.Instance.playerData.startingRequiredExp;
         currentXP = 0;
         RecalculateCurrentT();
@@ -68,7 +68,7 @@ public class ExperienceSystem : MonoBehaviour
 
             currentXP = Mathf.Abs(requiredXP - currentXP);
             requiredXP = GetNextLevelExp();
-            print($"Required XP for level {currentLevel}: {requiredXP}. Killed Enemies: {killedEnemiesThisLevel}");
+            print($"Level {currentLevel}. Required XP for next: {requiredXP}. Killed Enemies: {killedEnemiesThisLevel}. Time: {GameManager.Instance.GetCurrentTime()}");
         }
 
         currentXP = Mathf.Clamp(currentXP, 0, requiredXP);
@@ -87,7 +87,8 @@ public class ExperienceSystem : MonoBehaviour
 
     private float GetNextLevelExp()
     {
-        return Mathf.Round(requiredXP + Mathf.Abs((requiredXP * currentLevel * Mathf.Log(GameManager.Instance.playerData.experienceGrowth, currentLevel))));
+        var nextLevel = currentLevel + 1;
+        return Mathf.Round(requiredXP + Mathf.Abs((requiredXP * nextLevel * Mathf.Log(GameManager.Instance.playerData.experienceGrowth, nextLevel))));
         //return Mathf.Sqrt(experienceModifier * (power * totalExperienceGained + 25) + 50) / 100;
         //return (currentLevel ^ power + currentLevel) / power * experienceModifier - (currentLevel * experienceModifier); 
     }
