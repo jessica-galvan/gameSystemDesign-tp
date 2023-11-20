@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -672532348, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9411765}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -114,5 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1ea734ccf1a7446a562269eea97fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4003991170197372679}
   manaAmount: 5
-  lifeTimer: 10
+  lifeTimer: 15
+  startFadingTime: 0.5
+  minFadingAmount: 0.3
