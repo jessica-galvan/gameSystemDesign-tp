@@ -42,6 +42,7 @@ public class EnemyModel : BaseCharacterModel, IDamage
 
     public override void TakeDamage(int damage, bool ignoreCooldown = true)
     {
+        if (!Alive) return;
         if (!CanTakeDamage && !ignoreCooldown) return;
 
         base.TakeDamage(damage, ignoreCooldown);
@@ -51,6 +52,7 @@ public class EnemyModel : BaseCharacterModel, IDamage
 
     public override void TakeDamage(int damage, Vector2 knockback,  bool ignoreCooldown = true)
     {
+        if (!Alive) return;
         if (!CanTakeDamage && !ignoreCooldown) return;
 
         base.TakeDamage(damage, knockback, ignoreCooldown);

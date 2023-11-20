@@ -138,7 +138,7 @@ MonoBehaviour:
     maxTotalEnemies: 0
     minSpawnWaitTime: 0
     maxSpawnWaitTime: 0
-  - startTime: 0.55
+  - startTime: 0.525
     allEnemyData:
     - enemyController: {fileID: 7672375688410834417, guid: d64d8b7357da4704ab23a6caef1f801b, type: 3}
       weight: 10

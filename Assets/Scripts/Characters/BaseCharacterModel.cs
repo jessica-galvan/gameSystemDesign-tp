@@ -28,7 +28,7 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
     public CharacterDataSO BaseStats => baseStats;
     public Animator Animator => animator;
     public float Speed => baseStats.MovementSpeed;
-    public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible && Alive;
+    public bool CanTakeDamage => canTakeDamage && !LifeController.Invincible;
 
     public virtual void Initialize(CharacterDataSO stats)
     {
@@ -82,14 +82,15 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public virtual void TakeDamage(int damage, bool ignoreCooldown = true)
     {
-        if (!CanTakeDamage) return;
+        if (!CanTakeDamage && !ignoreCooldown) return;
+        if (!Alive) return;
 
         LifeController.TakeDamage(damage);
 
         for (int i = 0; i < takeDamageVFX.Length; i++)
             takeDamageVFX[i].Play();
 
-        if (baseStats.takeDamageCooldown > 0)
+        if (!ignoreCooldown && baseStats.takeDamageCooldown > 0)
         {
             canTakeDamage = false;
             currentTakeDamageCooldown = baseStats.takeDamageCooldown;
@@ -116,7 +117,8 @@ public class BaseCharacterModel : MonoBehaviour, IDamagable
 
     public virtual void TakeDamage(int damage, Vector2 direction, bool ignoreCooldown = true)
     {
-        if (!CanTakeDamage) return;
+        if (!Alive) return;
+        if (!CanTakeDamage && !ignoreCooldown) return;
 
         TakeDamage(damage);
 

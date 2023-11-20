@@ -133,10 +133,11 @@ public class PlayerModel : BaseCharacterModel
 
     public void OnCollisionStay2D(Collision2D collision)
     {
+        if (!Alive) return;
         if (!CanTakeDamage) return;
 
         if(collision.gameObject.TryGetComponent<IDamage>(out var idamage))
-            TakeDamage(idamage.AttackData.Damage);
+            TakeDamage(idamage.AttackData.Damage, ignoreCooldown: false);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -152,14 +153,16 @@ public class PlayerModel : BaseCharacterModel
 
     public override void TakeDamage(int damage, bool ignoreCooldown = true)
     {
+        if (!Alive) return;
         if (!CanTakeDamage) return;
         Debug.Log($"Player takes damage {damage}. CurrentLife: {LifeController.CurrentLife}");
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, ignoreCooldown);
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.playerTakeDamageSound);
     }
 
     public override void TakeDamage(int damage, Vector2 direction, bool ignoreCooldown = true)
     {
+        if (!Alive) return;
         if (!CanTakeDamage) return;
         Debug.Log($"Player takes damage {damage}. CurrentLife: {LifeController.CurrentLife}");
         base.TakeDamage(damage, direction, ignoreCooldown);
