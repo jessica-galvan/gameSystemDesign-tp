@@ -11,6 +11,7 @@ public class PoolManager : MonoBehaviour
     [ReadOnly] public Pool<ParticleEffect> deathParticlePool;
     [ReadOnly] public Pool<ParticleEffect> manaDestructionPool;
     [ReadOnly] public Pool<ManaDrop> manaDropPool;
+    [ReadOnly] public Pool<DamageNumbers> damageNumbersPool;
     [ReadOnly] public Dictionary<int, Pool<EnemyController>> enemyPools = new Dictionary<int, Pool<EnemyController>>();
 
     //[ReadOnly] public Pool bulletImpactParticlePool;
@@ -32,6 +33,7 @@ public class PoolManager : MonoBehaviour
         manaDropPool = CreateNewPool("ManaDroplePool", GameManager.Instance.prefabReferences.manaDropPrefab, GameManager.Instance.globalConfig.initialPool, "ManaDrop");
         deathParticlePool = CreateNewPool("DeathParticlePool", GameManager.Instance.prefabReferences.deathVFX, GameManager.Instance.globalConfig.initialPool, "DeathVFX");
         manaDestructionPool = CreateNewPool("ManaParticlePool", GameManager.Instance.prefabReferences.manaDestructionVFX, GameManager.Instance.globalConfig.initialPool, "ManaDestructionVFX");
+        damageNumbersPool = CreateNewPool("DamageVFXPool", GameManager.Instance.prefabReferences.damageTextVFX, GameManager.Instance.globalConfig.initialPool, "DamageVFX");
 
         //bulletImpactParticlePool = CreateNewPool("BulletImpactParticlePool", GameManager.Instance.prefabReferences.bulletImpactParticle.gameObject, GameManager.Instance.globalConfig.particlePool);
     }
@@ -145,5 +147,15 @@ public class PoolManager : MonoBehaviour
                 manaDestructionPool.BackToPool(particle);
                 break;
         }
+    }
+
+    public DamageNumbers GetDamageEffect()
+    {
+        return damageNumbersPool.Spawn();
+    }
+
+    public void ReturnDamageEffect(DamageNumbers effect)
+    {
+        damageNumbersPool.BackToPool(effect);
     }
 }

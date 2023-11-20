@@ -81,6 +81,12 @@ public class EnemyController : BaseCharacterController<EnemyModel>, IPoolable
 
     private void OnDie()
     {
+        if (GameManager.Instance.playerData.showExperienceText)
+        {
+            var effect = GameManager.Instance.poolManager.GetDamageEffect();
+            effect.SetData(Mathf.RoundToInt(stats.Experience + (stats.Experience * GameManager.Instance.experienceSystem.ExperienceMultiplier)), transform.position);
+        }
+
         GameManager.Instance.poolManager.ReturnEnemy(this);
         GameManager.Instance.enemyManager.EnemyKilled(this);
         GameManager.Instance.audioManager.PlaySFXSound(GameManager.Instance.soundReferences.enemyDeathSound);

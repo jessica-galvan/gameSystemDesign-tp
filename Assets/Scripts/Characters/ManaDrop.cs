@@ -37,7 +37,7 @@ public class ManaDrop : MonoBehaviour, ICollectable, IUpdate, IPoolable
 
         currentT = Mathf.InverseLerp(0, lifeTimer, currentTimer);
 
-        if (currentT < startFadingTime)
+        if (currentT <= startFadingTime)
         {
             fadingColor = spriteRenderer.color;
             fadingColor.a = minFadingAmount + currentT;

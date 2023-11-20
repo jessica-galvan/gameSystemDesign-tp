@@ -14,8 +14,11 @@ public class PlayerDataSO : ScriptableObject
     public bool canCheat = false;
 
     [Header("Experience")]
-    [Header("Every how many levels do you get to unlock a new ability?")]
+    [Tooltip("Every how many levels do you get to unlock a new ability?")]
     public int unlockAbilityEveryAmountLevels = 5;
     public float startingRequiredExp = 100f;
     public float experienceGrowth = 2;
+
+    [Header("Extra")]
+    public bool showExperienceText = true;
 }

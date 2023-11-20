@@ -20,3 +20,4 @@ MonoBehaviour:
   unlockAbilityEveryAmountLevels: 5
   startingRequiredExp: 300
   experienceGrowth: 1.2
+  showExperienceText: 1
