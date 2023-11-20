@@ -15,7 +15,7 @@ MonoBehaviour:
   title: Healing Boost
   icon: {fileID: 1643539559, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   weight: 10
-  reutilizableTimes: 2
+  reutilizableTimes: 5
   abilityData: {fileID: 11400000, guid: 8b666a5a826b16a499922fd8ee61d654, type: 2}
   action: {fileID: 11400000, guid: 8e7b274a3a9aef9448000d0348f86a3c, type: 2}
   cooldownMultiplier: 0

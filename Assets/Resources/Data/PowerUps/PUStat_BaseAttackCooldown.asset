@@ -15,7 +15,7 @@ MonoBehaviour:
   title: Reduce Base Attack Cooldown
   icon: {fileID: -538871839, guid: 2a9eda7b1a998ee46b23e60143e51428, type: 3}
   weight: 20
-  reutilizableTimes: 3
+  reutilizableTimes: 5
   description: Reduce your base attack cooldown by a 20%
   statsToModify: 4
   add: 0
