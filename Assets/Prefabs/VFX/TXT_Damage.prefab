@@ -135,7 +135,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -198,13 +198,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 880193311975457695}
-  timeAlive: 0.7
+  timeAlive: 0.5
   animationSizeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: 0.042894438
+      value: 0.50779533
       inSlope: 2
       outSlope: 2
       tangentMode: 0
@@ -212,22 +212,31 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.2534425
-      value: 0.45342872
-      inSlope: 1.5948733
-      outSlope: 1.5948733
+      time: 0.14041224
+      value: 0.6827175
+      inSlope: 1.8585618
+      outSlope: 1.8585618
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
-      outWeight: 0.069000624
+      outWeight: 0.07873414
+    - serializedVersion: 3
+      time: 0.31927162
+      value: 0.97491044
+      inSlope: 0.7238565
+      outSlope: 0.7238565
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16099514
     - serializedVersion: 3
       time: 0.939437
       value: 1.0894533
-      inSlope: -0.66521466
-      outSlope: -0.66521466
+      inSlope: -0.4396402
+      outSlope: -0.4396402
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33545554
+      inWeight: 0.22288059
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
