@@ -18,6 +18,9 @@ public class ManaDrop : MonoBehaviour, ICollectable, IUpdate, IPoolable
 
     public void Restart()
     {
+        fadingColor = spriteRenderer.color;
+        fadingColor.a = 1f;
+        spriteRenderer.color = fadingColor;
         gameObject.SetActive(true);
         currentTimer = lifeTimer;
         currentT = 1f;
